@@ -1,9 +1,9 @@
-import type { Site, SocialObjects } from "./types";
+// ✅ 这是一个纯净版 config.ts，移除了导致报错的引用
 
-export const SITE: Site = {
-  website: "https://222382.xyz/", // 改成你的新域名
+export const SITE = {
+  website: "https://222382.xyz/", // 你的域名
   author: "Velo.x",
-  profile: "https://github.com/pwenxiang51-wq", // ✅ 你的个人主页
+  profile: "https://github.com/pwenxiang51-wq", // 你的GitHub
   desc: "Velo.x 的个人博客",
   title: "Velo.x",
   ogImage: "astropaper-og.jpg",
@@ -30,10 +30,10 @@ export const LOGO_IMAGE = {
   height: 46,
 };
 
-export const SOCIALS: SocialObjects = [
+export const SOCIALS = [
   {
     name: "Github",
-    href: "https://github.com/pwenxiang51-wq", // ✅ 绝对是你的链接
+    href: "https://github.com/pwenxiang51-wq", // ✅ 你的链接
     linkTitle: ` ${SITE.title} on Github`,
     active: true,
   },
@@ -53,7 +53,7 @@ export const SOCIALS: SocialObjects = [
     name: "LinkedIn",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on LinkedIn`,
-    active: false, // ❌ 彻底关闭领英
+    active: false, // ❌ 已关闭
   },
   {
     name: "Mail",
@@ -65,7 +65,7 @@ export const SOCIALS: SocialObjects = [
     name: "Twitter",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on Twitter`,
-    active: false, // ❌ 关闭推特
+    active: false,
   },
   {
     name: "Telegram",
