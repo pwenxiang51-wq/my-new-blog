@@ -47,11 +47,15 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         我会在这里分享我的折腾记录和踩坑经验。
       </p>
       <p class="mt-2">
-        阅读我的文章或查看关于页面了解更多。
-        <LinkButton
-          class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="https://github.com/pwenxiang51-wq/my-new-blog"
-        </p>
+      阅读我的文章或查看关于页面了解更多。
+     <LinkButton
+     class="underline decoration-dashed underline-offset-4 hover:text-accent"
+      href="https://github.com/pwenxiang51-wq/my-new-blog"
+     >
+    README
+     </LinkButton> for more info.
+    </p>
+  
       {
         // only display if at least one social link is enabled
         SOCIALS.length > 0 && (
