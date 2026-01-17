@@ -1,7 +1,4 @@
----
-title: "关于我"
-layout: ../layouts/AboutLayout.astro
----
+
 
 ### 欢迎来到 Velo.x 的极客空间 👋
 
@@ -14,5 +11,4 @@ layout: ../layouts/AboutLayout.astro
 
 #### 联系我
 如果你有任何问题，欢迎通过以下方式联系：
-* **Email**: pwenxiang51@gmail.com
 * **Telegram**: @Velox95
