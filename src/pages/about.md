@@ -1,5 +1,7 @@
 
-
+---
+layout: ../layouts/AboutLayout.astro
+---
 ### 欢迎来到 Velo.x 的极客空间 👋
 
 这里是我的技术日记本，记录我折腾 VPS 和各种网络工具的点点滴滴。
