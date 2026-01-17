@@ -1,4 +1,4 @@
-// 🔴 注意：第1行没有 import 了，直接开始！
+// ✅ 这是一个完美的 config.ts，直接复制粘贴即可
 
 export const SITE = {
   website: "https://astro-paper.pages.dev/", 
@@ -11,14 +11,12 @@ export const SITE = {
   postPerPage: 3,
   scheduledPostMargin: 15 * 60 * 1000,
   showArchives: true,
-  // 👇 刚才缺的就是这几行，现在补回来了！
-  postPerIndex: 4,
-  dynamicOgImage: true,
-  showBackButton: true, // 报错说缺这个
-  dir: "ltr",           // 报错说缺这个
-  lang: "zh-CN",        // 报错说缺这个
-  timezone: "Asia/Shanghai", // 报错说缺这个
-  
+  postPerIndex: 4,      // 之前报错缺这个
+  dynamicOgImage: true, // 之前报错缺这个
+  showBackButton: true, // 之前报错缺这个
+  dir: "ltr",           
+  lang: "zh-CN",        
+  timezone: "Asia/Shanghai", 
   editPost: {
     enabled: true,
     text: "Edit page",
@@ -38,11 +36,10 @@ export const LOGO_IMAGE = {
   height: 46,
 };
 
-// 👇 这里的 SOCIALS 也没冒号了，不会报错
 export const SOCIALS = [
   {
     name: "Github",
-    href: "https://github.com/pwenxiang51-wq",
+    href: "https://github.com/pwenxiang51-wq", // ✅ 这里改好了，更新成功后图标就是你的了
     linkTitle: ` ${SITE.title} on Github`,
     active: true,
   },
