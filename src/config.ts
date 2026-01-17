@@ -1,28 +1,25 @@
+import type { Site, SocialObjects } from "./types";
+
 export const SITE = {
-  website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
+  website: "https://astro-paper.pages.dev/", 
   author: "Velo.x",
-  profile: "https://satnaing.dev/",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  profile: "https://github.com/pwenxiang51-wq",
+  desc: "Velo.x 的个人博客",
   title: "Velo.x",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
-  postPerIndex: 4,
   postPerPage: 4,
-  scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
+  scheduledPostMargin: 15 * 60 * 1000,
   showArchives: true,
-  showBackButton: true, // show back button in post detail
   editPost: {
     enabled: true,
     text: "Edit page",
-    url: "https://github.com/pwenxiang51-wq/my-new-blog",
-  },
-  dynamicOgImage: true,
-  dir: "ltr", // "rtl" | "auto"
-  lang: "en", // html lang code. Set this empty and default will be "en"
-  timezone: "Asia/Bangkok", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-} as const;
+    url: "https://github.com/pwenxiang51-wq/my-new-blog/edit/main/src/content/blog",
+  }
+};
+
 export const LOCALE = {
-  lang: "zh-CN", // 设置中文
+  lang: "zh-CN",
   langTag: ["zh-CN"],
 } as const;
 
@@ -33,7 +30,7 @@ export const LOGO_IMAGE = {
   height: 46,
 };
 
-export const SOCIALS = [
+export const SOCIALS: SocialObjects = [
   {
     name: "Github",
     href: "https://github.com/pwenxiang51-wq",
@@ -56,11 +53,11 @@ export const SOCIALS = [
     name: "LinkedIn",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on LinkedIn`,
-    active: false, // ❌ 已关闭 (in图标)
+    active: false,
   },
   {
     name: "Mail",
-    href: "mailto:pwenxiang51@gmail.com", // ✅ 已填好你的谷歌邮箱
+    href: "mailto:pwenxiang51@gmail.com",
     linkTitle: `Send an email to ${SITE.title}`,
     active: true,
   },
@@ -68,15 +65,14 @@ export const SOCIALS = [
     name: "Twitter",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on Twitter`,
-    active: false, // ❌ 推特暂时关闭 (想开把 false 改 true)
+    active: false,
   },
   {
     name: "Telegram",
-    href: "https://t.me/Velox95", // ✅ 已填好你的 TG 链接
+    href: "https://t.me/Velox95",
     linkTitle: `${SITE.title} on Telegram`,
-    active: true, // ✅ 已开启
+    active: true,
   },
-  // --- 下面这些保持关闭即可 ---
   {
     name: "YouTube",
     href: "https://github.com/satnaing/astro-paper",
@@ -87,6 +83,18 @@ export const SOCIALS = [
     name: "WhatsApp",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on WhatsApp`,
+    active: false,
+  },
+  {
+    name: "Snapchat",
+    href: "https://github.com/satnaing/astro-paper",
+    linkTitle: `${SITE.title} on Snapchat`,
+    active: false,
+  },
+  {
+    name: "Pinterest",
+    href: "https://github.com/satnaing/astro-paper",
+    linkTitle: `${SITE.title} on Pinterest`,
     active: false,
   },
   {
