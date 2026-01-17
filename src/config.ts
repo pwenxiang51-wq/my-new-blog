@@ -1,6 +1,6 @@
-// ✅ 终极修正版：补全了所有报错缺失的配置项 (lang, timezone, showBackButton 等)
+import type { Site, SocialObjects } from "./types";
 
-export const SITE = {
+export const SITE: Site = {
   website: "https://222382.xyz/", 
   author: "Velo.x",
   profile: "https://github.com/pwenxiang51-wq",
@@ -12,13 +12,13 @@ export const SITE = {
   scheduledPostMargin: 15 * 60 * 1000,
   showArchives: true,
   
-  // 👇 刚才报错缺这些，我全部补回来的：
-  postPerIndex: 4,      
-  dynamicOgImage: true, 
-  showBackButton: true, 
-  dir: "ltr",           
-  lang: "zh-CN",        
-  timezone: "Asia/Shanghai", 
+  // 👇 刚才报错就是因为缺下面这6行，我补回来了，这次绝对能过
+  postPerIndex: 4,
+  dynamicOgImage: true,
+  showBackButton: true,
+  dir: "ltr",
+  lang: "zh-CN",
+  timezone: "Asia/Shanghai",
   
   editPost: {
     enabled: true,
@@ -39,7 +39,7 @@ export const LOGO_IMAGE = {
   height: 46,
 };
 
-export const SOCIALS = [
+export const SOCIALS: SocialObjects = [
   {
     name: "Github",
     href: "https://github.com/pwenxiang51-wq",
@@ -62,7 +62,7 @@ export const SOCIALS = [
     name: "LinkedIn",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on LinkedIn`,
-    active: false,
+    active: false, // ❌ 已关闭，图标会消失
   },
   {
     name: "Mail",
