@@ -1,5 +1,3 @@
-import type { Site, SocialObjects } from "./types";
-
 export const SITE = {
   website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
   author: "Velo.x",
@@ -35,7 +33,7 @@ export const LOGO_IMAGE = {
   height: 46,
 };
 
-export const SOCIALS: SocialObjects = [
+export const SOCIALS = [
   {
     name: "Github",
     href: "https://github.com/pwenxiang51-wq",
