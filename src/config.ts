@@ -1,10 +1,9 @@
-// ✅ 这是一个完美的 config.ts，直接复制粘贴即可
+import type { Site, SocialObjects } from "./types";
 
-export const SITE = {
-  website: "https://astro-paper.pages.dev/", 
+export const SITE: Site = {
+  website: "https://222382.xyz/", // 改成你的新域名
   author: "Velo.x",
-  profile: "https://github.com/pwenxiang51-wq",
-  
+  profile: "https://github.com/pwenxiang51-wq", // ✅ 你的个人主页
   desc: "Velo.x 的个人博客",
   title: "Velo.x",
   ogImage: "astropaper-og.jpg",
@@ -12,16 +11,10 @@ export const SITE = {
   postPerPage: 3,
   scheduledPostMargin: 15 * 60 * 1000,
   showArchives: true,
-  postPerIndex: 4,      // 之前报错缺这个
-  dynamicOgImage: true, // 之前报错缺这个
-  showBackButton: true, // 之前报错缺这个
-  dir: "ltr",           
-  lang: "zh-CN",        
-  timezone: "Asia/Shanghai", 
   editPost: {
     enabled: true,
     text: "Edit page",
-    url: "https://github.com/pwenxiang51-wq/my-new-blog/edit/main/src/content/blog", 
+    url: "https://github.com/pwenxiang51-wq/my-new-blog/edit/main/src/content/blog",
   }
 };
 
@@ -37,10 +30,10 @@ export const LOGO_IMAGE = {
   height: 46,
 };
 
-export const SOCIALS = [
+export const SOCIALS: SocialObjects = [
   {
     name: "Github",
-    href: "https://github.com/pwenxiang51-wq", // ✅ 这里改好了，更新成功后图标就是你的了
+    href: "https://github.com/pwenxiang51-wq", // ✅ 绝对是你的链接
     linkTitle: ` ${SITE.title} on Github`,
     active: true,
   },
@@ -60,11 +53,11 @@ export const SOCIALS = [
     name: "LinkedIn",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on LinkedIn`,
-    active: false,
+    active: false, // ❌ 彻底关闭领英
   },
   {
     name: "Mail",
-    href: "mailto:pwenxiang51@gmail.com",
+    href: "mailto:pwenxiang51@gmail.com", // ✅ 你的邮箱
     linkTitle: `Send an email to ${SITE.title}`,
     active: true,
   },
@@ -72,72 +65,12 @@ export const SOCIALS = [
     name: "Twitter",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on Twitter`,
-    active: false,
+    active: false, // ❌ 关闭推特
   },
   {
     name: "Telegram",
-    href: "https://t.me/Velox95",
+    href: "https://t.me/Velox95", // ✅ 你的 TG
     linkTitle: `${SITE.title} on Telegram`,
     active: true,
-  },
-  {
-    name: "YouTube",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on YouTube`,
-    active: false,
-  },
-  {
-    name: "WhatsApp",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on WhatsApp`,
-    active: false,
-  },
-  {
-    name: "Snapchat",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on Snapchat`,
-    active: false,
-  },
-  {
-    name: "Pinterest",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on Pinterest`,
-    active: false,
-  },
-  {
-    name: "TikTok",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on TikTok`,
-    active: false,
-  },
-  {
-    name: "Discord",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on Discord`,
-    active: false,
-  },
-  {
-    name: "Reddit",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on Reddit`,
-    active: false,
-  },
-  {
-    name: "Skype",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on Skype`,
-    active: false,
-  },
-  {
-    name: "Steam",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on Steam`,
-    active: false,
-  },
-  {
-    name: "Mastodon",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on Mastodon`,
-    active: false,
   }
 ];
