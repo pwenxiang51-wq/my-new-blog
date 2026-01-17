@@ -20,7 +20,7 @@ export const SITE = {
   editPost: {
     enabled: true,
     text: "Edit page",
-    url: "https://github.com/pwenxiang51-wq/my-new-blog/edit/main/src/content/blog",
+    url: "https://github.com/pwenxiang51-wq/my-new-blog/edit/main/src/content/blog", 
   }
 };
 
