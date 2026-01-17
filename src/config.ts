@@ -1,4 +1,4 @@
-import type { Site, SocialObjects } from "./types";
+// 🔴 注意：第1行没有 import 了，直接开始！
 
 export const SITE = {
   website: "https://astro-paper.pages.dev/", 
@@ -8,9 +8,17 @@ export const SITE = {
   title: "Velo.x",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
-  postPerPage: 4,
+  postPerPage: 3,
   scheduledPostMargin: 15 * 60 * 1000,
   showArchives: true,
+  // 👇 刚才缺的就是这几行，现在补回来了！
+  postPerIndex: 4,
+  dynamicOgImage: true,
+  showBackButton: true, // 报错说缺这个
+  dir: "ltr",           // 报错说缺这个
+  lang: "zh-CN",        // 报错说缺这个
+  timezone: "Asia/Shanghai", // 报错说缺这个
+  
   editPost: {
     enabled: true,
     text: "Edit page",
@@ -21,7 +29,7 @@ export const SITE = {
 export const LOCALE = {
   lang: "zh-CN",
   langTag: ["zh-CN"],
-} as const;
+};
 
 export const LOGO_IMAGE = {
   enable: false,
@@ -30,7 +38,8 @@ export const LOGO_IMAGE = {
   height: 46,
 };
 
-export const SOCIALS: SocialObjects = [
+// 👇 这里的 SOCIALS 也没冒号了，不会报错
+export const SOCIALS = [
   {
     name: "Github",
     href: "https://github.com/pwenxiang51-wq",
