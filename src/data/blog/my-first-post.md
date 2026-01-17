@@ -1,6 +1,6 @@
 ---
 author: Velo.x
-pubDatetime: 2026-01-17T17:45:00Z
+pubDatetime: 2026-01-16T17:45:00Z
 title: 我的 Astro 博客正式开张！
 postSlug: welcome-to-my-new-blog
 featured: true
