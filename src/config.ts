@@ -1,9 +1,9 @@
-// ✅ 这是一个纯净版 config.ts，移除了导致报错的引用
+// ✅ 终极修正版：补全了所有报错缺失的配置项 (lang, timezone, showBackButton 等)
 
 export const SITE = {
-  website: "https://222382.xyz/", // 你的域名
+  website: "https://222382.xyz/", 
   author: "Velo.x",
-  profile: "https://github.com/pwenxiang51-wq", // 你的GitHub
+  profile: "https://github.com/pwenxiang51-wq",
   desc: "Velo.x 的个人博客",
   title: "Velo.x",
   ogImage: "astropaper-og.jpg",
@@ -11,6 +11,15 @@ export const SITE = {
   postPerPage: 3,
   scheduledPostMargin: 15 * 60 * 1000,
   showArchives: true,
+  
+  // 👇 刚才报错缺这些，我全部补回来的：
+  postPerIndex: 4,      
+  dynamicOgImage: true, 
+  showBackButton: true, 
+  dir: "ltr",           
+  lang: "zh-CN",        
+  timezone: "Asia/Shanghai", 
+  
   editPost: {
     enabled: true,
     text: "Edit page",
@@ -33,7 +42,7 @@ export const LOGO_IMAGE = {
 export const SOCIALS = [
   {
     name: "Github",
-    href: "https://github.com/pwenxiang51-wq", // ✅ 你的链接
+    href: "https://github.com/pwenxiang51-wq",
     linkTitle: ` ${SITE.title} on Github`,
     active: true,
   },
@@ -53,11 +62,11 @@ export const SOCIALS = [
     name: "LinkedIn",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on LinkedIn`,
-    active: false, // ❌ 已关闭
+    active: false,
   },
   {
     name: "Mail",
-    href: "mailto:pwenxiang51@gmail.com", // ✅ 你的邮箱
+    href: "mailto:pwenxiang51@gmail.com",
     linkTitle: `Send an email to ${SITE.title}`,
     active: true,
   },
@@ -69,7 +78,7 @@ export const SOCIALS = [
   },
   {
     name: "Telegram",
-    href: "https://t.me/Velox95", // ✅ 你的 TG
+    href: "https://t.me/Velox95",
     linkTitle: `${SITE.title} on Telegram`,
     active: true,
   }
