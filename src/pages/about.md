@@ -5,14 +5,14 @@ layout: ../layouts/AboutLayout.astro
 
 ### 欢迎来到 Velo.x 的极客空间 👋
 
-我是一名热衷于折腾 **VPS**、**网络技术**和**新奇软件**的玩家。
+这里是我的技术日记本，记录我折腾 VPS 和各种网络工具的点点滴滴。
 
-这个博客是我的技术日记本，用来记录：
-* **VPS 优化与管理**（GCP, RackNerd 等）
-* **网络协议研究**（VLESS, Hysteria2 等）
-* **静态网页部署**（Astro, Hugo, Cloudflare）
+#### 我的设备与服务
+* **VPS**: Google Cloud Platform (GCP) & RackNerd
+* **博客系统**: Astro (部署在 Cloudflare Pages)
+* **主要工具**: Hugo, GitHub, VLESS, Hysteria2
 
-#### 找我交流
-如果你也有相同的爱好，欢迎通过首页底部的 **Telegram** 或 **Email** 联系我。
-
-**路漫漫其修远兮，吾将上下而求索。**
+#### 联系我
+如果你有任何问题，欢迎通过以下方式联系：
+* **Email**: pwenxiang51@gmail.com
+* **Telegram**: @Velox95
