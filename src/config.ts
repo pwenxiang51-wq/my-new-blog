@@ -4,6 +4,7 @@ export const SITE = {
   website: "https://astro-paper.pages.dev/", 
   author: "Velo.x",
   profile: "https://github.com/pwenxiang51-wq",
+  
   desc: "Velo.x 的个人博客",
   title: "Velo.x",
   ogImage: "astropaper-og.jpg",
