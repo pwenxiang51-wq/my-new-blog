@@ -3,7 +3,7 @@ export const SITE = {
   author: "Velo.x",
   profile: "https://satnaing.dev/",
   desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
-  title: "Velo.x 的博",
+  title: "Velo.x",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
