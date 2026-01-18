@@ -1,6 +1,6 @@
 ---
 title: "[安全] 终极防盗门：配置 SSH 密钥登录并禁用密码"
-pubDatetime: 2026-01-18T17:11:00.000+08:00
+pubDatetime: 2025-11-20T17:11:00.000+08:00
 layout: post
 description: "改了端口只是隐身，密钥登录才是把门锁焊死。本文教你如何配置 SSH 密钥并彻底禁用密码登录。"
 tags: [VPS, Security, SSH, Linux]
