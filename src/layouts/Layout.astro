@@ -173,39 +173,31 @@ const structuredData = {
     <!-- Load full theme logic -->
     <script src="../scripts/theme.ts"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
-  <script is:inline>
-    // 定义全局变量，保证能在不同页面间控制它
-    let zoom;
-
-    // 1️⃣ 【清理阶段】在页面即将切换前，强行卸载旧的 Zoom
-    // 这就是解决“不用刷新”的关键！必须在 Astro 换内容之前把它杀掉。
-    document.addEventListener('astro:before-swap', () => {
-      if (zoom) {
-        zoom.detach(); // 彻底移除监听器和样式
-        zoom = null;   // 清空变量
-      }
-    });
-
-    // 2️⃣ 【初始化阶段】新页面加载完成后，重新绑定
-    document.addEventListener('astro:page-load', () => {
-      // 只在电脑/平板上启用
-      if (window.matchMedia('(min-width: 768px)').matches) {
-        
-        // 双重保险：如果还有残留，再杀一次
-        if (zoom) zoom.detach();
-
-        // 这里的图片选择器涵盖了所有可能的情况
-        const images = document.querySelectorAll('main img, .prose img, article img');
-
-        if (images.length > 0) {
-          zoom = mediumZoom(images, {
-            background: 'rgba(0, 0, 0, 0.95)', // 黑色背景
-            margin: 24,
-            scrollOffset: 120 // 滚轮滚动 > 120px 自动关闭
-          });
+    <script is:inline>
+      let zoom;
+      document.addEventListener('astro:before-swap', () => {
+        if (zoom) {
+          zoom.detach();
+          zoom = null;
         }
-      }
-    });
-  </script>
+      });
+      document.addEventListener('astro:page-load', () => {
+        if (window.matchMedia('(min-width: 768px)').matches) {
+          if (zoom) zoom.detach();
+          const images = document.querySelectorAll('main img, .prose img, article img');
+          if (images.length > 0) {
+            zoom = mediumZoom(images, {
+              background: 'rgba(0, 0, 0, 0.95)',
+              margin: 24,
+              scrollOffset: 120
+            });
+          }
+        }
+      });
+    </script>
+    
+  </body> </html>   ```
+
+**只换中间的芯，别动外面的壳！提交吧，这次稳了！**
   </body>
 </html>
