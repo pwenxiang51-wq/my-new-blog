@@ -1,29 +1,27 @@
 @import "tailwindcss";
 @import "./typography.css";
 
-/* ✅ 保持原有的变体配置不动 */
+/* ✅ 1. 核心配置：保持不动 */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+/* ✅ 2. 颜色变量：保留你喜欢的“科技蓝”和“护眼灰” */
 :root,
 html[data-theme="light"] {
-  /* ☀️ 白天模式：护眼灰 + 科技蓝 */
-  --background: #f8f9fa;  /* 护眼灰 (原为 #fdfdfd) */
+  --background: #f8f9fa;  /* 护眼灰 */
   --foreground: #27272a;  /* 深灰字 */
-  --accent: #0284c7;      /* 🔵 核心改动：科技蓝 */
-  --muted: #e5e7eb;       /* 浅灰装饰 */
-  --border: #e5e5e5;      /* 浅灰边框 */
+  --accent: #0284c7;      /* 科技蓝 */
+  --muted: #e5e7eb;
+  --border: #e5e5e5;
 }
 
 html[data-theme="dark"] {
-  /* 🌙 夜间模式：深邃黑 + 荧光蓝 */
-  --background: #18181b;  /* 极客黑 (原为蓝灰 #212737) */
+  --background: #18181b;  /* 极客黑 */
   --foreground: #e4e4e7;  /* 亮灰字 */
-  --accent: #38bdf8;      /* 🔵 核心改动：荧光青蓝 (原为橙色 #ff6b01) */
-  --muted: #27272a;       /* 深灰装饰 */
-  --border: #3f3f46;      /* 深灰边框 (原为棕色 #ab4b08) */
+  --accent: #38bdf8;      /* 荧光蓝 */
+  --muted: #27272a;
+  --border: #3f3f46;
 }
 
-/* ✅ 这里的映射关系完全保留，千万不动 */
 @theme inline {
   --font-app: var(--font-google-sans-code);
   --color-background: var(--background);
@@ -33,35 +31,24 @@ html[data-theme="dark"] {
   --color-border: var(--border);
 }
 
+/* ✅ 3. 基础样式：删除了那个激进的 * 选择器，只留安全的 */
 @layer base {
-  * {
-    @apply border-border outline-accent/75;
-    scrollbar-width: auto;
-    scrollbar-color: var(--color-muted) transparent;
-  }
-
   html {
     @apply overflow-y-scroll scroll-smooth;
-    font-size: 18px; /* ✅ 字体已加大 */
+    font-size: 18px; /* 字体加大保留 */
   }
 
   body {
     @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-background;
   }
 
-  a,
-  button {
+  a, button {
     @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
   }
-
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    cursor: pointer;
-  }
-
-  /* ⬇️ 标题样式整合在这里，更规范 */
+  
+  /* 标题样式 */
   h1 {
-    @apply font-extrabold text-4xl mb-6 mt-4 text-accent; /* 标题变蓝 */
+    @apply font-extrabold text-4xl mb-6 mt-4 text-accent;
   }
   h2 {
     @apply font-bold text-3xl mb-4 mt-8;
@@ -70,13 +57,13 @@ html[data-theme="dark"] {
     @apply font-bold text-2xl mb-2 mt-6;
   }
   
-  /* 文章链接样式优化：蓝色字，鼠标悬停出下划线 */
+  /* 文章链接蓝色 */
   .prose a {
     @apply text-accent no-underline hover:underline transition-colors;
   }
 }
 
-/* ⬇️ 宽度稍微加宽到 4xl，阅读代码更舒服 */
+/* ✅ 4. 宽度优化 */
 @utility max-w-app {
   @apply max-w-4xl; 
 }
@@ -85,7 +72,6 @@ html[data-theme="dark"] {
   @apply mx-auto w-full max-w-app px-4;
 }
 
-/* 导航栏激活状态：也改成蓝色 */
 .active-nav {
   @apply text-accent underline decoration-dashed decoration-2 underline-offset-8;
 }
