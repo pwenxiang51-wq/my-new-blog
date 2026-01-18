@@ -46,13 +46,13 @@ tags:
 
 我手头有一台 **RackNerd** 的廉价 VPS。众所周知，这种机房 IP 通常是“全红”（全部无法解锁）的。
 
-但是！**在使用节点脚本在SSH上部署并开启了 Cloudflare WARP 后**，奇迹发生了：
+但是！**在使用节点脚本的“管理 Warp”选项开启了解锁功能后**，奇迹发生了：
 
 * **Google Gemini**：从 **No** 变成了 **Yes (US)** ✅
 * **TikTok**：完美原生解锁。
 
 **结论：**
-如果你的 VPS 原生 IP 解锁能力很差，不要急着扔。尝试在节点上部署 WARP（可以用我之前文章提到的 Cloudflare 脚本），让流量走 Cloudflare 的出口，往往能“起死回生”，解锁 Gemini 或 ChatGPT 等 AI 服务。
+如果你的 VPS 原生 IP 解锁能力很差，不要急着扔。尝试在节点上部署 WARP（可以用我之前文章提到的 甬哥 脚本），让流量走 Cloudflare 的出口，往往能“起死回生”，解锁 Gemini 或 ChatGPT 等 AI 服务。
 
 ---
 
