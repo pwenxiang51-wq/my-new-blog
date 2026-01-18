@@ -1,23 +1,29 @@
 @import "tailwindcss";
 @import "./typography.css";
 
+/* ✅ 保持原有的变体配置不动 */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root,
 html[data-theme="light"] {
-  --background: #fdfdfd;  /* 👈 就是这一行 */
-  --foreground: #282728;
-  /* ...其他代码... */
+  /* ☀️ 白天模式：护眼灰 + 科技蓝 */
+  --background: #f8f9fa;  /* 护眼灰 (原为 #fdfdfd) */
+  --foreground: #27272a;  /* 深灰字 */
+  --accent: #0284c7;      /* 🔵 核心改动：科技蓝 */
+  --muted: #e5e7eb;       /* 浅灰装饰 */
+  --border: #e5e5e5;      /* 浅灰边框 */
 }
 
 html[data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --muted: #343f60;
-  --border: #ab4b08;
+  /* 🌙 夜间模式：深邃黑 + 荧光蓝 */
+  --background: #18181b;  /* 极客黑 (原为蓝灰 #212737) */
+  --foreground: #e4e4e7;  /* 亮灰字 */
+  --accent: #38bdf8;      /* 🔵 核心改动：荧光青蓝 (原为橙色 #ff6b01) */
+  --muted: #27272a;       /* 深灰装饰 */
+  --border: #3f3f46;      /* 深灰边框 (原为棕色 #ab4b08) */
 }
 
+/* ✅ 这里的映射关系完全保留，千万不动 */
 @theme inline {
   --font-app: var(--font-google-sans-code);
   --color-background: var(--background);
@@ -33,45 +39,29 @@ html[data-theme="dark"] {
     scrollbar-width: auto;
     scrollbar-color: var(--color-muted) transparent;
   }
- html {
-  @apply overflow-y-scroll scroll-smooth;
-  font-size: 18px;  /* 👈 加上这一行！ */
-}
+
+  html {
+    @apply overflow-y-scroll scroll-smooth;
+    font-size: 18px; /* ✅ 字体已加大 */
+  }
+
   body {
     @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-background;
   }
+
   a,
   button {
     @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
   }
+
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
-}
 
-@utility max-w-app {
-  @apply max-w-3xl;
-}
-
-@utility app-layout {
-  @apply mx-auto w-full max-w-app px-4;
-}
-
-.active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-8;
-}
-
-/* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
-/* Anything that has been anchored to should have extra scroll margin */
-:target {
-  scroll-margin-block: 1rem;
-}
-
-/* ⬇️ 新增：强制加大标题字号 */
-@layer base {
+  /* ⬇️ 标题样式整合在这里，更规范 */
   h1 {
-    @apply font-extrabold text-4xl mb-6 mt-2;
+    @apply font-extrabold text-4xl mb-6 mt-4 text-accent; /* 标题变蓝 */
   }
   h2 {
     @apply font-bold text-3xl mb-4 mt-8;
@@ -79,8 +69,27 @@ html[data-theme="dark"] {
   h3 {
     @apply font-bold text-2xl mb-2 mt-6;
   }
-  /* 修复文章链接的下划线样式 */
+  
+  /* 文章链接样式优化：蓝色字，鼠标悬停出下划线 */
   .prose a {
-    @apply no-underline hover:text-accent transition-colors;
+    @apply text-accent no-underline hover:underline transition-colors;
   }
+}
+
+/* ⬇️ 宽度稍微加宽到 4xl，阅读代码更舒服 */
+@utility max-w-app {
+  @apply max-w-4xl; 
+}
+
+@utility app-layout {
+  @apply mx-auto w-full max-w-app px-4;
+}
+
+/* 导航栏激活状态：也改成蓝色 */
+.active-nav {
+  @apply text-accent underline decoration-dashed decoration-2 underline-offset-8;
+}
+
+:target {
+  scroll-margin-block: 1rem;
 }
