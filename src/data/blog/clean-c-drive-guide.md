@@ -1,6 +1,6 @@
 ---
 title: "电脑 C 盘又红了？这几个“吃硬盘”的隐形杀手，删了就能腾出几十 G"
-pubDatetime: 2025-12-19T20:30:00.000+08:00
+pubDatetime: 2024-9-19T20:30:00.000+08:00
 description: "C 盘明明没装什么软件，空间却莫名其妙满了？本文揭秘 Windows AppData 下的几大毒瘤，教你安全瘦身。"
 tags:
   - Windows
