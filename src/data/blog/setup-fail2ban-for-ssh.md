@@ -61,7 +61,7 @@ Fail2Ban 默认只监控 22 端口，因为我们改了端口（比如 56789）�
 
 如果运行正常，你会看到类似下图的输出：
 
-![Fail2Ban 运行状态](three.png)
+![Fail2Ban 运行状态](/assets/three.png)
 
 *(如图所示，Status 为 "active" 说明防护罩已经打开了。因为我们使用了高位端口，所以目前暂时没有笨蛋脚本撞上来，Banned IP 列表是空的。)*
 
