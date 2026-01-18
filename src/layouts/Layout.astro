@@ -172,5 +172,11 @@ const structuredData = {
 
     <!-- Load full theme logic -->
     <script src="../scripts/theme.ts"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
+  <script is:inline>
+    document.addEventListener('astro:page-load', () => {
+      mediumZoom('main img', { background: 'rgba(0,0,0,0.8)' });
+    });
+  </script>
   </body>
 </html>
