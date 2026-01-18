@@ -174,30 +174,18 @@ const structuredData = {
     <script src="../scripts/theme.ts"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
     <script is:inline>
-      let zoom;
-      document.addEventListener('astro:before-swap', () => {
-        if (zoom) {
-          zoom.detach();
-          zoom = null;
-        }
-      });
       document.addEventListener('astro:page-load', () => {
-        if (window.matchMedia('(min-width: 768px)').matches) {
-          if (zoom) zoom.detach();
-          const images = document.querySelectorAll('main img, .prose img, article img');
-          if (images.length > 0) {
-            zoom = mediumZoom(images, {
-              background: 'rgba(0, 0, 0, 0.95)',
-              margin: 24,
-              scrollOffset: 120
-            });
-          }
-        }
+        // 1. 只要有旧的，立马杀掉 (解决跳转后失效/卡死)
+        if (window.zoom) window.zoom.detach();
+        
+        // 2. 重新绑定 (寻找 main 里的所有图片)
+        // 这里的 'main img' 是最稳的选择器
+        window.zoom = mediumZoom('main img', {
+          background: 'rgba(0, 0, 0, 0.95)' // 只留这一个参数
+        });
       });
     </script>
-    
-  </body> </html>   ```
 
-**只换中间的芯，别动外面的壳！提交吧，这次稳了！**
+  </body> </html>
   </body>
 </html>
