@@ -36,7 +36,7 @@ html[data-theme="dark"] {
   }
  html {
   @apply overflow-y-scroll scroll-smooth;
-  font-size: 18px;  /* 👈 加上这一行！ */
+  font-size: 20px;  /* 👈 加上这一行！ */
 }
   body {
     @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-background;
