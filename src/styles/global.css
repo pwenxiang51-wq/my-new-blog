@@ -1,29 +1,24 @@
 @import "tailwindcss";
 @import "./typography.css";
 
-/* 🔒 框架核心：原封不动保留 v4 高级配置 */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root,
 html[data-theme="light"] {
-  /* 🔵 改动点1：白天颜色改为 护眼灰 + 科技蓝 */
-  --background: #f8f9fa;  
-  --foreground: #27272a;
-  --accent: #0284c7;      /* 科技蓝 */
-  --muted: #e5e7eb;
-  --border: #e5e5e5;
+  --background: #f8f9fa;  /* 👈 就是这一行 */
+  --foreground: #282728;
+  --accent: #0284c7;
+  /* ...其他代码... */
 }
 
 html[data-theme="dark"] {
-  /* 🔵 改动点2：夜间颜色改为 极客黑 + 荧光蓝 */
-  --background: #18181b;  
-  --foreground: #e4e4e7;
-  --accent: #38bdf8;      /* 荧光蓝 */
-  --muted: #27272a;
+  --background: #18181b;
+  --foreground: #eaedf3;
+  --accent: #38bdf8;
+  --muted: #343f60;
   --border: #3f3f46;
 }
 
-/* 🔒 框架核心：原封不动保留变量映射 */
 @theme inline {
   --font-app: var(--font-google-sans-code);
   --color-background: var(--background);
@@ -34,50 +29,30 @@ html[data-theme="dark"] {
 }
 
 @layer base {
-  /* 🔒 框架核心：原封不动保留全局样式 */
   * {
     @apply border-border outline-accent/75;
     scrollbar-width: auto;
     scrollbar-color: var(--color-muted) transparent;
   }
-
-  html {
-    @apply overflow-y-scroll scroll-smooth;
-    font-size: 18px; /* ✅ 字体加大 */
-  }
-
+ html {
+  @apply overflow-y-scroll scroll-smooth;
+  font-size: 18px;  /* 👈 加上这一行！ */
+}
   body {
     @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-background;
   }
-
   a,
   button {
     @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
   }
-
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
-
-  /* ⬇️ 新增的排版美化 (安全追加在 base 层里) */
-  h1 {
-    @apply font-extrabold text-4xl mb-6 mt-4 text-accent;
-  }
-  h2 {
-    @apply font-bold text-3xl mb-4 mt-8;
-  }
-  h3 {
-    @apply font-bold text-2xl mb-2 mt-6;
-  }
-  .prose a {
-    @apply text-accent no-underline hover:underline transition-colors;
-  }
 }
 
-/* 🔒 框架核心：原封不动保留 Utility */
 @utility max-w-app {
-  @apply max-w-4xl; /* 稍微加宽一点点 */
+  @apply max-w-3xl;
 }
 
 @utility app-layout {
@@ -85,9 +60,28 @@ html[data-theme="dark"] {
 }
 
 .active-nav {
-  @apply text-accent underline decoration-dashed decoration-2 underline-offset-8;
+  @apply underline decoration-wavy decoration-2 underline-offset-8;
 }
 
+/* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
+/* Anything that has been anchored to should have extra scroll margin */
 :target {
   scroll-margin-block: 1rem;
+}
+
+/* ⬇️ 新增：强制加大标题字号 */
+@layer base {
+  h1 {
+    @apply font-extrabold text-4xl mb-6 mt-2;
+  }
+  h2 {
+    @apply font-bold text-3xl mb-4 mt-8;
+  }
+  h3 {
+    @apply font-bold text-2xl mb-2 mt-6;
+  }
+  /* 修复文章链接的下划线样式 */
+  .prose a {
+    @apply no-underline hover:text-accent transition-colors;
+  }
 }
