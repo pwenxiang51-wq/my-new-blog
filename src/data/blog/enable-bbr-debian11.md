@@ -1,6 +1,6 @@
 ---
 title: "[优化] Debian 11 开启 BBR：压榨 VPS 的每一滴网络性能"
-pubDatetime: 2026-01-04T15:51:00.000+08:00
+pubDatetime: 2025-11-22T15:51:00.000+08:00
 description: "Debian 11 内核已自带 BBR，只需两行命令开启，即可在复杂的网络环境中显著提升传输速度和抗丢包能力。"
 tags:
   - VPS
