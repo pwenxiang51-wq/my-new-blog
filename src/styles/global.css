@@ -85,3 +85,11 @@ html[data-theme="dark"] {
     @apply no-underline hover:text-accent transition-colors;
   }
 }
+/* ⬇️ 给底部图标注入灵魂：变色 + 呼吸感 */
+footer a {
+  @apply text-foreground transition-all duration-300; /* 默认颜色，加个0.3秒的顺滑过渡 */
+}
+
+footer a:hover {
+  @apply text-accent scale-110; /* ✅ 悬停效果：变蓝 (text-accent) + 微微放大 (scale-110) */
+}
