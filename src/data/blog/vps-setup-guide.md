@@ -1,7 +1,7 @@
 ---
 title: "[实战] 从零开始：VPS 节点搭建 + 域名绑定全流程 (甬哥脚本版)"
 author: Velo.x
-pubDatetime: 2026-01-18T12:00:00Z
+pubDatetime: 2024-11-18T12:00:00Z
 description: VPS 买了不能只当摆设。本文分享利用甬哥一键脚本搭建 Sing-box 节点，并配合 Cloudflare 绑定自定义域名的保姆级教程。
 featured: true
 draft: false
