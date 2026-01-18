@@ -1,8 +1,8 @@
 ---
-title: "[实战] 从零开始：VPS 节点搭建 + 域名绑定全流程 (勇哥脚本版)"
+title: "[实战] 从零开始：VPS 节点搭建 + 域名绑定全流程 (甬哥脚本版)"
 author: Velo.x
 pubDatetime: 2026-01-18T12:00:00Z
-description: VPS 买了不能只当摆设。本文分享利用勇哥一键脚本搭建 Sing-box 节点，并配合 Cloudflare 绑定自定义域名的保姆级教程。
+description: VPS 买了不能只当摆设。本文分享利用甬哥一键脚本搭建 Sing-box 节点，并配合 Cloudflare 绑定自定义域名的保姆级教程。
 featured: true
 draft: false
 tags:
@@ -12,7 +12,7 @@ tags:
   - 教程
 ---
 
-> **📝 前言**：VPS 买了不能只当摆设。今天分享一套最稳的方案：利用 **勇哥 (yonggekkk)** 的一键脚本搭建 Sing-box 节点，并配合 **Cloudflare** 绑定自定义域名。
+> **📝 前言**：VPS 买了不能只当摆设。今天分享一套最稳的方案：利用 **甬哥 (yonggekkk)** 的一键脚本搭建 Sing-box 节点，并配合 **Cloudflare** 绑定自定义域名。
 
 这样不仅搭建简单（一行代码），而且以后连接节点用的就是你自己帅气的域名（如 `vps.222382.xyz`），而不是冷冰冰的 IP 数字。
 
