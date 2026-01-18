@@ -174,14 +174,33 @@ const structuredData = {
     <script src="../scripts/theme.ts"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
   <script is:inline>
+    // 定义一个全局变量来存放 zoom 实例
+    let zoom;
+
     document.addEventListener('astro:page-load', () => {
-      // 1. 智能判断：只有屏幕宽度大于 768px (电脑/平板) 才启用插件
+      // 1. 只有电脑/平板 (宽度 > 768px) 才启用
       if (window.matchMedia('(min-width: 768px)').matches) {
-        mediumZoom('main img', {
-          background: 'rgba(0, 0, 0, 0.95)', // 黑色背景
-          margin: 24,
-          scrollOffset: 150, // 👈 关键救命药：允许滚动关闭！只要滚轮一动，图片马上关掉，绝不卡死。
-        });
+        
+        // 2. 关键步骤：如果有旧的 zoom 实例，先把它关掉/卸载
+        // (防止从上一页带过来的幽灵实例干扰)
+        if (zoom) {
+          zoom.detach();
+        }
+
+        // 3. 重新寻找当前页面的图片并绑定
+        // 使用 setTimeout 给浏览器 100毫秒 的反应时间，确保图片已经渲染出来了
+        setTimeout(() => {
+          // 这里同时抓取 'main img' 和 '.prose img'，确保万无一失
+          const images = document.querySelectorAll('main img, .prose img');
+          
+          if (images.length > 0) {
+            zoom = mediumZoom(images, {
+              background: 'rgba(0, 0, 0, 0.95)',
+              margin: 24,
+              scrollOffset: 150 // 允许滚动关闭
+            });
+          }
+        }, 100); // 延迟 0.1 秒执行
       }
     });
   </script>
