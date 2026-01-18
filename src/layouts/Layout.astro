@@ -175,7 +175,14 @@ const structuredData = {
 <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
   <script is:inline>
     document.addEventListener('astro:page-load', () => {
-      mediumZoom('main img', { background: 'rgba(0,0,0,0.8)' });
+      // 使用 .prose img 选择器，只放大文章里的图片，不影响其他
+      const images = document.querySelectorAll('.prose img');
+      
+      mediumZoom(images, {
+        margin: 24,                    // 图片放大后离屏幕边缘留点空隙
+        background: 'rgba(0, 0, 0, 0.9)', // 背景颜色更深一点，更沉浸
+        scrollOffset: 0,               // 关键！禁止滚动关闭，必须点击才能关闭 (防止卡顿)
+      });
     });
   </script>
   </body>
