@@ -174,29 +174,36 @@ const structuredData = {
     <script src="../scripts/theme.ts"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
   <script is:inline>
+    // 定义全局变量，保证能在不同页面间控制它
+    let zoom;
+
+    // 1️⃣ 【清理阶段】在页面即将切换前，强行卸载旧的 Zoom
+    // 这就是解决“不用刷新”的关键！必须在 Astro 换内容之前把它杀掉。
+    document.addEventListener('astro:before-swap', () => {
+      if (zoom) {
+        zoom.detach(); // 彻底移除监听器和样式
+        zoom = null;   // 清空变量
+      }
+    });
+
+    // 2️⃣ 【初始化阶段】新页面加载完成后，重新绑定
     document.addEventListener('astro:page-load', () => {
-      // 1. 只有电脑/平板才启用 (手机用原生缩放)
+      // 只在电脑/平板上启用
       if (window.matchMedia('(min-width: 768px)').matches) {
         
-        // 2. 清理旧实例 (挂在 window 上，保证跨页面也能清理)
-        if (window.zoomInstance) {
-          window.zoomInstance.detach();
-        }
+        // 双重保险：如果还有残留，再杀一次
+        if (zoom) zoom.detach();
 
-        // 3. 【关键改动】等待 300ms！
-        // 等待 Astro 的页面切换动画完全结束，图片位置定格了，再去绑定。
-        // 之前 100ms 太快了，导致抓到了“运动中”的图片，所以会卡死。
-        setTimeout(() => {
-          const images = document.querySelectorAll('main img, .prose img, article img');
-          
-          if (images.length > 0) {
-            window.zoomInstance = mediumZoom(images, {
-              background: 'rgba(0, 0, 0, 0.95)',
-              margin: 24,
-              scrollOffset: 150 // 滚轮一动就关闭，防止误触
-            });
-          }
-        }, 300); // 👈 改成了 300
+        // 这里的图片选择器涵盖了所有可能的情况
+        const images = document.querySelectorAll('main img, .prose img, article img');
+
+        if (images.length > 0) {
+          zoom = mediumZoom(images, {
+            background: 'rgba(0, 0, 0, 0.95)', // 黑色背景
+            margin: 24,
+            scrollOffset: 120 // 滚轮滚动 > 120px 自动关闭
+          });
+        }
       }
     });
   </script>
