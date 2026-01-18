@@ -173,16 +173,12 @@ const structuredData = {
     <!-- Load full theme logic -->
     <script src="../scripts/theme.ts"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
-  <script is:inline>
-    document.addEventListener('astro:page-load', () => {
-      // 关键改动：换回 'main img'，这个绝对能抓到你文章里的图！
-      // 之前的 '.prose img' 是我写错了，对不起！
-      const zoom = mediumZoom('main img', {
-        margin: 24,
-        background: 'rgba(0, 0, 0, 0.9)',
-        scrollOffset: 40, // ✅ 允许滑动关闭！手指一滑就关掉，绝对不卡死！
-      });
+<script is:inline>
+  document.addEventListener('astro:page-load', () => {
+    mediumZoom('main img', { 
+      background: 'rgba(0, 0, 0, 0.9)' 
     });
-  </script>
+  });
+</script>
   </body>
 </html>
