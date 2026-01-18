@@ -5,11 +5,9 @@
 
 :root,
 html[data-theme="light"] {
-  --background: #fdfdfd;
+  --background: #fdfdfd;  /* 👈 就是这一行 */
   --foreground: #282728;
-  --accent: #006cac;
-  --muted: #e6e6e6;
-  --border: #ece9e9;
+  /* ...其他代码... */
 }
 
 html[data-theme="dark"] {
@@ -35,9 +33,10 @@ html[data-theme="dark"] {
     scrollbar-width: auto;
     scrollbar-color: var(--color-muted) transparent;
   }
-  html {
-    @apply overflow-y-scroll scroll-smooth;
-  }
+ html {
+  @apply overflow-y-scroll scroll-smooth;
+  font-size: 18px;  /* 👈 加上这一行！ */
+}
   body {
     @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-background;
   }
@@ -67,4 +66,21 @@ html[data-theme="dark"] {
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
   scroll-margin-block: 1rem;
+}
+
+/* ⬇️ 新增：强制加大标题字号 */
+@layer base {
+  h1 {
+    @apply font-extrabold text-4xl mb-6 mt-2;
+  }
+  h2 {
+    @apply font-bold text-3xl mb-4 mt-8;
+  }
+  h3 {
+    @apply font-bold text-2xl mb-2 mt-6;
+  }
+  /* 修复文章链接的下划线样式 */
+  .prose a {
+    @apply no-underline hover:text-accent transition-colors;
+  }
 }
