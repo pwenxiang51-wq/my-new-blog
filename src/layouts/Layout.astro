@@ -173,12 +173,17 @@ const structuredData = {
     <!-- Load full theme logic -->
     <script src="../scripts/theme.ts"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
-<script is:inline>
-  document.addEventListener('astro:page-load', () => {
-    mediumZoom('main img', { 
-      background: 'rgba(0, 0, 0, 0.9)' 
+  <script is:inline>
+    document.addEventListener('astro:page-load', () => {
+      // 1. 智能判断：只有屏幕宽度大于 768px (电脑/平板) 才启用插件
+      if (window.matchMedia('(min-width: 768px)').matches) {
+        mediumZoom('main img', {
+          background: 'rgba(0, 0, 0, 0.95)', // 黑色背景
+          margin: 24,
+          scrollOffset: 150, // 👈 关键救命药：允许滚动关闭！只要滚轮一动，图片马上关掉，绝不卡死。
+        });
+      }
     });
-  });
-</script>
+  </script>
   </body>
 </html>
