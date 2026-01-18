@@ -1,5 +1,3 @@
-Markdown
-
 ---
 title: "[实战] 从零开始：VPS 节点搭建 + 域名绑定全流程 (甬哥脚本版)"
 author: Velo.x
@@ -53,7 +51,7 @@ ssh root@192.168.1.1 -p22
 
 Bash
 
-bash <(wget -qO- https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/sb.sh)
+bash <(wget -qO- [https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/sb.sh](https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/sb.sh))
 第四步：安装与绑定
 脚本菜单出现后，按以下逻辑操作：
 
