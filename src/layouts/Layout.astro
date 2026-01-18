@@ -174,33 +174,29 @@ const structuredData = {
     <script src="../scripts/theme.ts"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
   <script is:inline>
-    // 定义一个全局变量来存放 zoom 实例
-    let zoom;
-
     document.addEventListener('astro:page-load', () => {
-      // 1. 只有电脑/平板 (宽度 > 768px) 才启用
+      // 1. 只有电脑/平板才启用 (手机用原生缩放)
       if (window.matchMedia('(min-width: 768px)').matches) {
         
-        // 2. 关键步骤：如果有旧的 zoom 实例，先把它关掉/卸载
-        // (防止从上一页带过来的幽灵实例干扰)
-        if (zoom) {
-          zoom.detach();
+        // 2. 清理旧实例 (挂在 window 上，保证跨页面也能清理)
+        if (window.zoomInstance) {
+          window.zoomInstance.detach();
         }
 
-        // 3. 重新寻找当前页面的图片并绑定
-        // 使用 setTimeout 给浏览器 100毫秒 的反应时间，确保图片已经渲染出来了
+        // 3. 【关键改动】等待 300ms！
+        // 等待 Astro 的页面切换动画完全结束，图片位置定格了，再去绑定。
+        // 之前 100ms 太快了，导致抓到了“运动中”的图片，所以会卡死。
         setTimeout(() => {
-          // 这里同时抓取 'main img' 和 '.prose img'，确保万无一失
-          const images = document.querySelectorAll('main img, .prose img');
+          const images = document.querySelectorAll('main img, .prose img, article img');
           
           if (images.length > 0) {
-            zoom = mediumZoom(images, {
+            window.zoomInstance = mediumZoom(images, {
               background: 'rgba(0, 0, 0, 0.95)',
               margin: 24,
-              scrollOffset: 150 // 允许滚动关闭
+              scrollOffset: 150 // 滚轮一动就关闭，防止误触
             });
           }
-        }, 100); // 延迟 0.1 秒执行
+        }, 300); // 👈 改成了 300
       }
     });
   </script>
