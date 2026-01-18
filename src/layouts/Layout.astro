@@ -177,9 +177,8 @@ const structuredData = {
     document.addEventListener('astro:page-load', () => {
       mediumZoom('.prose img', {
         margin: 24,
-        background: 'rgba(0, 0, 0, 0.8)',
-        // ❌ 删掉了 scrollOffset: 0
-        // ✅ 现在：点一下打开，再点一下关闭；或者手指随便一滑，也能关闭！绝对不会卡住。
+        background: 'rgba(0, 0, 0, 0.9)',
+        // 这里千万别加 scrollOffset: 0，那是导致卡死的元凶
       });
     });
   </script>
