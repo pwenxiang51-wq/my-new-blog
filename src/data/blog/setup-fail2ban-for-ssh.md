@@ -1,6 +1,6 @@
 ---
 title: 配置 Fail2Ban 防止 SSH 暴力破解
-pubDatetime: 2026-01-04T15:25:00.000+08:00
+pubDatetime: 2025-11-21T15:25:00.000+08:00
 description: "改了端口还不够，再加上 Fail2Ban 这个自动封禁 IP 的保安，让你的 VPS 固若金汤。"
 tags:
   - VPS
