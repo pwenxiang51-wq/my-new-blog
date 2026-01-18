@@ -1,6 +1,6 @@
 ---
 title: "Linux VPS 新手指南：如何正确查看和理解服务器内存？"
-pubDatetime: 2026-01-04T19:21:00.000+08:00
+pubDatetime: 2025-12-15T19:21:00.000+08:00
 description: "看到内存只剩 100MB 别慌！本文教你用 free、top 和 htop 三种姿势正确查看 Linux 服务器内存状态。"
 tags:
   - VPS
