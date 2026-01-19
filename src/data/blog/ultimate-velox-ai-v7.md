@@ -1,6 +1,6 @@
 ---
 title: "[全网首发] Velox AI v7.0 终极版：自带“中译英”大脑，彻底解决 SDXL 绘图听不懂中文的痛点！"
-pubDatetime: 2026-01-20T14:00:00.000+08:00
+pubDatetime: 2026-01-12T14:00:00.000+08:00
 description: "这是 Velox AI 的最终形态。增加了‘自动翻译层’，让 SDXL 完美听懂中文指令，配合 Groq Llama 3.1 的极速响应与 KV 长期记忆，打造免费的六边形战士。"
 tags:
   - AI
@@ -98,11 +98,11 @@ tags:
 
 1.  在 Cloudflare 左侧菜单点击 **Storage & Databases** -> **KV**。
 2.  点击 **Create Namespace**，名字随便取（比如 `MEMORY`），点击 Add。
-3.  **回到刚才的 Worker 页面** -> **Settings** -> **Variables**。
+3.  **回到刚才的 Worker 页面** -> **Settings** -> **Bindings**。
 4.  向下滑动，找到 **KV Namespace Bindings** (KV 绑定)。
 5.  点击 **Add binding**：
-    * **Variable name**: 这里必须填 **`MEMORY`** (大写，不能改)。
-    * **KV Namespace**: 选择你刚才创建的那个数据库。
+    * **KV namespace**: 这里必须填 **`MEMORY`** (大写，不能改)。
+    * **Workers AI**: 这里必须填 **`AI`** (大写，不能改)。
 6.  再次点击 **Deploy**。
 
 #### 第五步：接通电话线 (Webhook)
