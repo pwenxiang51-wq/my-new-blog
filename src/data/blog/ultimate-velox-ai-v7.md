@@ -48,7 +48,7 @@ tags:
 ![GitHub 仓库截图](/assets/屏幕截图 twelve.jpg)
 
 **部署步骤简述：**
-1.  在 GitHub 复制 `v7-final.js` 的全部代码。
+1.  在 GitHub 复制 `v7-final.js` 的全部代码。 
 2.  登录 Cloudflare Workers，创建一个新 Worker 并粘贴代码。
 3.  **配置变量 (Settings -> Variables)**：
     * `GROQ_API_KEY`: 你的 Groq 密钥。
