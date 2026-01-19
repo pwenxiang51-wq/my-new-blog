@@ -1,5 +1,13 @@
 ---
 title: "[开源] Velox AI v7.0 发布：集成 Llama 3.1 + SDXL + 记忆库，这是目前最完美的免费 TG 助理方案。"
+pubDatetime: 2026-01-12T14:00:00.000+08:00
+description: "这是 Velox AI 的最终形态。增加了‘自动翻译层’，让 SDXL 完美听懂中文指令，配合 Groq Llama 3.1 的极速响应与 KV 长期记忆，打造免费的六边形战士。"
+tags:
+  - AI
+  - Telegram
+  - Cloudflare
+  - StableDiffusion
+  - Llama3
 ### 🛠️ 部署指南 (保姆级教程)
 
 为了让所有人都能用上这个最终版，我已经将包含**“自动翻译层”**的完整代码开源到了 GitHub。
