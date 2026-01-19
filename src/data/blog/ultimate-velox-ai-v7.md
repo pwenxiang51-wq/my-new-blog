@@ -26,7 +26,7 @@ tags:
 **实测效果：**
 你只需要发送 `/img 一只漂亮的小猫`，机器人会自动将其转化为 `A cyberpunk style cat, neon lights, high detail, 8k resolution...`，然后画出电影级的大片。并且在回复图片时，它会把**“AI 理解”**的英文原文也贴出来，方便你学习 Prompt。
 
-![AI 绘图功能演示](/assets/ten.jpg)
+![AI 绘图功能演示](/assets/ten.png)
 
 #### 2. ⚡ 模型升级：Llama 3.1 8B Instant
 我们将对话核心升级到了 Meta 最新发布的 Llama 3.1 版本。配合 Groq 的 LPU 芯片，对话回复速度达到了毫秒级，几乎没有延迟，体验吊打普通的 GPT-4 转发服务。
@@ -45,7 +45,7 @@ tags:
 **GitHub 项目地址：**
 [Velox-groqAI-Bot (v7.0 Final Code)](https://github.com/pwenxiang51-wq/Velox-groqAI-Bot)
 
-![GitHub 仓库截图](/assets/twelve.jpg)
+![GitHub 仓库截图](/assets/twelve.png)
 
 **部署步骤简述：**
 1.  在 GitHub 复制 `v7-final.js` 的全部代码。 
