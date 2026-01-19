@@ -98,8 +98,8 @@ tags:
 
 1.  在 Cloudflare 左侧菜单点击 **Storage & Databases** -> **KV**。
 2.  点击 **Create Namespace**，名字随便取（比如 `MEMORY`），点击 Add。
-3.  **回到刚才的 Worker 页面** -> **Settings** -> **Bindings**。
-4.  向下滑动，找到 **KV Namespace Bindings** (KV 绑定)。
+3.  **回到刚才的 Worker 页面** -> **Bindings**。
+4.  找到 **KV Namespace Bindings** (KV 绑定)。
 5.  点击 **Add binding**：
     * **KV namespace**: 这里必须填 **`MEMORY`** (大写，不能改)。
     * **Workers AI**: 这里必须填 **`AI`** (大写，不能改)。
