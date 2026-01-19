@@ -172,19 +172,7 @@ const structuredData = {
 
     <!-- Load full theme logic -->
     <script src="../scripts/theme.ts"></script>
-<script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
-    <script is:inline>
-      document.addEventListener('astro:page-load', () => {
-        // 1. 只要有旧的，立马杀掉 (解决跳转后失效/卡死)
-        if (window.zoom) window.zoom.detach();
-        
-        // 2. 重新绑定 (寻找 main 里的所有图片)
-        // 这里的 'main img' 是最稳的选择器
-        window.zoom = mediumZoom('main img', {
-          background: 'rgba(0, 0, 0, 0.95)' // 只留这一个参数
-        });
-      });
-    </script>
+
 
   </body> </html>
   </body>
