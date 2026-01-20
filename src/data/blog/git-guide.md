@@ -1,69 +1,69 @@
 ---
 author: Velo.x
-pubDatetime: 2026-01-20T13:30:00Z
-title: 只需要四行代码，优雅地管理博客
-postSlug: git-four-steps
-featured: true 
+pubDatetime: 2026-01-18T14:45:00Z
+title: 只需要五行代码，优雅地管理博客
+postSlug: git-five-steps
+featured: true
 draft: false
 tags:
   - 教程
   - Git
   - 博客
-description: 很多新手（包括我自己）在使用 GitHub 博客时，经常遇到“冲突”报错。其实只要养成一个好习惯，只需要记住这四个“魔法咒语”，就能让博客永远同步。
+description: 很多新手（包括我自己）在使用 GitHub 博客时，经常报错说“找不到仓库”。其实只要养成一个好习惯，按顺序执行这五步，就能让博客永远同步。
 ---
 
-折腾了一大圈，终于把我的 Astro 博客搭建好了。在踩了很多坑之后，我总结出了这套最稳的操作流程。
+折腾了一大圈，终于把我的 Astro 博客搭建好了。在踩了很多坑（比如忘了进文件夹）之后，我总结出了这套最稳的操作流程。
 
 无论你是刚打开电脑准备写文章，还是写完准备发布，严格按照这个顺序来，绝对不会出错。
 
-## 📦 Git 同步四部曲
+## 📦 Git 同步五部曲
 
-### 第零步：同步（git pull）
+### 第一步：进门（cd）
 
-**这步最重要！** 动笔之前，先检查云端有没有新东西。防止你在网页上改了代码，本地却不知道，最后导致打架。
+**这是最容易忘的一步！** 打开终端时，你默认是在“大厅”里。必须先进入博客的房间，才能开始干活。
 
-打开终端，输入：
+    cd Desktop\my-new-blog
 
-```bash
-git pull
-```
+* **注意**：如果不执行这一步，后面的命令都会报错说 `fatal: not a git repository`。
+
+---
+
+### 第二步：同步（git pull）
+
+动笔之前，先检查云端有没有新东西。防止你在网页上改了代码，本地却不知道，最后导致打架。
+
+    git pull
 
 * **含义**：从云端“拉取”最新的修改。
 * **场景**：每次准备写文章前，习惯性敲一下。如果不报错，就说明是安全的。
 
 ---
 
-### 第一步：打包（git add）
+### 第三步：打包（git add）
 
 写完文章后，我们需要把散落在房间里的文件捡起来，放进“快递盒”。
 
-```bash
-git add .
-```
+    git add .
 
 * **注意**：`add` 后面有个空格，然后是一个点 `.`（代表全部）。
 
 ---
 
-### 第二步：贴单（git commit）
+### 第四步：贴单（git commit）
 
 给快递盒封口，并写上备注。
 
-```bash
-git commit -m "更新了文章"
-```
+    git commit -m "更新了文章"
 
 * **建议**：引号里的备注最好写清楚，比如“新增教程”、“修改Logo”，方便以后查账。
 
 ---
 
-### 第三步：发货（git push）
+### 第五步：发货（git push）
 
 最后一步，把快递交给 GitHub。
 
-```bash
-git push
-```
+    git push
 
 * **效果**：看到进度条跑完，你的博客源码就更新了。几分钟后，Cloudflare 就会自动部署到全世界。
 
@@ -71,16 +71,14 @@ git push
 
 如果你在国内，`git push` 经常卡住（Connection reset），可以给 Git 开个加速挂（注意端口号要改成你代理软件的端口，比如 10808）：
 
-```bash
-git config --global http.proxy [http://127.0.0.1:10808](http://127.0.0.1:10808)
-git config --global https.proxy [http://127.0.0.1:10808](http://127.0.0.1:10808)
-```
+    git config --global http.proxy [http://127.0.0.1:10808](http://127.0.0.1:10808)
+    git config --global https.proxy [http://127.0.0.1:10808](http://127.0.0.1:10808)
 
 ## 总结
 
 以后写博客的**黄金流程**：
-1.  **上线**：`git pull` （先同步，保平安）
-2.  **写文**：在 VS Code 里尽情创作
+1.  **进门**：`cd Desktop\my-new-blog`
+2.  **上线**：`git pull`
 3.  **打包**：`git add .`
 4.  **贴单**：`git commit -m "update"`
 5.  **发货**：`git push`
