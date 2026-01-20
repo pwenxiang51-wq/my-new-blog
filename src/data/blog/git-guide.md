@@ -3,7 +3,7 @@ author: Velo.x
 pubDatetime: 2026-01-20T13:30:00Z
 title: 只需要四行代码，优雅地管理博客
 postSlug: git-four-steps
-featured: true
+featured: true 
 draft: false
 tags:
   - 教程
