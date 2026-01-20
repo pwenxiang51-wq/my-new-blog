@@ -1,8 +1,17 @@
 ---
-title: "Groq 虽快，但遇到长文怎么办？Cloudflare 部署 Gemini 完美互补方案"
-date: 2026-01-13T14:00:00.000+08:00
-description: "给你的 Telegram 机器人装上 Google 的大脑。支持 Gemini 1.5/2.0/3.0 自动切换、图片识别、AI 绘画，与 Groq 形成完美的快慢互补组合。"
-tags: ["Cloudflare", "Gemini", "Telegram", "AI", "教程"]
+author: Velox
+pubDatetime: 2026-01-13T10:00:00Z
+title: Groq 虽快，但遇到长文怎么办？Cloudflare 部署 Gemini 完美互补方案
+postSlug: deploy-gemini-on-cloudflare
+featured: true
+draft: false
+tags:
+  - Cloudflare
+  - Gemini
+  - Telegram
+  - AI
+  - 教程
+description: 给你的 Telegram 机器人装上 Google 的大脑。支持 Gemini 1.5/2.0/3.0 自动切换、图片识别、AI 绘画，与 Groq 形成完美的快慢互补组合。
 ---
 
 在上一篇文章中，我们介绍了天下武功唯快不破的 **Groq**。它秒回的体验确实爽，但在处理**长文档分析**、**图片识别**或者**复杂逻辑推理**时，Groq 的免费模型有时会显得力不从心（或者 Token 不够用）。
