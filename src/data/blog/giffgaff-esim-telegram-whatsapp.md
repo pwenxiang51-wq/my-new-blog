@@ -1,6 +1,6 @@
 ---
 title: 'TG/WA双号保命指南：13块钱搞定 Giffgaff 实体卡转 eSIM，稳用25年！'
-pubDatetime: 2026-01-26T18:00:00
+pubDatetime: 2026-01-24T18:00:00
 description: '手把手教你低成本持有英国 Giffgaff 实体号码，配合美版 iPhone 转 eSIM，完美解决 Telegram 和 WhatsApp 注册与防封问题。'
 tags: ['Giffgaff', 'eSIM', 'Telegram', '教程']
 layout: '../../layouts/BlogPost.astro'
@@ -29,7 +29,7 @@ layout: '../../layouts/BlogPost.astro'
 
 ## 🚀 第二步：激活（这里有2个巨坑！）
 
-拿到卡后，下载 **giffgaff App** 或上官网激活。注意，这里是最多人翻车的地方：
+拿到卡后，下载 **giffgaff App** 或上官网输入六位数激活码激活。接着用邮箱注册giffgaff账户。注意，这里是最多人翻车的地方：
 
 ### ❌ 巨坑一：选错套餐（Plan）
 系统会疯狂给你推销 £10、£15 的 "Monthly Plan"（月租套餐）。
@@ -38,7 +38,7 @@ layout: '../../layouts/BlogPost.astro'
 
 ### ❌ 巨坑二：地址报错
 输入个人信息时，如果你填中国地址，系统可能会报 *"Invalid Postcode"*（邮编无效）。
-* **暴力解法**：直接填一个英国真实邮编，比如白金汉宫的：`SW1A 1AA`。这只是个形式，不影响你用卡。
+* **暴力解法**：直接填一个英国真实邮编，比如白金汉宫的：`SW1A 1AA`。country填**United Kingdom**.这只是个形式，不影响你用卡。
 
 **💰 算笔账**：充值 £10 + 赠送 £5 = **£15 余额**。
 这一步搞定后，你的卡在中国已经有信号了（显示中国移动/联通漫游）。
@@ -69,7 +69,7 @@ iPhone 有个机制，为了保证信号，会自动用副卡的流量，或者�
 
 ## 📲 第四步：实体卡转 eSIM（iPhone用户专属）
 
-既然是美版 iPhone，当然要发挥 eSIM 的优势，把实体卡槽留给国内主卡。
+既然我的手机是美版 iPhone，当然要发挥 eSIM 的优势，把实体卡槽留给国内主卡。
 
 1.  **插卡**：插卡后确认有信号（中国移动/联通漫游）。
 2.  **申请转换**：打开 App → `Account` → `SIM` → `Replace my SIM` → `Switch to a new eSIM`。
@@ -80,7 +80,7 @@ iPhone 有个机制，为了保证信号，会自动用副卡的流量，或者�
 
 ## 🔄 第五步：Telegram 完美换绑
 
-这时候，你的 Giffgaff 已经是个成熟的英国号了。给 TG 换号，记录完全无损！
+这时候，我的 Giffgaff 已经是个成熟的英国号了。给 TG 换号，记录完全无损！
 
 1.  TG 设置 → 点击头像 → **Change Number**。
 2.  输入新号码（注意：英国区号 +44，输入手机号时**去掉最前面的 0**）。
