@@ -17,14 +17,14 @@ layout: '../../layouts/BlogPost.astro'
 
 ## 🛠️ 第一步：安装神器 (解决网络报错)
 
-首先，在 App Store 搜索并下载 **`a-shell mini`** (免费，图标是个黑底白字的终端)。
+首先，在 App Store 搜索并下载 **`a-shell mini`** (免费，图标是个黄底黑字的终端)。
 
 打开 App，我们会看到一个类似黑客帝国的界面。别慌，我们需要先安装下载核心。因为国内网络原因，直接安装通常会报错，所以我们必须使用**清华大学的国内镜像源**来加速。
 
 **👉 复制下方指令，粘贴到 App 里，回车：**
 
 ```bash
-pip install yt-dlp -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install yt-dlp -i [https://pypi.tuna.tsinghua.edu.cn/simple](https://pypi.tuna.tsinghua.edu.cn/simple)
 ```
 
 * **小白解说**：`pip` 是安装工具，`yt-dlp` 是下载软件的名字，`-i` 后面那串网址是为了让它从国内服务器下载，速度飞快且不会报错。
@@ -47,7 +47,7 @@ pip install yt-dlp -i https://pypi.tuna.tsinghua.edu.cn/simple
 **👉 示范代码 (直接套用)：**
 
 ```bash
-yt-dlp "https://youtu.be/你的视频链接xxx"
+yt-dlp "[https://youtu.be/你的视频链接xxx](https://youtu.be/你的视频链接xxx)"
 ```
 
 * **为什么加双引号？**：因为视频链接里常有 `?` `&` 等特殊符号，不加引号 App 会看不懂。
@@ -71,19 +71,21 @@ yt-dlp "https://youtu.be/你的视频链接xxx"
 * 找到 **“a-shell mini”** 文件夹。
 * 🎉 你的视频就躺在这里！通常是 `.webm` 或 `.mp4` 格式。
 
-### 2. 推荐播放方案 (关键！)
+### 2. 推荐播放方案 (Infuse YYDS!)
 由于 YouTube 的高画质视频（尤其是 MKV 或 WebM 格式）不仅体积大，编码也特殊，iPhone 自带的相册有时候打不开或者没声音。
 
 **强烈推荐配合以下软件观看：**
 
-* **方案 A：VLC for Mobile (免费、全能)** ⭐⭐⭐⭐⭐
-    * 去 App Store 下载 **VLC**。
-    * 在“文件”App 里长按视频 -> **共享** -> 选 **VLC**。
-    * **优点**：通吃所有格式，支持 4K/8K HDR，支持外挂字幕，完全免费。
+* **方案 A：Infuse (iOS 播放器天花板)** ⭐⭐⭐⭐⭐
+    * **优势**：画质最强，完美支持 4K HDR 和杜比视界，界面精美。
+    * **操作**：
+        1. 打开 Infuse，点击右上角设置 -> 添加文件 -> 选择“a-shell mini”文件夹。
+        2. 你的下载库会自动变成一面精美的“海报墙”，点击即看！
+    * **备选操作**：也可以在“文件”App 里长按视频 -> 共享 -> 选择 Infuse。
 
-* **方案 B：nPlayer (付费但强大)** ⭐⭐⭐⭐⭐
-    * 如果你是老牌 iOS 用户，肯定知道它。
-    * 直接在 nPlayer 里连接本地文件播放，解码能力比 VLC 更强，支持杜比音效。
+* **方案 B：VLC for Mobile (免费替代)** ⭐⭐⭐⭐
+    * 如果你不想付费买 Infuse Pro，VLC 是最好的免费替代品，通吃所有格式。
+    * 在“文件”App 里长按视频 -> 共享 -> 选 VLC。
 
 * **方案 C：存入系统相册 (仅限 MP4)**
     * 如果你下载运气好是 `.mp4` 格式：
@@ -106,4 +108,4 @@ A：**当然可以！** `yt-dlp` 支持全球几百个视频网站。把链接�
 ---
 
 **总结：**
-不用电脑，不用花钱，几行代码就能把 iPhone 变成最强的媒体下载器。快去试试下载你的第一个 8K 视频吧！
+不用电脑，不用花钱，几行代码就能把 iPhone 变成最强的媒体下载器。再配合 **Infuse** 带来的顶级视听享受，这才是 iPhone Pro 系列屏幕的正确打开方式！
