@@ -46,6 +46,7 @@ tags:
     > **Strictly require a US Residential ISP IP with a Fraud Score of 5 (Five) on Scamalytics. Since I have paid for the "Zero Risk" service, I expect a flawless IP for TikTok business. Thank you!
 
 (翻译：严格要求 Scamalytics 风控分为 5 的美国住宅 ISP IP。既然我已经购买了“零风险”服务，我希望得到一个用于 TikTok 业务的完美 IP。谢谢！)**
+
 3.  **获取极品 IP：**
     订单处理完后，我成功拿到了一个 **Verizon Business** 的原生 IP，Scamalytics 风控分仅为 **10%**（极度纯净），归属地为宾夕法尼亚州。
     * **ISP:** Verizon Business
