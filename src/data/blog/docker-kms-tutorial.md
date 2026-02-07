@@ -1,7 +1,7 @@
 ---
-title: 【实战】VPS 榨干计划：零成本搭建 Docker 镜像加速器 + KMS 激活服务
+title: 【实战】VPS 榨干计划：零成本搭建 Docker 镜像加速器 + KMS 激活服务（保姆级教程）
 author: Velox
-pubDatetime: 2026-02-04T16:30:00+08:00
+pubDatetime: 2026-02-03T16:45:00+08:00
 slug: vps-docker-kms-guide
 featured: true
 draft: false
@@ -11,13 +11,12 @@ tags:
   - Cloudflare
   - KMS
   - 实战
-description: 手把手教你利用 Cloudflare Workers 搭建私有 Docker 镜像加速器，解决拉取慢的问题；同时在 VPS 上部署 KMS 服务，实现 Windows/Office 一键激活。
+description: 手把手教你利用 Cloudflare Workers 搭建私有 Docker 镜像加速器，解决拉取慢的问题；同时在 VPS 上部署 KMS 服务，实现 Windows/Office 一键激活。包含新手必看的 Docker 常用指令（下载、查看、删除）。
 ---
+
 手里有闲置的 VPS（如 RackNerd、GCP）和 Cloudflare 账号，不仅仅可以用来挂探针，还能部署一些极其实用的“基础设施”。
 
 今天这篇教程，我们将搭建两个神级工具，既能解决国内或廉价 VPS 拉取镜像慢的问题，又能让你拥有自己的正版 Windows/Office 激活服务。哪怕你以后换了 VPS，这套服务也能轻松带走。
-
----
 
 ## 🚀 项目一：Cloudflare 专属 Docker 镜像加速器
 
@@ -91,7 +90,40 @@ systemctl daemon-reload
 systemctl restart docker
 ```
 
-**验证成功：** 输入 `docker info`，在输出的一大堆信息里找到 `Registry Mirrors`，如果下面显示了你的域名，就是成功了！从此拉镜像速度起飞。
+---
+
+## 🛠️ 新手必看：如何验证、查看与清理？(实操演练)
+
+很多小伙伴配置完了不知道生效没，也不敢乱下东西怕占内存。这里教你一套完整的操作闭环。
+
+### 1. 验证加速效果 (下载测试)
+我们在 VPS 上下载一个 Nginx 试试。注意：因为我们配置了加速器，你不需要输你的域名，直接输软件名，系统会自动加速！
+
+```bash
+docker pull nginx
+```
+**现象：** 如果你看到下载速度飞快，没有卡顿，说明加速成功。
+
+### 2. 东西下到哪里了？(查看镜像)
+下载下来的软件叫“镜像 (Image)”，它存在硬盘里，**不占运行内存**。
+输入下面指令查看你下载了哪些东西：
+
+```bash
+docker images
+```
+你会看到一个列表：
+* **REPOSITORY**: 软件名 (nginx)
+* **TAG**: 版本 (latest)
+* **SIZE**: 占用硬盘大小 (约 180MB)
+
+### 3. 我不想要了，怎么删？(清理空间)
+如果只是为了测试，或者以后不用这个软件了，留着会占硬盘空间。用这个指令删除：
+
+```bash
+# 删除 nginx 镜像
+docker rmi nginx
+```
+*(注：`rmi` 意思是 Remove Image)*。再次输入 `docker images`，你会发现它消失了，硬盘空间回来了。
 
 ---
 
@@ -110,8 +142,6 @@ systemctl restart docker
 ```bash
 docker run -d -p 1688:1688 --restart=always --name kms mikolatero/vlmcsd
 ```
-* `-p 1688:1688`：开放 1688 端口（微软激活专用）。
-* `--restart=always`：VPS 重启后它也会自动启动。
 
 **第二步：配置域名解析 (重要!)**
 1.  去 Cloudflare -> **DNS**。
@@ -133,64 +163,56 @@ slmgr /ato
 
 ---
 
-## 🧐 常用指令教学：如何检查服务状态？
+## 🧐 进阶指令：如何检查正在运行的服务？
 
-很多小白部署完不知道成没成功，这里教大家一个最重要的 Docker 指令：`docker ps`。
+刚才讲了 `docker images` 是看硬盘里躺着的“安装包”。
+那怎么看哪些软件**正在运行**（占内存）呢？
 
-在 SSH 里输入：
-
+输入：
 ```bash
 docker ps
 ```
 
-你会看到类似下面的一张表，每一列都很重要：
-
-| 列名 | 含义 | 应该看到什么？ |
+| 列名 | 含义 | 状态 |
 | :--- | :--- | :--- |
-| **CONTAINER ID** | 容器的身份证号 | 一串随机字符 |
 | **IMAGE** | 运行的是哪个软件 | `mikolatero/vlmcsd` |
-| **STATUS** | 运行状态 (**最重要**) | 必须显示 `Up x hours` (已运行x小时)。如果没显示，或者列表是空的，说明服务挂了。 |
-| **PORTS** | 端口映射 | `0.0.0.0:1688->1688/tcp` (说明端口通了) |
+| **STATUS** | 运行状态 | 必须显示 `Up`，说明活着 |
+| **PORTS** | 端口 | `1688`，说明路通了 |
 
-**总结：** 只要 `docker ps` 能看到你的 `kms` 容器，并且状态是 `Up`，就说明你的服务正在稳稳地运行中！
+**总结：**
+* **`docker images`**：看家里买了哪些家具（看硬盘）。
+* **`docker ps`**：看家里哪些电器插着电在工作（看内存/运行）。
+* **`docker rmi`**：把不用的家具扔出去（清理硬盘）。
 
 ---
 
-## 📦 进阶教程：迁移与卸载
+## 📦 迁移与卸载
 
-VPS 到期了要换机器？或者不想用了想删掉？看这里。
+VPS 到期了要换机器？或者不想用了想删掉？
 
 ### 1. VPS 到期了，怎么迁移到新机器？
 
 **对于 Docker 加速器：**
-* **不需要迁移服务端**！因为加速器是跑在 Cloudflare 上的，永远不会过期。
-* 你只需要在**新买的 VPS** 上，重新执行一遍上面 **“项目一 -> 3. 使用步骤”** 里的那几行命令，新 VPS 就能立刻享受加速。
+* **不需要迁移服务端**！Cloudflare 端不用动。
+* 只需要在**新 VPS** 上，重新执行一遍上面 **“项目一 -> 3. 使用步骤”** 里的那几行命令即可。
 
 **对于 KMS 激活服务：**
-1.  **在新 VPS 上**：安装好 Docker，然后重新执行一遍 `docker run` 那行命令。
-2.  **在 Cloudflare 上**：修改 DNS 记录，把 `kms` 域名的 IP 地址改成**新 VPS 的 IP**。
-3.  **搞定**！你的激活服务无缝切换，Windows 客户端那边完全无感知，不需要做任何修改。
+1.  **在新 VPS 上**：重新执行一遍 `docker run ...` 那行命令。
+2.  **在 Cloudflare 上**：修改 DNS 记录，把 IP 改成新 VPS 的 IP。
 
 ### 2. 我不想用了，怎么彻底删除？
 
-如果你想把这些服务从你的 VPS 上彻底清理干净，不留一点痕迹：
-
 **删除 Docker 加速器配置：**
 ```bash
-# 删除配置文件
 rm /etc/docker/daemon.json
-
-# 重启 Docker
 systemctl restart docker
 ```
 
 **删除 KMS 激活服务：**
 ```bash
-# 1. 强制停止并删除容器
+# 1. 停止并删除运行的容器
 docker rm -f kms
 
-# 2. 删除下载的镜像文件 (清理掉残留的垃圾文件)
+# 2. 删除下载的镜像文件 (清理垃圾)
 docker rmi mikolatero/vlmcsd
 ```
-
-执行完这些，你的 VPS 就恢复到了最初的一尘不染的状态。
