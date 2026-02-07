@@ -40,8 +40,8 @@ import { connect } from 'cloudflare:sockets';
 
 // ⚠️这里配置你的专属域名
 const routes = {
-  // 把下面的 docker.222382.xyz 换成你自己的域名
-  "docker.222382.xyz": "[https://registry-1.docker.io](https://registry-1.docker.io)",
+  // 把下面的 docker.111111.xyz 换成你自己的域名
+  "docker.111111.xyz": "[https://registry-1.docker.io](https://registry-1.docker.io)",
 };
 
 export default {
@@ -69,7 +69,7 @@ export default {
 };
 ```
 
-5.  **绑定域名**：保存代码后，去 **Settings** -> **Triggers** -> **Add Custom Domain**，绑定你的域名（例如 `docker.222382.xyz`）。
+5.  **绑定域名**：保存代码后，去 **Settings** -> **Triggers** -> **Add Custom Domain**，绑定你的域名（例如 `docker.111111.xyz`）。
 
 ### 3. 使用步骤 (VPS 端)
 
@@ -82,7 +82,7 @@ mkdir -p /etc/docker
 # 写入配置 (把里面的网址换成你刚才绑定的域名)
 tee /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["[https://docker.222382.xyz](https://docker.222382.xyz)"]
+  "registry-mirrors": ["[https://docker.111111.xyz](https://docker.111111.xyz)"]
 }
 EOF
 
@@ -124,7 +124,7 @@ docker run -d -p 1688:1688 --restart=always --name kms mikolatero/vlmcsd
 
 ```cmd
 :: 设置服务器
-slmgr /skms kms.222382.xyz
+slmgr /skms kms.111111.xyz
 :: 激活
 slmgr /ato
 ```
