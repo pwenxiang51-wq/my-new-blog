@@ -18,7 +18,7 @@ description:
 
 博客搭建完成那一刻的成就感是无与伦比的 ✨。但如果不能被搜索引擎搜到，那它就像漂浮在互联网海洋里的一座“孤岛”。
 
-今天下午，我为 **[Velox's Blog](https://222382.xyz)** 进行了一次彻底的 **SEO (搜索引擎优化)** 改造。
+今天下午，我为 **[Velo.x Blog](https://222382.xyz)** 进行了一次彻底的 **SEO (搜索引擎优化)** 改造。
 
 不论你是用 Hugo, Hexo 还是 Astro 部署在 Cloudflare Pages 上，这套 **“GSC + Cloudflare”** 的组合拳都能让你的博客在 Google 面前“火力全开” 🔥。
 
@@ -78,7 +78,7 @@ description:
 
 ### ⚙️ Cloudflare 配置作业（直接抄）：
 
-1.  进入 Cloudflare -> 左侧菜单 **Rules** -> **Redirect Rules**。
+1.  进入 [Cloudflare](https://www.cloudflare.com/) -> 左侧菜单 **Rules** -> **Redirect Rules**。
 2.  点击 **Create rule**。
 3.  **配置如下**：
     * **Rule Name**: `Blog转主站`
@@ -97,7 +97,7 @@ description:
         * **Status code**: `301`
 
 ### 🎉 效果展示
-部署后，当用户访问 `https://blog.222382.xyz/posts/abc` 时，浏览器地址栏会 **“嗖”** 的一下，自动跳变成 `https://222382.xyz/posts/abc`。
+部署后，当用户访问 `https://blog.222382.xyz` 时，浏览器地址栏会 **“嗖”** 的一下，自动跳变成 `https://222382.xyz`。
 
 ---
 
