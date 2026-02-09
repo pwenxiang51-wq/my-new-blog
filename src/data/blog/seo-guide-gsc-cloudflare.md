@@ -78,9 +78,8 @@ description:
 
 ### ⚙️ Cloudflare 配置作业（直接抄）：
 
-1.  进入 [Cloudflare](https://www.cloudflare.com/) -> 左侧菜单 **Rules** -> **Redirect Rules**。
-2.  点击 **Create rule**。
-3.  **配置如下**：
+1.  进入 [Cloudflare](https://www.cloudflare.com/) -> 左侧菜单 **Rules** -> **Create rule** -> **Redirect Rules**。
+2.  **配置如下**：
     **1. 规则名称 (Rule name)**：
 随便填，例如 `Blog转主站`。
 
