@@ -52,6 +52,9 @@ nexttrace 223.5.5.5
 ```bash
 bash <(curl -sL https://raw.githubusercontent.com/spiritLHLS/ecs/main/ecs.sh)
 ```
+* **实用指令**：
+    * **查看脚本代码** (安全审计)：`cat ecs.sh`
+    * **清理脚本文件** (测速后删除)：`rm ecs.sh`
 
 ### 5. 枢纽管理：Sing-box 与 WARP 管理
 最后是咱们日常用来调优和管理“变身”出口的两个快捷指令。
