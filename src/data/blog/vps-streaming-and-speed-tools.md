@@ -50,7 +50,7 @@ nexttrace 223.5.5.5
 * **功能**：包含 CPU 性能测试、三网（电信/联通/移动）多节点下载与上传速度测试。
 * **命令**：
 ```bash
-bash <(curl -sL [https://raw.githubusercontent.com/spiritLHLS/ecs/main/ecs.sh](https://raw.githubusercontent.com/spiritLHLS/ecs/main/ecs.sh))
+bash <(curl -sL https://raw.githubusercontent.com/spiritLHLS/ecs/main/ecs.sh)
 ```
 
 ### 5. 枢纽管理：Sing-box 与 WARP 管理
