@@ -76,7 +76,7 @@ ping time.is
 *(老牌稳定，全网通用)*
 
 ```bash
-ping [www.visa.com](https://www.visa.com).sg
+ping www.visa.com.sg
 ```
 *(亚太地区神级反代，延迟表现极佳)*
 如果你测得延迟在 **100ms** 左右且 **0% 丢包**，那么这个 IP（如 `172.67.68.157`）就是你的最优解！虽然查询显示它在 [旧金山](https://www.ip138.com/)，但 100ms 的延迟证明它实际走的是近处的亚太机房。🛰️
