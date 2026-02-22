@@ -215,3 +215,5 @@ async function callGroq(apiKey, userText) {
 > *"测试一下刚部署的自动化博客流水线，这套 Serverless 系统太爽了！"*
 
 一分钟内，你将看到 Groq AI 瞬间接管排版，GitHub 自动落库提交，Cloudflare Pages 被唤醒重构……而你，只需要喝杯咖啡，享受全自动化带来的极致愉悦！😎
+https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1771771058974.jpg
+
