@@ -43,14 +43,14 @@ description: 放弃传统图床和手动 Git 提交！今天分享我是如何�
 
 为了追求极致的体验，我甚至给代码加上了“豪华双显”功能。看看这性感的部署代码：
 
-![Worker 部署代码截图](![image](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1771759137457.jpg))
+![Worker 部署代码截图](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1771759137457.jpg))
 *👆 核心魔法：利用 Worker 接收 TG 图片流并直传 R2 存储桶*
 
 部署完成后，实际体验简直爽到飞起！机器人不仅会秒回一个方便写博客的 Markdown 代码块，Telegram 还会自动抓取链接生成一张超大的实时预览图，安全感拉满！
 
 看看这丝滑的效果：
 
-![TG 机器人回复效果](![image](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1771767526587.jpg))
+![TG 机器人回复效果](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1771767526587.jpg))
 *👆 最终形态：发图即得 Markdown 源码，外带超大预览图*
 
 ---
