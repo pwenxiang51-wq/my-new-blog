@@ -97,54 +97,54 @@ export default {
       // 生成精准东八区时间
       const d = new Date();
       d.setUTCHours(d.getUTCHours() + 8);
-      const pubDatetime = d.toISOString().replace(/\\.\\d{3}Z$/, '+08:00');
+      const pubDatetime = d.toISOString().replace(/\.\d{3}Z$/, '+08:00');
 
       // 严格拼接 Astro Frontmatter
-      const finalMarkdown = \`---
-title: \${data.title}
+      const finalMarkdown = `---
+title: ${data.title}
 author: Velox
-pubDatetime: \${pubDatetime}
-slug: \${data.slug}
+pubDatetime: ${pubDatetime}
+slug: ${data.slug}
 featured: false
 draft: false
 tags:
-\${data.tags.map(t => \`  - \${t}\`).join('\\n')}
-description: \${data.description}
+${data.tags.map(t => `  - ${t}`).join('\n')}
+description: ${data.description}
 ---
 
-\${data.content}
-\`;
+${data.content}
+`;
 
       // 推送到 GitHub
-      const path = \`src/data/blog/\${data.slug}.md\`;
+      const path = `src/data/blog/${data.slug}.md`;
       const base64Content = btoa(unescape(encodeURIComponent(finalMarkdown)));
       
-      const ghRes = await fetch(\`https://api.github.com/repos/\${env.GH_REPO}/contents/\${path}\`, {
+      const ghRes = await fetch(`https://api.github.com/repos/${env.GH_REPO}/contents/${path}`, {
         method: "PUT",
         headers: {
-          "Authorization": \`Bearer \${env.GH_TOKEN}\`,
+          "Authorization": `Bearer ${env.GH_TOKEN}`,
           "User-Agent": "Cloudflare-Worker",
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          message: \`🤖 Auto-publish via TG Bot: \${data.title}\`,
+          message: `🤖 Auto-publish via TG Bot: ${data.title}`,
           content: base64Content
         })
       });
 
       if (!ghRes.ok) throw new Error(await ghRes.text());
 
-      await sendTgMsg(env.TG_BOT_TOKEN, chatId, \`✅ **发布成功！**\\n\\n📌 **标题**: \${data.title}\\n🔗 **文件名**: \\\`\${data.slug}.md\\\`\\n\\nGitHub Action 已自动触发编译！\`);
+      await sendTgMsg(env.TG_BOT_TOKEN, chatId, `✅ **发布成功！**\n\n📌 **标题**: ${data.title}\n🔗 **文件名**: \`${data.slug}.md\`\n\nGitHub Action 已自动触发编译！`);
 
     } catch (error) {
-      await sendTgMsg(env.TG_BOT_TOKEN, chatId, \`❌ **翻车了！**\\n报错：\${error.message}\`);
+      await sendTgMsg(env.TG_BOT_TOKEN, chatId, `❌ **翻车了！**\n报错：${error.message}`);
     }
     return new Response("OK");
   }
 };
 
 async function sendTgMsg(token, chatId, text) {
-  await fetch(\`https://api.telegram.org/bot\${token}/sendMessage\`, {
+  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ chat_id: chatId, text: text })
@@ -152,7 +152,7 @@ async function sendTgMsg(token, chatId, text) {
 }
 
 async function callGroq(apiKey, userText) {
-  const prompt = \`你是一个极客架构师。用户会发草稿给你。请整理成逻辑清晰、带Markdown标题的技术文章。
+  const prompt = `你是一个极客架构师。用户会发草稿给你。请整理成逻辑清晰、带Markdown标题的技术文章。
 为了适配Astro，必须且只能返回纯JSON格式：
 {
   "slug": "文章英文短链接，全小写短横线连接",
@@ -161,11 +161,11 @@ async function callGroq(apiKey, userText) {
   "tags": ["SEO", "VPS"],
   "content": "排版后的纯Markdown正文，不要写前言。"
 }
-严禁输出任何其他说明文字！\`;
+严禁输出任何其他说明文字！`;
 
-  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+  const res = await fetch("[https://api.groq.com/openai/v1/chat/completions](https://api.groq.com/openai/v1/chat/completions)", {
     method: "POST",
-    headers: { "Authorization": \`Bearer \${apiKey}\`, "Content-Type": "application/json" },
+    headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       model: "llama-3.3-70b-versatile",
       messages: [
