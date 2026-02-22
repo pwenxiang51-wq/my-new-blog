@@ -72,7 +72,7 @@ Worker 需要这把钥匙，才能把生成的文章直接塞进你的源码库�
 1. 部署后，点击 **Edit code**，将默认代码清空。
 2. 复制并粘贴以下完整代码（代码中已写死东八区时间及 Astro 标准目录结构，可自行根据需要修改路径）：
 
-
+````javascript
 export default {
   async fetch(request, env, ctx) {
     if (request.method !== "POST") return new Response("🚀 Velox 的私人 Astro 发布节点已就绪！");
@@ -180,7 +180,7 @@ async function callGroq(apiKey, userText) {
   if (!json.choices) throw new Error(JSON.stringify(json));
   return json.choices[0].message.content;
 }
-
+````
 3. 点击右上角 **Deploy** 保存。
 
 ### Step 3: 配置环境变量 (最容易翻车的一步)
@@ -201,9 +201,8 @@ async function callGroq(apiKey, userText) {
 
 打开你的浏览器，地址栏输入以下魔法拼接链接并回车：
 
-\`\`\`text
-https://api.telegram.org/bot【这里换成你的TG机器人Token】/setWebhook?url=https://【这里换成你Worker的专属网页地址】
-\`\`\`
+`https://api.telegram.org/bot【这里换成你的TG机器人Token】/setWebhook?url=https://【这里换成你Worker的专属网页地址】`
+
 *⚠️ 注意：`bot` 和你的 Token 之间不要有空格！*
 
 如果网页返回：`{"ok":true,"result":true,"description":"Webhook was set"}`，那么恭喜你，全线贯通！
