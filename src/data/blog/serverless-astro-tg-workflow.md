@@ -53,6 +53,85 @@ description: 放弃传统图床和手动 Git 提交！今天分享我是如何�
 ![TG 机器人回复效果](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1771767526587.jpg)
 *👆 最终形态：发图即得 Markdown 源码，外带超大预览图*
 
+### 💻 附录：核心 Worker 源码
+
+分享一下我打磨好的 R2 图床机器人的完整 Cloudflare Worker 代码。这段代码实现了“非图片消息静默”、“自动提取最高画质原图”以及“返回纯净版直连链接”的核心功能。
+
+```javascript
+export default {
+  async fetch(request, env) {
+    // 1. 验证 POST 请求
+    if (request.method !== "POST") return new Response("🚀 Velox 的 R2 图床极速通道已就绪！");
+
+    let update;
+    try {
+      update = await request.json();
+    } catch (e) {
+      return new Response("OK");
+    }
+
+    // 2. 核心逻辑：如果没有收到消息，或者收到的不是图片，直接静默放行（不打扰当备忘录用）
+    if (!update.message || !update.message.photo) {
+      return new Response("OK");
+    }
+
+    const chatId = update.message.chat.id;
+    // 获取 TG 压缩数组里最后一张（分辨率最高）的图片
+    const photo = update.message.photo[update.message.photo.length - 1];
+    const fileId = photo.file_id;
+
+    try {
+      // 3. 向 TG 索要真实下载路径
+      const fileRes = await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/getFile?file_id=${fileId}`);
+      const fileData = await fileRes.json();
+      if (!fileData.ok) throw new Error("获取 TG 图片路径失败");
+      const filePath = fileData.result.file_path;
+
+      // 4. 下载图片二进制流
+      const imgRes = await fetch(`https://api.telegram.org/file/bot${env.TG_BOT_TOKEN}/${filePath}`);
+      const imgBuffer = await imgRes.arrayBuffer();
+
+      // 5. 生成极客时间戳文件名
+      const fileExt = filePath.split('.').pop() || 'png';
+      const fileName = `blog-img-${Date.now()}.${fileExt}`;
+
+      // 6. 暴力塞入 R2 维洛克斯网盘
+      await env.MY_BUCKET.put(fileName, imgBuffer, {
+        httpMetadata: { contentType: `image/${fileExt}` }
+      });
+
+      // ==========================================
+      // ⚠️ 极其关键：下面这里换成你图床真实的加速域名
+      const customDomain = "pub-65eb3861e8d64d24a3280e55bd221735.r2.dev"; 
+      // ==========================================
+
+      const rawUrl = `https://${customDomain}/${fileName}`;
+
+      // 7. 发送极简纯净版回复给 TG
+      await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: `📸 **R2 直传成功！**\n\n🌐 **纯净链接 (长按或右键复制)**：\n${rawUrl}`,
+          parse_mode: "Markdown"
+        })
+      });
+      
+    } catch (error) {
+      await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: `❌ 翻车了：${error.message}`
+        })
+      });
+    }
+
+    return new Response("OK");
+  }
+};
 ---
 
 ## 🎉 总结：进入“心流”写作状态
