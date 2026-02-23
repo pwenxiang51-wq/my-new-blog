@@ -150,3 +150,12 @@ crontab -l | sort | uniq | crontab -
 现在，这台小内存 VPS 每天早上都会 **“满血复活”**，内存干干净净 ✨，再也不用担心晚高峰死机了！
 
 **Enjoy your 4K video!** 🍿🎬
+
+
+
+
+---
+
+> **💡 提示：** > 本文首发于我的个人博客 **[Velo.x 的极客空间](https://222382.xyz)**。我在那里存放了更完整的 **[Linux VPS 新手指南：如何正确查看和理解服务器内存？系列教程](https://222382.xyz/posts/linux-vps-check-memory/)**，排版更精美，更新也更及时，欢迎来踩踩！🚀
+
+---
