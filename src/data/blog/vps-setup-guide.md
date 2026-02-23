@@ -96,3 +96,11 @@ bash <(wget -qO- [https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/s
 sudo -i  # 先获取 root 权限
 sb       # 唤出脚本菜单
 ```
+
+
+
+---
+
+> **💡 提示：** > 本文首发于我的个人博客 **[Velo.x 的极客空间](https://222382.xyz)**。我在那里存放了更完整的 **[VPS 榨干计划：从零部署青龙面板薅羊毛 + 私人网盘搭建全纪录系列教程](https://222382.xyz/posts/vps-qinglong-alist-guide/)**，排版更精美，更新也更及时，欢迎来踩踩！🚀
+
+---
