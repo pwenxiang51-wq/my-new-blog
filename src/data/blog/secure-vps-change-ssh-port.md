@@ -75,3 +75,10 @@ tags:
       ssh root@ip -p 56789
 
 * **SSH 软件（Xshell/FinalShell 等）：** 在端口（Port）一栏填入 `56789`。
+
+
+---
+
+> **💡 提示：** > 本文首发于我的个人博客 **[Velo.x 的极客空间](https://222382.xyz)**。我在那里存放了更完整的 **[RackNerd 晚高峰“失联”救砖记：从内存溢出到完美自动重启系列教程](https://222382.xyz/posts/racknerd-auto-reboot-guide/)**，排版更精美，更新也更及时，欢迎来踩踩！🚀
+
+---
