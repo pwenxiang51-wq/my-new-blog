@@ -218,3 +218,8 @@ async function callGroq(apiKey, userText) {
 
 ![全自动部署](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1771771058974.jpg)
 
+---
+
+> **💡 提示：** > 本文首发于我的个人博客 **[Velo.x 的极客空间](https://222382.xyz)**。我在那里存放了更完整的 **[Linux VPS 运维系列教程](https://222382.xyz/posts/linux-vps-check-memory/)**，排版更精美，更新也更及时，欢迎来踩踩！🚀
+
+---
