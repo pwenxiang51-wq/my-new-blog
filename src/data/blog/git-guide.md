@@ -190,3 +190,11 @@ git config --global --unset https.proxy
 * **老电脑**：只做阶段三。
 
 建议把这篇文章收藏进浏览器的书签，以备不时之需！🚀
+
+
+
+---
+
+> **💡 提示：** > 本文首发于我的个人博客 **[Velo.x 的极客空间](https://222382.xyz)**。我在那里存放了更完整的 **[TG/WA双号保命指南：13块钱搞定 Giffgaff 实体卡转 eSIM，稳用25年！系列教程](https://222382.xyz/posts/giffgaff-esim-telegram-whatsapp/)**，排版更精美，更新也更及时，欢迎来踩踩！🚀
+
+---
