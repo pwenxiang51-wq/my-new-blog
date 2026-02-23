@@ -249,3 +249,12 @@ docker rmi whyour/qinglong xhofe/alist
 折腾 VPS 的乐趣不在于那几毛钱的京豆，而在于看着一行行代码跑通、报错消失那一刻的成就感。Serverless 虽好，但拥有一台完全属于自己的 Docker 主机，那种掌控感是无可替代的。
 
 Enjoy your server! 🚀
+
+
+
+
+---
+
+> **💡 提示：** > 本文首发于我的个人博客 **[Velo.x 的极客空间](https://222382.xyz)**。我在那里存放了更完整的 **[Velox AI v7.0 终极版：自带“中译英”大脑，彻底解决 SDXL 绘图听不懂中文的痛点！系列教程](https://222382.xyz/posts/ultimate-velox-ai-v7/)**，排版更精美，更新也更及时，欢迎来踩踩！🚀
+
+---
