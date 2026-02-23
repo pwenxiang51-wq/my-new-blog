@@ -216,3 +216,8 @@ docker rm -f kms
 # 2. 删除下载的镜像文件 (清理垃圾)
 docker rmi mikolatero/vlmcsd
 ```
+
+
+
+> **💡 提示：** > 本文首发于我的个人博客 **[Velo.x 的极客空间](https://222382.xyz)**。我在那里存放了更完整的 **[velox AI v7.0 终极版：自带“中译英”大脑，彻底解决 SDXL 绘图听不懂中文的痛点！ 运维系列教程](https://222382.xyz/posts/ultimate-velox-ai-v7/)**，排版更精美，更新也更及时，欢迎来踩踩！🚀
+
