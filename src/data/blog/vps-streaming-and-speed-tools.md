@@ -73,3 +73,12 @@ bash <(curl -sL https://raw.githubusercontent.com/spiritLHLS/ecs/main/ecs.sh)
 
 ---
 **更多硬核折腾记录，欢迎访问我的博客：[blog.222382.xyz](https://blog.222382.xyz)** ✌️
+
+
+
+
+---
+
+> **💡 提示：** > 本文首发于我的个人博客 **[Velo.x 的极客空间](https://222382.xyz)**。我在那里存放了更完整的 **[RackNerd 玩机全记录：流媒体解锁与三网测速 5 大神器合集系列教程](https://222382.xyz/posts/vps-streaming-and-speed-tools/)**，排版更精美，更新也更及时，欢迎来踩踩！🚀
+
+---
