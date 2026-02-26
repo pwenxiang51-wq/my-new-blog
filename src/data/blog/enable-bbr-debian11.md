@@ -42,6 +42,28 @@ Debian 11 的内核（5.10+）已经默认内置了 BBR 模块，我们只需要
 
 ![BBR 开启成功](/assets/four.png)
 
+---
+🛠️ 如何彻底关闭 BBR
+在你的终端（黑框）里按顺序执行以下指令：
+
+修改系统内核参数：
+将拥塞控制算法改回 Linux 默认的 cubic。
+
+```Bash
+sudo sysctl -w net.ipv4.tcp_congestion_control=cubic
+```
+从配置文件中移除 BBR：
+你需要删掉 /etc/sysctl.conf 里的 BBR 开启指令，否则重启后它又会自动开启。
+
+```Bash
+sudo sed -i '/net.core.default_qdisc=fq/d' /etc/sysctl.conf
+sudo sed -i '/net.ipv4.tcp_congestion_control=bbr/d' /etc/sysctl.conf
+```
+刷新配置生效：
+
+```Bash
+sudo sysctl -p
+```
 ### 进阶：为什么要用 BBR？
 
 传统的 TCP 拥塞控制（像 Cubic）一遇到丢包就误以为网络堵了，立马把速度降下来。而 BBR 是基于“模型预测”的，它不管丢包，只看带宽和延迟，能极大地利用带宽，非常适合高延迟、易丢包的国际线路。
