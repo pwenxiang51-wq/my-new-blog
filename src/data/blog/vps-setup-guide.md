@@ -35,7 +35,7 @@ tags:
 
 👇 **操作示意图：**
 
-![Cloudflare 解析设置](/assets/one.png) *(注：记得把这张图换成你最新的 Cloudflare 脱敏解析图哦)*
+![Cloudflare 解析设置](/assets/one.png) 
 
 ---
 
@@ -87,7 +87,7 @@ bash <(curl -Ls [https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine
 
 👇 **Velox 视觉大屏预览：**
 
-![Velox 脚本大屏](/assets/two.png) *(注：记得把这张图换成你最新的脱敏大屏图哦)*
+![Velox 脚本大屏](/assets/two.png) 
 
 ---
 
