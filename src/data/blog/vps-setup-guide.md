@@ -13,7 +13,7 @@ tags:
   - Sing-box
 ---
 
-> **📝 前言**：👋 VPS 买了不能只当摆设。在如今越来越臃肿的代理脚本圈子里，今天给大家分享一股清流：利用我亲自打磨的 **Velox Node Engine (VX)** 一键脚本，搭建纯净单核的 Sing-box 节点，并配合 **Cloudflare** 绑定自定义域名。✨
+> **📝 前言**：👋 VPS 买了不能只当摆设。在如今越来越臃肿的代理脚本圈子里，今天给大家分享一股清流：利用我亲自打磨的 **Velox Node Engine (VX)** 一键脚本，搭建纯净单核的 **[Sing-box](https://sing-box.sagernet.org/)** 节点，并配合 **[Cloudflare](https://dash.cloudflare.com/)** 绑定自定义域名。✨
 
 🛠️ 这套方案主打“极低内存占用”和“全动态防盗链”。不管你是追求极致稳定的老鸟，还是刚入门的小白，一行代码下去，就能拥有属于你自己的“五虎神将”全能节点大屏！🚀
 
@@ -23,7 +23,7 @@ tags:
 
 如果你打算使用 **Hysteria2** 或 **TUIC v5** 这类需要真实证书的高速协议，我们需要先给 VPS 分配一个“门牌号”。（注：如果你只用 Reality 协议，此步可跳过，但建议配置以解锁全部姿势）。
 
-1. 登录 Cloudflare 后台，点击你的域名。
+1. 登录 **[Cloudflare 后台](https://dash.cloudflare.com/)**，点击你的域名。
 2. 进入 **DNS** -> **记录 (Records)**。
 3. ➕ **添加记录 (Add record)**，按下图填写：
 
@@ -96,7 +96,7 @@ bash <(curl -Ls [https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine
 一切完成后，看大屏的 **“高级拓展矩阵”** 区域。
 
 你會看到一行金色的 **`🔗 专属订阅: https://.../vx_sub`**。🌟
-这是一串自带 UUID 密码锁的动态防盗链🛡️。你只需要复制这个链接，打开你的手机客户端（v2rayN / Shadowrocket / Nekobox 等），添加订阅即可瞬间导入所有节点！
+这是一串自带 UUID 密码锁的动态防盗链🛡️。你只需要复制这个链接，打开你的手机客户端（**[v2rayN](https://github.com/2dust/v2rayN/releases)** / **[Shadowrocket](https://apps.apple.com/us/app/shadowrocket/id932747118)** / **[Nekobox](https://github.com/MatsuriDayo/nekoray/releases)** 等），添加订阅即可瞬间导入所有节点！
 
 如果你只想获取单个节点的明文或二维码，可以在菜单输入 `8` (一键提取全节点) 📋 进行查看。
 
