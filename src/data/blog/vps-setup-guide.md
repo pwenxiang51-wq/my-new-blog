@@ -60,7 +60,7 @@ ssh root@192.168.1.1
 成功登录 VPS 后，复制下面这行“召唤指令”，在终端里 **右键粘贴** 并回车：
 
 ```bash
-bash <(curl -Ls [https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/vx.sh](https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/vx.sh))
+bash <(curl -Ls (https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/vx.sh)
 ```
 
 脚本会自动安装底层核心，随后你将看到一个极具极客美学的 **亮蓝色大屏控制面板**。
