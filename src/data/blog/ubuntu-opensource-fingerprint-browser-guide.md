@@ -85,9 +85,9 @@ PROXY=$2
 
 # 智能侦测：参数强拦截
 if [[ -z "$PROFILE" || -z "$PROXY" ]]; then
-    echo -e "\033[0;31m[FATAL] 缺少启动参数！\033[0m"
-    echo -e "标准姿势: ./ghost_armor.sh <环境名称> <Socks5/HTTP代理>"
-    echo -e "实战示例: ./ghost_armor.sh shop_01 socks5://192.168.1.100:1080"
+    echo "[FATAL] 缺少启动参数！"
+    echo "标准姿势: ./ghost_armor.sh <环境名称> <Socks5/HTTP代理>"
+    echo "实战示例: ./ghost_armor.sh shop_01 socks5://<你的静态住宅IP>:<端口>"
     exit 1
 fi
 
@@ -95,11 +95,11 @@ fi
 VAULT_DIR="$HOME/.geek_vault/browser_profiles/$PROFILE"
 
 if [ ! -d "$VAULT_DIR" ]; then
-    echo -e "\033[0;36m[INIT] 侦测到新环境，正在进行目录物理切分: $PROFILE ...\033[0m"
+    echo "[INIT] 侦测到新环境，正在进行目录物理切分: $PROFILE ..."
     mkdir -p "$VAULT_DIR"
 fi
 
-echo -e "\033[0;32m[LAUNCH] 正在挂载节点隧道 ($PROXY) 并启动防弹装甲...\033[0m"
+echo "[LAUNCH] 正在挂载节点隧道 ($PROXY) 并启动防弹装甲..."
 
 # 核心降维打击参数注入
 brave-browser \
@@ -114,7 +114,7 @@ brave-browser \
     --no-first-run \
     --password-store=basic > /dev/null 2>&1 &
 
-echo -e "\033[0;36m[STATUS] $PROFILE 已独立运行，平台 JS 探针已被致盲。\033[0m"
+echo "[STATUS] $PROFILE 已独立运行，平台 JS 探针已被致盲。"
 ```
 
 ### ⚡ Step 3: 赋予权限并启动实战
@@ -122,8 +122,8 @@ echo -e "\033[0;36m[STATUS] $PROFILE 已独立运行，平台 JS 探针已被致
 # 赋予极客执行权
 chmod +x ~/ghost_armor.sh
 
-# 启动账号隔离环境 (替换为你购买的静态住宅 IP)
-./ghost_armor.sh account_alpha socks5://123.45.67.89:1080
+# 启动账号隔离环境 (务必将后面的地址替换为【你的静态住宅 IP】和端口)
+./ghost_armor.sh account_alpha socks5://<你的静态住宅IP>:<端口>
 ```
 
 ---
@@ -132,7 +132,7 @@ chmod +x ~/ghost_armor.sh
 
 装甲启动后，不要盲目自信，用数据说话。在新打开的 Brave 环境中进行测试：
 
-1. **网络隧道纯净度测试**：打开 `https://whoer.net`，确保出口 IP 是你买的静态住宅 IP，WebRTC 处于 Disable 状态，且 DNS 没有泄漏真实位置。
-2. **底层指纹对抗测试**：打开 `https://browserleaks.com/canvas`。关闭环境后重新运行脚本启动，观察 Canvas Fingerprint 的 Hash 值。只要 Hash 值每次都在变，说明咱们的“随机噪声注入”成功了。
+1. **网络隧道纯净度测试**：打开 [https://whoer.net](https://whoer.net) ，确保出口 IP 是你买的静态住宅 IP，WebRTC 处于 Disable 状态，且 DNS 没有泄漏真实位置。
+2. **底层指纹对抗测试**：打开 [https://browserleaks.com/canvas](https://browserleaks.com/canvas) 。关闭环境后重新运行脚本启动，观察 Canvas Fingerprint 的 Hash 值。只要 Hash 值每次都在变，说明咱们的“随机噪声注入”成功了。
 
 **最后忠告**：开源加持下的 Ubuntu 是一座坚不可摧的堡垒。永远不要在你的核心业务链条上运行带有中国影子的闭源代理软件，斩断黑盒，物理拔管，这才是架构师的终极生存法则。
