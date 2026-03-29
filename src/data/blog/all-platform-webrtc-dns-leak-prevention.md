@@ -65,17 +65,16 @@ NekoBox 基于 `sing-box` 内核，天生带有极客血统。在设置中进行
 
 ## 🔍 终极极客体检与满血复活
 
-三端配置完毕后，全部进行物理重启，杀向 `BrowserLeaks` 进行终极体检！
+三端配置完毕后，全部进行物理重启，杀向权威的极客验尸台 **BrowserLeaks** 进行终极体检！
 
-🎯 **满血复活判定标准：**
-* ✅ **WebRTC Leak Test:** 必须显示 **`n/a`** 或者是你的海外节点 IP。
-* ✅ **DNS Leak Test:** 列表里必须清一色全是海外大厂（如 **Google LLC**），绝对不能出现任何国内运营商（如 CNC Group 等）的字眼。哪怕出现香港 Google 的 IP，只要 ISP 是 Google LLC，那就是物理纯净。
+🎯 **第一步：WebRTC 探针测试**
+👉 **[点击直达 BrowserLeaks WebRTC 测试](https://browserleaks.com/webrtc)**
+* **满血复活判定：** `Public IP Address` 必须显示 **`n/a`** 或者是你的海外节点 IP（如 GCP 节点），绝对不能出现你真实的物理位置 IP。
+
+🎯 **第二步：底层 DNS 泄露测试**
+👉 **[点击直达 BrowserLeaks DNS 测试](https://browserleaks.com/dns)**
+* **满血复活判定：** 运行测试后，列表里必须清一色全是海外大厂（如 **Google LLC** 或 **Cloudflare**），绝对不能出现任何国内运营商（如 CNC Group / China Telecom 等）的字眼。哪怕出现香港 Google 的 IP，只要 ISP 是 Google LLC，那就是物理纯净。
 
 ### 🏆 大佬总结
 
 至此，全端防弹装甲焊死！你的设备已经彻底从物理空间上搬到了海外机房，化身网络世界的“透明人”。极客们，安全冗余是第一位的，披上这套隐身涂层，去享受降维打击的快感吧！2026，我们绝不裸奔！🚀
----
-
-> **💡 提示：** > 本文首发于我的个人博客 **[Velo.x 的极客空间](https://222382.xyz)**。我在那里存放了更完整的 **[🚀 跨境级网络重构：台湾中继 + 美国静态住宅 IP 终极部署全指南 (V4.3.2 满血版)](https://222382.xyz/posts/cross-border-relay-static-isp-guide/)**，排版更精美，更新也更及时，欢迎来踩踩！🚀
-
----
