@@ -67,6 +67,8 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
 2. **Local IP Address:** 必须为 `n/a` 或 Fake IP 地址。
 3. **DNS Leak Test:** 结果必须全是 Google/Cloudflare，严禁出现国内运营商 IP。
 
+---
+
 ### 🍏 实战二：iOS端（Shadowrocket）的代码级硬核加固
 
 小火箭默认基于 `VpnService` 运行，自带 TUN 属性，但 iOS 系统权限极其霸道，偶尔会让系统 DNS 偷跑。不要依赖 UI 界面，直接进入「配置」 -> 找到你的 `default.conf` -> 选择「纯文本编辑」，进入极客手术模式：
