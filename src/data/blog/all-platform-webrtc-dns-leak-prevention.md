@@ -46,8 +46,17 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
 
 小火箭默认基于 `VpnService` 运行，自带 TUN 属性，但 iOS 系统权限极其霸道，偶尔会让系统 DNS 偷跑。不要依赖 UI 界面，直接进入「配置」 -> 找到你的 `default.conf` -> 选择「纯文本编辑」，进入极客手术模式：
 
-1. **踢掉内鬼 DNS：** 找到 `[General]` 模块，将 `dns-server` 和 `fallback-dns-server` 里的 `system` 物理抹除，强制替换为 `8.8.8.8, 1.1.1.1`。
-2. **植入致命代码：** 手动添加一行 **`remote-dns = true`**。这招最狠，直接把所有解析请求打包发给海外节点，彻底屏蔽国内运营商的 DNS 劫持。
+1. **踢掉内鬼 DNS：** 找到 `[General]` 模块，将 `dns-server` 和 `fallback-dns-server` 里的 `system` 物理抹除，放弃过时的 UDP 53 端口查询，强制替换为高强度加密的 DoH (DNS over HTTPS) 链接。这不仅踢掉了内鬼，还给 DNS 流量穿上了 HTTPS 隐身衣，运营商的 DPI 探测瞬间变瞎。
+```bash
+dns-server = https://8.8.8.8/dns-query, https://1.1.1.1/dns-query
+fallback-dns-server = https://9.9.9.9/dns-query
+```
+
+2. **植入致命代码：** 手动添加这两行。这招最狠，直接把所有解析请求强行打包发给海外节点，彻底屏蔽国内运营商的 DNS 劫持和嗅探。
+```bash
+remote-dns = true
+dns-direct-system = false
+```
 3. **封杀 WebRTC 探针：** 在 `[Rule]` 模块中手动添加两条规则：
    * `DOMAIN-KEYWORD,stun,REJECT`
    * `DOMAIN-KEYWORD,turn,REJECT`
