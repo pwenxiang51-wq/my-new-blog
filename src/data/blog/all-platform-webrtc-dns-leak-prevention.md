@@ -36,11 +36,36 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
 
 ### 💻 实战一：PC端（v2rayN + sing-box内核）的底层接管
 
-默认的 v2rayN 内核在处理 UDP 流量时不够干净。我们直接进行底层手术：
-1. 进入设置，把 Core 类型切换为 **`sing_box`**。`sing_box` 对 TUN 的路由劫持极其严谨，属于降维打击级别。
-2. 随后在主界面勾选 **“启用 Tun”**。
+默认的 v2rayN 内核在处理 UDP 流量时不够干净。我们要让内鬼不仅出不去，还得在网卡门口就被**物理超度**。
 
-此时，你所有的 WebRTC 探测包只要碰到 TUN 的边界，就会被立刻打包装进海外节点。不管你是跑 Reality 还是 Hysteria2，底层探针抓回来的永远是你海外机房的 IP。🌍
+### 1. 核心装甲重构（Core 切换）
+进入「设置」->「参数设置」->「Core 类型设置」，将 **VLESS、Hysteria2、TUIC、VMess** 统统切换为 **`sing-box`**。
+* **极客解剖：** `sing-box` 是 Hysteria2 的原生亲爹，对 TUN 的路由劫持极其严谨，属于**降维打击**级别，是满血推背感的硬件基础。
+
+### 2. 物理层接管（Tun 模式调优）
+进入「参数设置」->「Tun 模式设置」，进行以下**“满血优化”**：
+* **协议栈 (Stack):** 选 **`system`**（直接调用系统内核，性能最强）。
+* **MTU:** 设为 **`1500`**（全球标准，防止暴力协议丢包）。
+* **解析策略:** 底部 `Outbound 默认解析策略` 强制选择 **`ipv4_only`**。
+  * **深度逻辑：** 物理阉割 IPv6 解析路径，彻底封死 WebRTC 通过 IPv6 偷渡真实 IP 的后门。
+
+### 3. 火控中心锁死（DNS & 路由拦截）
+这是封杀 WebRTC 探针的**“机枪阵地”**：
+* **DNS 加固：** 在「DNS 设置」中，开启 **FakeIP**。远程 DNS 指定为 `https://8.8.8.8/dns-query` (DoH)。
+  * **效果：** 开启后，系统解析域名会返回 `198.18.x.x` 的虚拟地址。这是**封杀 WebRTC 真实泄露**的物理级手段，让探测器当场“致盲”。
+* **路由击落：** 在「路由设置」->「用户自定义路由」中添加 **`block`** 规则：
+  * **Domain:** `stun, turn, webrtc, geosite:category-ads-all`
+  * **效果：** 探测包露头即死。路由层 block 是“不让出门”，DNS 层指向本地是“原地处决”，双重锁死，内鬼绝无生还可能。
+
+---
+
+## 🛡️ 终审验尸：隐身矩阵是否闭环？
+
+完成上述手术后，必须点击【确定】并执行【重启服务】。👉 **[点击直达 BrowserLeaks WebRTC 测试](https://browserleaks.com/webrtc)**
+
+1. **WebRTC Leak Test:** 必须显示 **`No Leak`**。
+2. **Local IP Address:** 必须为 `n/a` 或 Fake IP 地址。
+3. **DNS Leak Test:** 结果必须全是 Google/Cloudflare，严禁出现国内运营商 IP。
 
 ### 🍏 实战二：iOS端（Shadowrocket）的代码级硬核加固
 
