@@ -73,22 +73,58 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
 
 小火箭默认基于 `VpnService` 运行，自带 TUN 属性，但 iOS 系统权限极其霸道，偶尔会让系统 DNS 偷跑。不要依赖 UI 界面，直接进入「配置」 -> 找到你的 `default.conf` -> 选择「纯文本编辑」，进入极客手术模式：
 
-1. **踢掉内鬼 DNS：** 找到 `[General]` 模块，将 `dns-server` 和 `fallback-dns-server` 里的 `system` 物理抹除，放弃过时的 UDP 53 端口查询，强制替换为高强度加密的 DoH (DNS over HTTPS) 链接。这不仅踢掉了内鬼，还给 DNS 流量穿上了 HTTPS 隐身衣，运营商的 DPI 探测瞬间变瞎。
-```bash
-dns-server = https://8.8.8.8/dns-query, https://1.1.1.1/dns-query
-fallback-dns-server = https://9.9.9.9/dns-query
+**1. 踢掉内鬼，换上纯血海外 DNS：**
+找到 `[General]` 模块，将 `dns-server` 和 `fallback-dns-server` 里的 `system` 或国内 DNS 物理抹除，强制替换为高强度加密的 DoH (DNS over HTTPS) 链接。这不仅踢掉了内鬼，还给 DNS 流量穿上了 HTTPS 隐身衣，运营商的 DPI 探测瞬间变瞎。
+```ini
+dns-server = [https://dns.google/dns-query](https://dns.google/dns-query), [https://1.1.1.1/dns-query](https://1.1.1.1/dns-query)
+fallback-dns-server = [https://dns.google/dns-query](https://dns.google/dns-query)
 ```
 
-2. **植入致命代码：** 手动添加这两行。这招最狠，直接把所有解析请求强行打包发给海外节点，彻底屏蔽国内运营商的 DNS 劫持和嗅探。
-```bash
+**2. 激活双核分流引擎（拯救苹果商店与国内大厂）：**
+全用海外 DNS 会导致苹果商店暴毙、抖音转圈。必须开启小火箭隐藏的“双核大脑”，让国内直连流量物理绕过海外 DNS。在 `[General]` 里手动植入或修改这两行致命代码：
+```ini
 remote-dns = true
-dns-direct-system = false
+dns-direct-system = true
 ```
-3. **封杀 WebRTC 探针：** 在 `[Rule]` 模块中手动添加两条规则：
-   * `DOMAIN-KEYWORD,stun,REJECT`
-   * `DOMAIN-KEYWORD,turn,REJECT`
-   这就相当于在虚拟网卡出口架了机枪，WebRTC 想要探测？对不起，物理击落！💥
+*极客原理解析：`remote-dns = true` 强制国外请求走海外节点解析，阻断嗅探；`dns-direct-system = true` 则是神来之笔，遇到直连规则直接调用本地宽带 DNS，瞬间拿到极速 IP 满血复活。*
 
+**3. 植入 `no-resolve` 终极防漏补丁：**
+为了防止测漏网站通过随机域名套取我们的国内 DNS 记录（导致页面蹦出中国国旗），在 `[Rule]` 模块的最顶端，强制挂上物理盲眼指令。遇到测漏网直接丢进隧道，严禁本地解析！
+```ini
+DOMAIN-SUFFIX,dnsleaktest.com,PROXY,no-resolve
+DOMAIN-SUFFIX,ipleak.net,PROXY,no-resolve
+DOMAIN-SUFFIX,dnsleak.com,PROXY,no-resolve
+```
+
+**4. 封杀 WebRTC 探针：**
+继续在 `[Rule]` 模块中手动添加这两条规则：
+```ini
+DOMAIN-KEYWORD,stun,REJECT
+DOMAIN-KEYWORD,turn,REJECT
+```
+这就相当于在虚拟网卡出口架了机枪，WebRTC 想要探测真实内网 IP？对不起，物理击落！💥
+
+**5. 发放国内巨头 VIP 直连通行证：**
+防止抖音等自带海外 CDN 的国内 App 被误判走代理（出现物理阻隔），不需要写几百行冗余代码，强行将根域名写入白名单。配合双核引擎，实现降维打击般的秒开速度：
+```ini
+# --- 🚀 国内巨头物理直连特权 (防 CDN 飘逸) ---
+# 字节跳动系 (抖音/头条/西瓜)
+DOMAIN-KEYWORD,douyin,DIRECT
+DOMAIN-KEYWORD,snssdk,DIRECT
+DOMAIN-KEYWORD,amemv,DIRECT
+DOMAIN-KEYWORD,toutiao,DIRECT
+DOMAIN-KEYWORD,ixigua,DIRECT
+
+# 阿里/腾讯/京东/美团/B站 (核心大厂全覆盖)
+DOMAIN-KEYWORD,alipay,DIRECT
+DOMAIN-KEYWORD,taobao,DIRECT
+DOMAIN-KEYWORD,wechat,DIRECT
+DOMAIN-SUFFIX,qq.com,DIRECT
+DOMAIN-KEYWORD,jd,DIRECT
+DOMAIN-KEYWORD,meituan,DIRECT
+DOMAIN-KEYWORD,bilibili,DIRECT
+# ----------------------------------------
+```
 ### 🤖 实战三：Android端（NekoBox）的原生降维防线
 
 NekoBox 基于 `sing-box` 内核，天生带有极客血统。在设置中进行三步走：
