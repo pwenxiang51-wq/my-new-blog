@@ -59,7 +59,6 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
   2. **封杀 QUIC 逃逸：** 端口 `443` + 网络 `udp` -> `block`。
   * **效果：** YouTube 等大厂极其狡猾，喜欢用 UDP 443 绕过代理。封死 UDP，逼它们乖乖走 TCP 隧道！探测包露头即死，内鬼绝无生还可能。
 
----
 
 ## 🛡️ 终审验尸：隐身矩阵是否闭环？
 
@@ -68,15 +67,6 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
 1. **WebRTC Leak Test:** 必须显示 **`No Leak`**。
 2. **Local IP Address:** 必须为 `n/a` 或 `-`（完美隐身）。
 3. **DNS Leak Test:** 结果必须全是 Google/Cloudflare 节点，严禁出现国内运营商 IP。
----
-
-## 🛡️ 终审验尸：隐身矩阵是否闭环？
-
-完成上述手术后，必须点击【确定】并执行【重启服务】。👉 **[点击直达 BrowserLeaks WebRTC 测试](https://browserleaks.com/webrtc)**
-
-1. **WebRTC Leak Test:** 必须显示 **`No Leak`**。
-2. **Local IP Address:** 必须为 `n/a` 或 Fake IP 地址。
-3. **DNS Leak Test:** 结果必须全是 Google/Cloudflare，严禁出现国内运营商 IP。
 
 ---
 
