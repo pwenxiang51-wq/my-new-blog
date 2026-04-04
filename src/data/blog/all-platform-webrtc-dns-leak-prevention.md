@@ -122,7 +122,7 @@ DOMAIN-KEYWORD,bilibili,DIRECT
 NekoBox 基于 `sing-box` 内核，天生带有极客血统。在设置中进行三步走：
 
 1. **启用 DoH 降维打击：** 将“远程 DNS”设置为 `https://dns.google/dns-query`。这会让 DNS 请求伪装成 443 端口的 HTTPS 加密流量，直接骗过运营商的 DPI 探测。
-2. **物理闭环：** 开启“启用内置 DNS 路由”和“始终使用远程 DNS”。
+2. **物理闭环：** 开启“启用FakeDNS”。
 3. **开启核弹级防御“FakeDNS”：** 当 WebRTC 试图获取本地 IP 时，FakeDNS 会直接甩给它一个虚假的内网 IP，探测器当场物理蒸发，实现绝对领域的隐身。👻
 
 ---
