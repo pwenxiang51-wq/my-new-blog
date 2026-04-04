@@ -74,7 +74,7 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
 小火箭默认基于 `VpnService` 运行，自带 TUN 属性，但 iOS 系统权限极其霸道，偶尔会让系统 DNS 偷跑。不要依赖 UI 界面，直接进入「配置」 -> 找到你的 `default.conf` -> 选择「纯文本编辑」，进入极客手术模式：
 
 **1. 踢掉内鬼，换上纯血海外 DNS：**
-找到 `[General]` 模块，将 `dns-server` 和 `fallback-dns-server` 里的 `system` 或国内 DNS 物理抹除，强制替换为高强度加密的 DoH (DNS over HTTPS) 链接。这不仅踢掉了内鬼，还给 DNS 流量穿上了 HTTPS 隐身衣，运营商的 DPI 探测瞬间变瞎。
+点开`配置`中`default.conf`文件后的`🛈`找到 `[General]` 模块，将 `dns-server` 和 `fallback-dns-server` 里的 `system` 或国内 DNS 物理抹除，强制替换为高强度加密的 DoH (DNS over HTTPS) 链接。这不仅踢掉了内鬼，还给 DNS 流量穿上了 HTTPS 隐身衣，运营商的 DPI 探测瞬间变瞎。
 ```ini
 dns-server = https://dns.google/dns-query, https://1.1.1.1/dns-query
 fallback-dns-server = https://dns.google/dns-query
