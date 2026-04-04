@@ -77,7 +77,7 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
 找到 `[General]` 模块，将 `dns-server` 和 `fallback-dns-server` 里的 `system` 或国内 DNS 物理抹除，强制替换为高强度加密的 DoH (DNS over HTTPS) 链接。这不仅踢掉了内鬼，还给 DNS 流量穿上了 HTTPS 隐身衣，运营商的 DPI 探测瞬间变瞎。
 ```ini
 dns-server = https://dns.google/dns-query, https://1.1.1.1/dns-query
-fallback-dns-server = [https://dns.google/dns-query](https://dns.google/dns-query)
+fallback-dns-server = https://dns.google/dns-query
 ```
 
 **2. 激活双核分流引擎（拯救苹果商店与国内大厂）：**
