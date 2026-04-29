@@ -120,6 +120,12 @@ chmod +x /root/sync_github.sh
 # 敲入 crontab -e 进入任务调度表，在最底部植入：
 0 */6 * * * /root/sync_github.sh >/dev/null 2>&1
 ```
+---
+⚡ 极客进阶：物理级“即时更新”扳机
+如果刚刚在 GitHub 修改了源码，不想等那 6 小时的定时任务，直接在 GCP 终端执行这一行，分发中心将一秒钟内完成基因重组：
+```bash
+/root/sync_github.sh
+```
 
 ---
 
