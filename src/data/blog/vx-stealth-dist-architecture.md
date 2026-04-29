@@ -129,7 +129,7 @@ chmod +x /root/sync_github.sh
 我的分发弹药库已全面建成！以后在任意新节点（比如我的 RN）或小白的机器上，只需敲入这行代码即可一键满血装载引擎：
 
 ```bash
-curl -sL [http://gcp02.04wen.dpdns.org:45678/stealth_8x9q2z/core.sh](http://gcp02.04wen.dpdns.org:45678/stealth_8x9q2z/core.sh) -o /usr/local/bin/vx && chmod +x /usr/local/bin/vx && vx
+curl -sL http://gcp02.04wen.dpdns.org:45678/stealth_8x9q2z/core.sh -o /usr/local/bin/vx && chmod +x /usr/local/bin/vx && vx
 ```
 
 ---
