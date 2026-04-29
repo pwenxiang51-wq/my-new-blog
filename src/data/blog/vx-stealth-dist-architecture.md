@@ -160,3 +160,36 @@ systemctl restart nginx
 # 4. [核武级选项] 连 Nginx 本体一起物理拔管 (⚠️ 警告：仅在我不需要任何 Web 服务时执行)
 apt purge nginx nginx-common nginx-core -y && apt autoremove -y
 ```
+---
+🚁 进阶：分发中心一键搬家（跃迁协议）
+当你的母舰（分发服务器）需要更换或迁移时，利用 Velox 面板的 27 号星际舰队功能，可以实现物理级克隆。
+
+第一步：母舰资产提取（旧服务器）
+运行 Velox 面板，进入 `26` -> `1` (全域资产打包)。
+当系统提示输入自定义路径时，必须手动注入以下地堡路径：
+```bash
+/var/www/stealth_8x9q2z /etc/nginx/conf.d/stealth.conf
+```
+💡 架构师注：同步脚本和 Cron 任务已包含在默认打包列表里，无需重复输入。
+---
+第二步：新机基因夺舍（新服务器）
+将生成的 `Velox_Assets_Backup.tar.gz` 传到新机器的 `/root` 目录后，依次执行以下物理指令：
+
+1. 预装 Web 引擎并清除 80 端口冲突：
+```bash
+apt update && apt install nginx -y && rm -f /etc/nginx/sites-enabled/default
+```
+2. 执行物理级覆盖恢复：
+```bash
+cd / && tar -xzpf /root/Velox_Assets_Backup.tar.gz && crontab /root/crontab_backup.txt 2>/dev/null
+```
+3. 激活引擎并点火同步：
+```bash
+systemctl enable nginx && systemctl restart nginx && /root/sync_github.sh
+```
+---
+🛡️ 架构师避坑提醒：
+1.域名指回：搬家完成后，新服务器 IP 已变。请立即前往 Cloudflare 或你的 DNS 服务商，将分发域名（如 `gcp02...`）解析到新服务器的 IP。
+
+2.零感迁移：域名解析生效后，发给小白或 RN 小鸡的部署指令完全不需要改动，它们会自动从新母舰取货，这就是域名分发的魅力！
+
