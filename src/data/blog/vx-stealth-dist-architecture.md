@@ -1,7 +1,7 @@
 ---
 title: 【架构】VeloX 极客分发架构：私有化部署与焦土化卸载全指南
 author: Velox
-pubDatetime: 2026-04-29T10:00:00+08:00
+pubDatetime: 2026-04-27T10:00:00+08:00
 slug: velox-stealth-dist-architecture
 featured: false
 draft: true
