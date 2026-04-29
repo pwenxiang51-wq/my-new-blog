@@ -189,6 +189,7 @@ systemctl enable nginx && systemctl restart nginx && /root/sync_github.sh
 ```
 ---
 🛡️ 架构师避坑提醒：
+
 1.域名指回：搬家完成后，新服务器 IP 已变。请立即前往 Cloudflare 或你的 DNS 服务商，将分发域名（如 `gcp02...`）解析到新服务器的 IP。
 
 2.零感迁移：域名解析生效后，发给小白或 RN 小鸡的部署指令完全不需要改动，它们会自动从新母舰取货，这就是域名分发的魅力！
