@@ -92,7 +92,7 @@ cat << 'EOF' > /root/sync_github.sh
 # === 🚨 请在此处替换我的 Token ===
 GITHUB_TOKEN="我的_ghp_令牌"
 # ==================================
-REPO_URL="[https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/vx.sh](https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/vx.sh)"
+REPO_URL="https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/vx.sh"
 TARGET_FILE="/var/www/stealth_8x9q2z/core.sh"
 
 # 携带兵符强行拉取
