@@ -74,7 +74,7 @@ systemctl restart nginx
 *🕵️ **极客验尸**：敲入 `netstat -tunlp | grep :80`，没有任何输出即为绝对安全。*
 
 **【步骤 4】注入幽灵同步引擎**
-将 GCP 与你的 GitHub 私有仓物理打通。执行下面代码前，**记得把 `GITHUB_TOKEN` 换成你刚才申请的兵符**：
+将 GCP 与我的 GitHub 私有仓物理打通。执行下面代码前，**记得把 `GITHUB_TOKEN` 换成你刚才申请的兵符**：
 
 ```bash
 cat << 'EOF' > /root/sync_github.sh
