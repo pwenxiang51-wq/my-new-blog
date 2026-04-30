@@ -137,7 +137,7 @@ chmod +x /root/sync_github.sh
 **【步骤 5】挂载自动化巡逻齿轮**
 让系统每 6 小时自动同步我的 GitHub 代码：
 
-# 敲入 `crontab -e` 进入任务调度表，在最底部植入：
+* 敲入 `crontab -e` 进入任务调度表，在最底部植入：
 ```bash
 0 */6 * * * /root/sync_github.sh >/dev/null 2>&1
 ```
