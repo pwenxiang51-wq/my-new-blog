@@ -106,6 +106,18 @@ else
     rm -f "${TARGET_FILE}.tmp"
     echo "$(date): 同步失败，保持防御态势！" >> /var/log/vx_sync.log
 fi
+LOG_URL="https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/changelog.txt"
+LOG_TARGET="/var/www/stealth_8x9q2z/changelog.txt"
+
+# 携带同一块兵符，强行拉取日志
+curl -s -H "Authorization: token ${GITHUB_TOKEN}" -L "${LOG_URL}" -o "${LOG_TARGET}.tmp"
+
+# 原子级替换，确保持续防弹
+if [ -s "${LOG_TARGET}.tmp" ]; then
+    mv -f "${LOG_TARGET}.tmp" "${LOG_TARGET}"
+else
+    rm -f "${LOG_TARGET}.tmp"
+fi
 EOF
 
 # 赋予执行权限并手动点火一次，完成首次拉取
