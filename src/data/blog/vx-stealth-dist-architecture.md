@@ -128,37 +128,6 @@ chmod +x /root/sync_github.sh
 ```
 ---
 
-🚀 架构师建议：
-别死等！咱们玩极客的，讲究的就是`强行点火`。现在去母舰执行这两行指令，瞬间就能破局：
-
-1.如果忘记文件夹位置，直接在 `GCP 母舰上`丢下这两行指令，管它藏在哪都能挖出来：
-```bash
-grep -r "stealth_8x9q2z" /etc/nginx/
-```
-这行指令会递归搜索 Nginx 配置目录，直接告诉你 `root` 或者 `alias` 指向的文件夹。
-
-2. 物理全盘扫描法（最彻底）
-如果配置里没写明，咱们直接在硬盘上搜这个文件夹：
-```bash
-find / -type d -name "stealth_8x9q2z" 2>/dev/null
-```
-这行跑完，会给出绝对路径（比如 `/var/www/html/stealth_8x9q2z`）。
-
----
-🚀 架构师一键修复指令
-既然找到了真身，别等延迟了，直接在` GCP 母舰`上执行这两行“暴力夺舍”指令，强行把基因注入进去：
-```bash
-# 1. 强行拉取最新的 changelog.txt 到物理目录
-wget -qO /var/www/stealth_8x9q2z/changelog.txt https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/changelog.txt
-
-# 2. 强行拉取最新的核心脚本到物理目录（确保小鸡能更新到 7.3.0）
-wget -qO /var/www/stealth_8x9q2z/core.sh https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/vx.sh
-```
----
-🛡️ 极客验尸官的最后叮嘱：
-这两行跑完后，可以在母舰上敲一下 `curl -I http://localhost:45678/stealth_8x9q2z/changelog.txt`，只要看到 `HTTP/1.1 200 OK`，就代表“阻断器”已经解除。
-
----
 
 ## 🟢 第三阶段：全网终端降维打击 (新机器装载)
 
