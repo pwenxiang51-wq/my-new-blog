@@ -126,27 +126,30 @@ chmod +x /root/sync_github.sh
 ```
 ---
 
-极客验尸（关键）：跑完之后，立刻敲一下这行检查：
+🔍 极客验尸（关键）：在 GitHub 改完代码，直接这一套连招丢过去：
 ```bash
-ls -lh /var/www/stealth_8x9q2z/core.sh
+/root/sync_github.sh && ls -lh /var/www/stealth_8x9q2z/{core.sh,changelog.txt}
 ```
-看到 `100KB+`：母舰满血复活！
+这一行下去，同步+验尸一气呵成，这才是资深 `Linux` 运维大师的干练风格！看到 `100KB+`：母舰满血复活！
+
+---
 
 **【步骤 5】挂载自动化巡逻齿轮**
 让系统每 6 小时自动同步我的 GitHub 代码：
 
+# 敲入 `crontab -e` 进入任务调度表，在最底部植入：
 ```bash
-# 敲入 crontab -e 进入任务调度表，在最底部植入：
 0 */6 * * * /root/sync_github.sh >/dev/null 2>&1
 ```
----
-⚡ 极客进阶：物理级“即时更新”扳机
-如果刚刚在 GitHub 修改了源码，不想等那 6 小时的定时任务，直接在 GCP 终端执行这一行，分发中心将一秒钟内完成基因重组：
-```bash
-/root/sync_github.sh
-```
----
+如果你用的是 Nano 编辑器（底部有提示），按 `Ctrl+O` 再回车保存，最后 `Ctrl+X` 退出。
 
+姿势二：极客“一行流”植入（最快）
+如果你想玩得更高级点，不进编辑器，直接在命令行把任务“焊”进去，可以用这招“降维打击”：
+```bash
+(crontab -l 2>/dev/null; echo "0 2 * * * /usr/local/bin/velox_cleanup.sh >/dev/null 2>&1") | crontab -
+```
+
+---
 
 ## 🟢 第三阶段：全网终端降维打击 (新机器装载)
 
