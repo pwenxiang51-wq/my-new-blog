@@ -130,7 +130,7 @@ chmod +x /root/sync_github.sh
 ```bash
 /root/sync_github.sh && ls -lh /var/www/stealth_8x9q2z/{core.sh,changelog.txt}
 ```
-这一行下去，同步+验尸一气呵成，这才是资深 `Linux` 运维大师的干练风格！看到 `100KB+`：母舰满血复活！
+>这一行下去，同步+验尸一气呵成，这才是资深 `Linux` 运维大师的干练风格！看到 `100KB+`：母舰满血复活！
 
 ---
 
@@ -184,7 +184,7 @@ systemctl restart nginx
 apt purge nginx nginx-common nginx-core -y && apt autoremove -y
 ```
 ---
-🚁 进阶：分发中心一键搬家（跃迁协议）
+# 🚁 进阶：分发中心一键搬家（跃迁协议）
 当你的母舰（分发服务器）需要更换或迁移时，利用 Velox 面板的 27 号星际舰队功能，可以实现物理级克隆。
 
 第一步：母舰资产提取（旧服务器）
