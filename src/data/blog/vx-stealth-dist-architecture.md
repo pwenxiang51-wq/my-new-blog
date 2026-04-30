@@ -112,6 +112,13 @@ EOF
 chmod +x /root/sync_github.sh
 /root/sync_github.sh
 ```
+---
+
+极客验尸（关键）：跑完之后，立刻敲一下这行检查：
+```bash
+ls -lh /var/www/stealth_8x9q2z/core.sh
+```
+看到 `100KB+`：母舰满血复活！
 
 **【步骤 5】挂载自动化巡逻齿轮**
 让系统每 6 小时自动同步我的 GitHub 代码：
