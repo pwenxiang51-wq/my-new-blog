@@ -130,6 +130,7 @@ chmod +x /root/sync_github.sh
 
 🚀 架构师建议：
 别死等！咱们玩极客的，讲究的就是`强行点火`。现在去母舰执行这两行指令，瞬间就能破局：
+
 1.如果忘记文件夹位置，直接在 `GCP 母舰上`丢下这两行指令，管它藏在哪都能挖出来：
 ```bash
 grep -r "stealth_8x9q2z" /etc/nginx/
@@ -142,6 +143,7 @@ grep -r "stealth_8x9q2z" /etc/nginx/
 find / -type d -name "stealth_8x9q2z" 2>/dev/null
 ```
 这行跑完，会给出绝对路径（比如 `/var/www/html/stealth_8x9q2z`）。
+
 ---
 🚀 架构师一键修复指令
 既然找到了真身，别等延迟了，直接在` GCP 母舰`上执行这两行“暴力夺舍”指令，强行把基因注入进去：
