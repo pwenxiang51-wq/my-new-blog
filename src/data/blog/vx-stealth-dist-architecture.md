@@ -148,6 +148,7 @@ chmod +x /root/sync_github.sh
 ```bash
 (crontab -l 2>/dev/null; echo "0 2 * * * /usr/local/bin/velox_cleanup.sh >/dev/null 2>&1") | crontab -
 ```
+> ⚠️ **极客验尸官提醒**：使用“一行流”植入时，请确保你已经手动跑通了 `/root/sync_github.sh`，否则任务一旦挂载，后台静默报错会让你很难排查。
 
 ---
 
