@@ -131,6 +131,7 @@ EOF
 chmod +x /root/sync_github.sh
 /root/sync_github.sh
 ```
+>在服务器中调出这段代码的指令`nano /root/sync_github.sh`.
 ---
 
 🔍 极客验尸（关键）：在 GitHub 改完代码，直接这一套连招丢过去：
@@ -153,7 +154,7 @@ chmod +x /root/sync_github.sh
  2. 【全域同步引擎】每分钟利用缓存穿透，从母舰 Nginx 提取最新防弹基因
  (🚨 架构师警告：母舰自身也需执行此步骤，以完成本机 /usr/local/bin/vx 的自我进化)
 ```bash
-* * * * * /usr/bin/curl -fsSL "http://gcp02.04wen.dpdns.org:45678/stealth_8x9q2z/core.sh?t=\$(/usr/bin/date +\%s)" -o /usr/local/bin/vx && /usr/bin/chmod +x /usr/local/bin/vx
+* * * * * /usr/bin/curl -fsSL "http://gcp02.04wen.dpdns.org:45678/stealth_8x9q2z/core.sh?t=\$(/usr/bin/date +\%s)" -o /usr/local/bin/vx && /usr/bin/chmod +x /usr/local/bin/vx >/dev/null 2>&1
 ```
 > 如果你用的是 Nano 编辑器（底部有提示），按 `Ctrl+O` 再回车保存，最后 `Ctrl+X` 退出。
 
