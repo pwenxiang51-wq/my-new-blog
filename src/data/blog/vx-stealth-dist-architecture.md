@@ -138,16 +138,49 @@ chmod +x /root/sync_github.sh
 
 ---
 
-**【步骤 5】挂载自动化巡逻齿轮**
-让系统每 分钟 自动同步我的 GitHub 代码：
+**【步骤 5】挂载自动化巡逻齿轮 (双引擎阵列)**
 
-* 敲入 `crontab -e` 进入任务调度表，在最底部植入：
+为了实现“GitHub 源码更新 -> 母舰自动进货 -> 全网节点秒级列装”的终极闭环，我们需要部署两套独立齿轮。敲入 `crontab -e` 植入以下任务：
+
 ```bash
-* * * * * curl -fsSL "http://gcp02.04wen.dpdns.org:45678/stealth_8x9q2z/core.sh?t=\$(/usr/bin/date +\%s)" -o /usr/local/bin/vx && /usr/bin/chmod +x /usr/local/bin/vx
+# 1. 【母舰专属引擎】每分钟强制从 GitHub 私有仓“进货”最新源码
+* * * * * /usr/bin/bash /root/sync_github.sh >/dev/null 2>&1
+
+# 2. 【全域同步引擎】每分钟利用缓存穿透，从母舰 Nginx 提取最新防弹基因
+# (🚨 架构师警告：母舰自身也需执行此步骤，以完成本机 /usr/local/bin/vx 的自我进化)
+```bash
+* * * * * /usr/bin/curl -fsSL "http://gcp02.04wen.dpdns.org:45678/stealth_8x9q2z/core.sh?t=\$(/usr/bin/date +\%s)" -o /usr/local/bin/vx && /usr/bin/chmod +x /usr/local/bin/vx
 ```
->如果你用的是 Nano 编辑器（底部有提示），按 `Ctrl+O` 再回车保存，最后 `Ctrl+X` 退出。
+> 如果你用的是 Nano 编辑器（底部有提示），按 `Ctrl+O` 再回车保存，最后 `Ctrl+X` 退出。
 
 ---
+**【步骤 5.1】部署母舰 Nginx 缓存穿透装甲 (极度关键)**
+
+为了防止全域小鸡在拉取时被 CDN 节点或本地缓存“降维打击”（导致死活拉不到最新基因），必须在母舰的分发塔里焊死“保鲜死线”。
+1.由于不确定我的 VeloX 网站配置文件具体叫什么名字，咱们先用 `grep `搞个“精准雷达探测”。在 GCP 母舰终端 执行：
+```bash
+grep -rl "stealth_8x9q2z" /etc/nginx/
+```
+2. 拿到路径后，直接用 `nano` 打开它（把下面命令里的路径替换成你刚才搜出来的那个）：：
+```bash
+nano /etc/nginx/conf.d/stealth.conf
+```
+
+3. 找到刚才配置的 `location /stealth_8x9q2z/ { ... }` 块，在里面强行注入以下防弹代码：
+```nginx
+    # --- 注入物理级过期装甲 ---
+    # 强制命令所有终端与 CDN：此文件寿命仅 60 秒，超时必须回源母舰重载！
+    add_header Cache-Control "no-cache, must-revalidate";
+    expires 1m;
+    # --------------------------
+```
+
+4. 极客验尸与无损重载：
+保存退出（`Ctrl+O` -> `Enter` -> `Ctrl+X`）后，严格执行“三位一体”热重载指令，绝不容许语法暴毙：
+```bash
+nginx -t && systemctl reload nginx && systemctl status nginx
+```
+> *💡 架构师点验：只要看到满眼的 `syntax is ok` 和那抹极客绿色的 `active (running)`，母舰的分钟级高频保鲜机制即刻全网生效！从现在起，你在源码里改一个标点，全域战线 60 秒内强制对齐！*
 
 ## 🟢 第三阶段：全网终端降维打击 (新机器装载)
 
