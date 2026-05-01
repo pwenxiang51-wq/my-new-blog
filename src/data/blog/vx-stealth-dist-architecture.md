@@ -122,6 +122,9 @@ if [ -s "${LOG_TARGET}.tmp" ]; then
 else
     rm -f "${LOG_TARGET}.tmp"
 fi
+# === 🛡️ 注入自动净化装甲 (暴力截断版) ===
+# 强行掐出最后 100 行并物理覆盖，多一行都留不住
+echo "$(tail -n 100 /var/log/vx_sync.log)" > /var/log/vx_sync.log
 EOF
 
 # 赋予执行权限并手动点火一次，完成首次拉取
