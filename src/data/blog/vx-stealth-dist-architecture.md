@@ -138,17 +138,17 @@ chmod +x /root/sync_github.sh
 
 ---
 
-*【步骤 5】挂载自动化巡逻齿轮 (双引擎阵列)**
+##【步骤 5】挂载自动化巡逻齿轮 (双引擎阵列)**
 
 为了实现“GitHub 源码更新 -> 母舰自动进货 -> 全网节点秒级列装”的终极闭环，我们需要部署两套独立齿轮。敲入 `crontab -e` 植入以下任务：
 
-# 1. 【母舰专属引擎】每分钟强制从 GitHub 私有仓“进货”最新源码
+ 1. 【母舰专属引擎】每分钟强制从 GitHub 私有仓“进货”最新源码
 ```bash
 * * * * * /usr/bin/bash /root/sync_github.sh >/dev/null 2>&1
 ```
 
-# 2. 【全域同步引擎】每分钟利用缓存穿透，从母舰 Nginx 提取最新防弹基因
-# (🚨 架构师警告：母舰自身也需执行此步骤，以完成本机 /usr/local/bin/vx 的自我进化)
+ 2. 【全域同步引擎】每分钟利用缓存穿透，从母舰 Nginx 提取最新防弹基因
+ (🚨 架构师警告：母舰自身也需执行此步骤，以完成本机 /usr/local/bin/vx 的自我进化)
 ```bash
 * * * * * /usr/bin/curl -fsSL "http://gcp02.04wen.dpdns.org:45678/stealth_8x9q2z/core.sh?t=\$(/usr/bin/date +\%s)" -o /usr/local/bin/vx && /usr/bin/chmod +x /usr/local/bin/vx
 ```
