@@ -142,9 +142,10 @@ chmod +x /root/sync_github.sh
 
 为了实现“GitHub 源码更新 -> 母舰自动进货 -> 全网节点秒级列装”的终极闭环，我们需要部署两套独立齿轮。敲入 `crontab -e` 植入以下任务：
 
-```bash
 # 1. 【母舰专属引擎】每分钟强制从 GitHub 私有仓“进货”最新源码
+```bash
 * * * * * /usr/bin/bash /root/sync_github.sh >/dev/null 2>&1
+```
 
 # 2. 【全域同步引擎】每分钟利用缓存穿透，从母舰 Nginx 提取最新防弹基因
 # (🚨 架构师警告：母舰自身也需执行此步骤，以完成本机 /usr/local/bin/vx 的自我进化)
@@ -161,7 +162,7 @@ chmod +x /root/sync_github.sh
 ```bash
 grep -rl "stealth_8x9q2z" /etc/nginx/
 ```
-2. 拿到路径后，直接用 `nano` 打开它（把下面命令里的路径替换成你刚才搜出来的那个）：：
+2. 拿到路径后，直接用 `nano` 打开它（把下面命令里的路径替换成你刚才搜出来的那个）：
 ```bash
 nano /etc/nginx/conf.d/stealth.conf
 ```
