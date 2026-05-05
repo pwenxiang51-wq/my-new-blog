@@ -80,6 +80,13 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
 dns-server = https://dns.google/dns-query, https://1.1.1.1/dns-query
 fallback-dns-server = https://dns.google/dns-query
 ```
+>注意：如果是联通和电信用户可以使用以上代理解析，如果是移动用户把`dns-server`改为以下代理
+
+```bash
+dns-server = 223.5.5.5, 119.29.29.29, system
+```
+>#强制接管 DNS，先用阿里/腾讯 DNS 引导，防止开局致盲
+
 
 **2. 激活双核分流引擎（拯救苹果商店与国内大厂）：**
 全用海外 DNS 会导致苹果商店暴毙、抖音转圈。必须开启小火箭隐藏的“双核大脑”，让国内直连流量物理绕过海外 DNS。在 `[General]` 里手动植入或修改这两行致命代码：
