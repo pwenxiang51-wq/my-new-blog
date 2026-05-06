@@ -80,7 +80,7 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
 dns-server = https://dns.google/dns-query, https://1.1.1.1/dns-query
 fallback-dns-server = https://dns.google/dns-query
 ```
->注意：如果是联通和电信用户可以使用以上DNS代理解析，如果是移动用户把`dns-server`改为下方国内大厂代理，具体要看自己的本地运营商网络视情况而定。
+>注意：如果是联通用户可以使用以上DNS代理解析，如果是移动和电信用户把`dns-server`改为下方国内大厂代理，具体要看自己的本地运营商 DNS 劫持与 UDP/HTTPS 阻断！视情况而定。
 
 ```bash
 dns-server = 223.5.5.5, 119.29.29.29, system
