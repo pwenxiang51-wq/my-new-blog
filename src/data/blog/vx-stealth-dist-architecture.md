@@ -91,12 +91,19 @@ systemctl restart nginx
 将 GCP 与我的 GitHub 私有仓物理打通。执行下面代码前，**记得把 `GITHUB_TOKEN` 换成我刚才申请的兵符**：
 
 ```bash
+# 1. 铸造暗物质黑匣子（锁死权限，凭证仅 root 可见）
+echo "我的_ghp_令牌" > /root/.github_token
+chmod 600 /root/.github_token
 cat << 'EOF' > /root/sync_github.sh
 #!/bin/bash
-# === 🚨 请在此处替换我的 Token ===
-GITHUB_TOKEN="我的_ghp_令牌"
+# === 🛡️ 极客级动态凭证装甲 ===
+if [ ! -f "/root/.github_token" ]; then
+    echo "$(date): 致命错误：未检测到核心兵符，终止同步！" >> /var/log/vx_sync.log
+    exit 1
+fi
+GITHUB_TOKEN=$(cat /root/.github_token)
 # ==================================
-REPO_URL="[https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/vx.sh](https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/vx.sh)"
+REPO_URL="https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/vx.sh"
 TARGET_FILE="/var/www/stealth_8x9q2z/core.sh"
 
 # 携带兵符强行拉取
@@ -110,7 +117,7 @@ else
     rm -f "${TARGET_FILE}.tmp"
     echo "$(date): 同步失败，保持防御态势！" >> /var/log/vx_sync.log
 fi
-LOG_URL="[https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/changelog.txt](https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/changelog.txt)"
+LOG_URL="https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/changelog.txt"
 LOG_TARGET="/var/www/stealth_8x9q2z/changelog.txt"
 
 # 携带同一块兵符，强行拉取日志
