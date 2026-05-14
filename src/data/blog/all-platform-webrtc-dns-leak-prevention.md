@@ -101,7 +101,11 @@ dns-direct-system = false
 ipv6 = false
 ```
  降维打击：开启 Fake-IP 模式接管系统网络
- ```bash
+```bash
+mode = pcb
+```
+探针屏蔽：防止通过 WebRTC 探测你的真实 IP
+```bash
 is-skip-local-ip-queries-enabled = false
 ```
 强制劫持：拦截所有常见的明文 DNS 端口
