@@ -83,7 +83,7 @@ fallback-dns-server = https://dns.google/dns-query
 >注意：如果是联通用户可以使用以上DNS代理解析，如果是移动和电信用户把`dns-server`改为下方国内大厂代理，具体要看本地运营商 DNS 劫持与 UDP/HTTPS 阻断！视情况而定。
 
 ```bash
-dns-server = 223.5.5.5, 119.29.29.29, system
+dns-server = https://223.5.5.5/dns-query, https://dns.google/dns-query
 ```
 >#强制接管 DNS，先用阿里/腾讯 DNS 引导，防止开局致盲
 
@@ -92,9 +92,22 @@ dns-server = 223.5.5.5, 119.29.29.29, system
 全用海外 DNS 会导致苹果商店暴毙、抖音转圈。必须开启小火箭隐藏的“双核大脑”，让国内直连流量物理绕过海外 DNS。在 `[General]` 里手动植入或修改这两行致命代码：
 ```ini
 remote-dns = true
-dns-direct-system = true
+dns-direct-system = false
 ```
 *极客原理解析：`remote-dns = true` 强制国外请求走海外节点解析，阻断嗅探；`dns-direct-system = true` 则是神来之笔，遇到直连规则直接调用本地宽带 DNS，瞬间拿到极速 IP 满血复活。*
+
+ 侧漏封杀：彻底关闭 IPv6 通道
+```bash
+ipv6 = false
+```
+ 降维打击：开启 Fake-IP 模式接管系统网络
+ ```bash
+is-skip-local-ip-queries-enabled = false
+```
+强制劫持：拦截所有常见的明文 DNS 端口
+```bash
+hijack-dns = 8.8.8.8:53, 8.8.4.4:53, 1.1.1.1:53, 114.114.114.114:53
+```
 
 **3. 封杀 WebRTC 探针：**
 在 `[Rule]` 模块中手动添加这两条规则：
@@ -125,6 +138,13 @@ DOMAIN-KEYWORD,meituan,DIRECT
 DOMAIN-KEYWORD,bilibili,DIRECT
 # ----------------------------------------
 ```
+
+### 3. 极客提示
+修改并导入配置后，请务必执行以下操作清空 iOS 顽固缓存：
+1. 开启**飞行模式**（保持 3 秒）。
+2. 关闭飞行模式，重新连接。
+3. 访问 👉 **[点击直达 BrowserLeaks WebRTC 测试](https://browserleaks.com/webrtc)** 验尸。
+   
 ### 🤖 实战三：Android端（NekoBox）的原生降维防线
 
 NekoBox 基于 `sing-box` 内核，天生带有极客血统。它的图形界面虽然直观，但如果不懂底层逻辑，很容易配出“漏网之鱼”。请严格按照以下五步进行 UI 级别的物理加固：
