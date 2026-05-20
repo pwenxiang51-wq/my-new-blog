@@ -84,6 +84,7 @@ fallback-dns-server = https://dns.google/dns-query
 
 ```bash
 dns-server = https://223.5.5.5/dns-query, https://dns.google/dns-query
+             https://dns.alidns.com/dns-query
 ```
 >#强制接管 DNS，先用阿里/腾讯 DNS 引导，防止开局致盲
 
