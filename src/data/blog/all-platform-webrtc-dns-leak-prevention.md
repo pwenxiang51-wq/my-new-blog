@@ -142,6 +142,9 @@ DOMAIN-KEYWORD,jd,DIRECT
 DOMAIN-KEYWORD,meituan,DIRECT
 DOMAIN-KEYWORD,bilibili,DIRECT
 # ----------------------------------------
+# 兜底代理
+FINAL,PROXY
+EOF
 ```
 
 ### 3. 极客提示
