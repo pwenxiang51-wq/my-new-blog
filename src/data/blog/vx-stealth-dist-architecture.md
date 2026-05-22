@@ -57,19 +57,27 @@ mkdir -p /var/www/stealth_8x9q2z
 # 3. 物理重铸分发配置（只听 45678 奇葩端口，拒绝遍历）
 cat << 'EOF' > /etc/nginx/conf.d/stealth.conf
 server {
-    listen 45678;
+    listen 45679 ssl;
     server_name _;
-    
+
+    ssl_certificate      /etc/vx_vne/cert/acme.crt;
+    ssl_certificate_key  /etc/vx_vne/cert/acme.key;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
     location /stealth_8x9q2z/ {
         alias /var/www/stealth_8x9q2z/;
-        # 🚨 核心防弹基因：允许精确投递 .txt 等非索引文件，彻底消灭 404
         try_files $uri $uri/ =404;
         autoindex off;
+
+        add_header Cache-Control "no-cache, must-revalidate";
+        expires 1m;
     }
-    
-    # 瞎猜的探测流量，直接物理拔管 444
+
+    # 其他路径直接拒绝
     location / {
-        return 444; 
+        return 444;
     }
 }
 EOF
@@ -77,6 +85,8 @@ EOF
 # 4. 激活并开机自启
 systemctl enable nginx && systemctl restart nginx
 ```
+>打开指令 `sudo nano /etc/nginx/conf.d/stealth.conf`
+
 
 **【步骤 3】排雷：强杀 80 端口占用**
 为防止后续 ACME 申请证书暴毙，必须清除 Nginx 的默认占位：
@@ -161,7 +171,7 @@ chmod +x /root/sync_github.sh
  2. 【全域同步引擎】每5分钟利用缓存穿透，从母舰 Nginx 提取最新防弹基因
  (🚨 架构师警告：母舰自身也需执行此步骤，以完成本机 /usr/local/bin/vx 的自我进化)
 ```bash
-*/5 * * * * /usr/bin/curl -fsSL "http://gcp02.04wen.dpdns.org:45678/stealth_8x9q2z/core.sh?t=\$(/usr/bin/date +\%s)" -o /usr/local/bin/vx && /usr/bin/chmod +x /usr/local/bin/vx >/dev/null 2>&1
+*/5 * * * * /usr/bin/curl -fsSLK "https://gcp02.04wen.dpdns.org:45678/stealth_8x9q2z/core.sh?t=\$(/usr/bin/date +\%s)" -o /usr/local/bin/vx && /usr/bin/chmod +x /usr/local/bin/vx >/dev/null 2>&1
 ```
 > 如果你用的是 Nano 编辑器（底部有提示），按 `Ctrl+O` 再回车保存，最后 `Ctrl+X` 退出。
 
