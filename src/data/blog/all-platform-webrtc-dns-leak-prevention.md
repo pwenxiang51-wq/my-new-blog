@@ -101,7 +101,7 @@ dns-direct-system = true
 ```bash
 private-ip-answer = true
 ```
-**3. 不支持 UDP 转发时直接拒绝（强迫国内大厂的 HTTP3/QUIC 流量安全降级回 TCP）
+**. 不支持 UDP 转发时直接拒绝（强迫国内大厂的 HTTP3/QUIC 流量安全降级回 TCP）
 ```bash
 udp-policy-not-supported-behaviour = REJECT
 ```
