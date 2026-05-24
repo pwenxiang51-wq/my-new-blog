@@ -93,10 +93,18 @@ dns-server = https://223.5.5.5/dns-query, https://dns.google/dns-query
 全用海外 DNS 会导致苹果商店暴毙、抖音转圈。必须开启小火箭隐藏的“双核大脑”，让国内直连流量物理绕过海外 DNS。在 `[General]` 里手动植入或修改这两行致命代码：
 ```ini
 remote-dns = true
-dns-direct-system = false
+dns-direct-system = true
 ```
 >*极客原理解析：`remote-dns = true` 强制国外请求走海外节点解析，从物理层面阻断运营商的嗅探。；`dns-direct-system = false` 这是降维打击的关键！遇到直连规则不再盲目调用本地宽带 DNS，而是强制使用我们指定的加密 DoH 解析。这样既能拿到极速 IP，又能让联通 DNS 彻底致盲，实现真正的滴水不漏。*
 
+**. 强制允许私有 IP 响应（防止国内大厂的本地加速 IP 被小火箭误判为劫持）
+```bash
+private-ip-answer = true
+```
+**3. 不支持 UDP 转发时直接拒绝（强迫国内大厂的 HTTP3/QUIC 流量安全降级回 TCP）
+```bash
+udp-policy-not-supported-behaviour = REJECT
+```
  侧漏封杀：彻底关闭 IPv6 通道
 ```bash
 ipv6 = false
