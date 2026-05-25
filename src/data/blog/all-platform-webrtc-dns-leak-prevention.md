@@ -61,8 +61,8 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
  
 ### 4.Chrome浏览器设置
 1.**如果你是用 Chrome，没有直接配置项，直接在浏览器输入安装 `WebRTC Control` 插件，添加到“扩展程序”。封住本地IP防止在WebRTC检测时泄露
-2.打开设置，搜索`DNS`点开`安全`，关闭 `使用安全DNS`。
-3.在浏览器地址栏输入`chrome://flags/`，搜索`QUIC`，在`Experimental QUIC protocol`设置为`Disabled`，然后点击`重新启动`。
+2.**打开设置，搜索`DNS`点开`安全`，关闭 `使用安全DNS`。
+3.**在浏览器地址栏输入`chrome://flags/`，搜索`QUIC`，在`Experimental QUIC protocol`设置为`Disabled`，然后点击`重新启动`。
 
 
 ## 🛡️ 终审验尸：隐身矩阵是否闭环？
