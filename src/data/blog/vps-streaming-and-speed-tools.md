@@ -21,7 +21,7 @@ tags:
 * **功能**：一键检测是否解锁 Netflix（非自制剧）、Disney+、YouTube Premium 以及 **Google Gemini**。
 * **命令**：
 ```bash
-bash <(curl -L -s [https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh](https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh))
+bash <(curl -L -s https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh)
 ```
 
 ### 2. 🕵️ IP 质量与风控检测 (IPQuality)
@@ -30,7 +30,7 @@ bash <(curl -L -s [https://raw.githubusercontent.com/lmc999/RegionRestrictionChe
 * **功能**：查询 IP 风险等级、欺诈分及是否为 IDC 机房 IP。
 * **命令**：
 ```bash
-bash <(curl -sL [https://raw.githubusercontent.com/xykt/IPQuality/main/ip.sh](https://raw.githubusercontent.com/xykt/IPQuality/main/ip.sh))
+bash <(curl -sL https://raw.githubusercontent.com/xykt/IPQuality/main/ip.sh)
 ```
 
 ### 3. 🗺️ 路由追踪工具 (NextTrace)
