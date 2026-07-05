@@ -143,13 +143,15 @@ DOMAIN-KEYWORD,turn,REJECT
 ```
 这就相当于在虚拟网卡出口架了机枪，WebRTC 想要探测真实内网 IP？对不起，物理击落！💥
 
-```
+---
 
 ### 3. 极客提示
 修改并导入配置后，请务必执行以下操作清空 iOS 顽固缓存：
 1. 开启**飞行模式**（保持 3 秒）。
 2. 关闭飞行模式，重新连接。
 3. 访问 👉 **[点击直达 BrowserLeaks WebRTC 测试](https://browserleaks.com/webrtc)** 验尸。
+
+---
    
 ### 🤖 实战三：Android端（NekoBox）的原生降维防线
 
