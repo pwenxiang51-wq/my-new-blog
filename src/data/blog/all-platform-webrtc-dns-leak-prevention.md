@@ -54,6 +54,7 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
 这是封杀泄露的**“机枪阵地”**：
 * **DNS 级致盲：** 在「DNS 设置」->「DNS 进阶设置」中，开启 **FakeIP**。直连DNS指定为 `223.5.5.5` 或 `223.5.5.5, 119.29.29.29`远程 DNS 指定为 `https://8.8.8.8/dns-query` (DoH)。
   * **效果：** 开启后，系统解析域名会返回 `198.18.x.x` 的虚拟地址。探针像无头苍蝇一样只能抓到这个假门牌号，当场“致盲”。
+  * **代理目标解析策略**：Asls
 * **协议级击落：** 在「路由设置」->「自定义规则」中，部署两道 **`block` (屏蔽)** 规则：
   1. **狙击 WebRTC：** 域名中包含 `stun, turn, webrtc, geosite:category-ads-all` -> `block`。
   2. **封杀 QUIC 逃逸：** 端口 `443` + 网络 `udp` -> `block`。
@@ -87,13 +88,7 @@ description: 彻底告别 WebRTC 和 DNS 泄露噩梦！顶级架构师带你从
 dns-server = https://dns.google/dns-query, https://1.1.1.1/dns-query
 fallback-dns-server = https://dns.google/dns-query, https://1.1.1.1/dns-query
 ```
->注意：如果是联通用户可以使用以上DNS代理解析，如果是移动和电信用户把`dns-server`改为下方国内大厂代理，具体要看本地运营商 DNS 劫持与 UDP/HTTPS 阻断！视情况而定。
-
-```bash
-dns-server = 223.5.5.5, https://dns.alidns.com/dns-query
-```
->#强制接管 DNS，先用阿里/腾讯 DNS 引导，防止开局致盲
-
+>注意：`dns-server` 和 `fallback-dns-server` 确实全走的是谷歌的加密 `DoH`，在普通的网络环境下，这意味着本地运营商`（ISP）`已经彻底被致盲了，他们既无法偷窥我的 DNS 请求，也无法对我进行明文劫持。
 
 **2. 激活双核分流引擎（拯救苹果商店与国内大厂）：**
 全用海外 DNS 会导致苹果商店暴毙、抖音转圈。必须开启小火箭隐藏的“双核大脑”，让国内直连流量物理绕过海外 DNS。在 `[General]` 里手动植入或修改这两行致命代码：
@@ -101,7 +96,7 @@ dns-server = 223.5.5.5, https://dns.alidns.com/dns-query
 remote-dns = true
 dns-direct-system = true
 ```
->*极客原理解析：`remote-dns = true` 强制国外请求走海外节点解析，从物理层面阻断运营商的嗅探。；`dns-direct-system = false` 这是降维打击的关键！遇到直连规则不再盲目调用本地宽带 DNS，而是强制使用我们指定的加密 DoH 解析。这样既能拿到极速 IP，又能让联通 DNS 彻底致盲，实现真正的滴水不漏。*
+>*极客原理解析：`remote-dns = true` 强制国外请求走海外节点解析，从物理层面阻断运营商的嗅探。；`dns-direct-system = true` 是双核引擎提速的灵魂！海外流量走加密 DoH 物理致盲运营商，但一旦命中 `DIRECT`直连规则（如国内电商），机甲立刻瞬间切换回手机原生网络 DNS，精准秒开国内边缘 CDN，实现速度与防弹的双重闭环。*
 
 **. 强制允许私有 IP 响应（防止国内大厂的本地加速 IP 被小火箭误判为劫持）
 ```bash
@@ -136,29 +131,6 @@ DOMAIN-KEYWORD,turn,REJECT
 ```
 这就相当于在虚拟网卡出口架了机枪，WebRTC 想要探测真实内网 IP？对不起，物理击落！💥
 
-**4. 发放国内巨头 VIP 直连通行证：**
-防止抖音等自带海外 CDN 的国内 App 被误判走代理（出现物理阻隔），不需要写几百行冗余代码，强行将根域名写入白名单。配合双核引擎，实现降维打击般的秒开速度：
-```ini
-# --- 🚀 国内巨头物理直连特权 (防 CDN 飘逸) ---
-# 字节跳动系 (抖音/头条/西瓜)
-DOMAIN-KEYWORD,douyin,DIRECT
-DOMAIN-KEYWORD,snssdk,DIRECT
-DOMAIN-KEYWORD,amemv,DIRECT
-DOMAIN-KEYWORD,toutiao,DIRECT
-DOMAIN-KEYWORD,ixigua,DIRECT
-
-# 阿里/腾讯/京东/美团/B站 (核心大厂全覆盖)
-DOMAIN-KEYWORD,alipay,DIRECT
-DOMAIN-KEYWORD,taobao,DIRECT
-DOMAIN-KEYWORD,wechat,DIRECT
-DOMAIN-SUFFIX,qq.com,DIRECT
-DOMAIN-KEYWORD,jd,DIRECT
-DOMAIN-KEYWORD,meituan,DIRECT
-DOMAIN-KEYWORD,bilibili,DIRECT
-# ----------------------------------------
-# 兜底代理
-FINAL,PROXY
-EOF
 ```
 
 ### 3. 极客提示
@@ -194,7 +166,7 @@ NekoBox 基于 `sing-box` 内核，天生带有极客血统。它的图形界面
 * **物理封杀 QUIC：** 添加规则 `dst port: 443` + `network: udp` -> 设为 **屏蔽(Block)**。并开启按钮
   * *极客原理解析：* YouTube 等谷歌系 App 极其狡猾，喜欢用 UDP (QUIC协议) 绕过代理直连，导致流量漏出。封死 UDP 443，逼它们乖乖走 TCP 代理隧道！
 * **补齐 WebRTC 漏洞（防真实 IP 侧漏）：** 点击右上角新建规则，进入后执行三步物理微操：
-  1. 点击 `domain`，在弹出的框内分两行填入 `keyword:stun` 和 `keyword:turn`。
+  1. 点击 `domain`，在弹出的框内分三行填入 `keyword:stun` , `keyword:turn` , `keyword:rtc`。
   2. 划到页面最底部，点击 `outbound`（目标出站）。
   3. 将其设为 **屏蔽 (block)** 或 **拒绝 (reject)** 并保存。
   *极客原理解析：这就在安卓底层架设了防空导弹，彻底切断 WebRTC 探测真实内网 IP 的可能，探针来一个死一个！💥*
