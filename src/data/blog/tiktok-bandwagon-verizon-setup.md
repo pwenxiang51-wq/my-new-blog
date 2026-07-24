@@ -33,7 +33,7 @@ tags:
 3.  **部署节点：** 购买后在后台重装系统（建议 Debian/Ubuntu 🐧），并部署科学上网协议（推荐 VLESS-Reality 或 VMess）。
 4.  **关键测试：** 拿到节点链接后，先在手机/电脑上单连这个节点，确保能秒开 [Google](https://www.google.com/)，速度要快 ⚡。
 
-> **📸 ![搬瓦工后台的套餐/机房信息界面，](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1771777943149.jpg)**
+> **📸 ![搬瓦工后台的套餐/机房信息界面，](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1784916183133.jpg)**
 
 ---
 
@@ -54,12 +54,12 @@ tags:
 同时，该 IP 在 Scamalytics 和 IP2Location 的欺诈风险得分必须【低于 5 分】，且没有任何黑名单记录。谢谢！)*
 
 3.  **获取极品 IP 💎：**
-    订单处理完后，我成功拿到了一个 **Verizon Business** 的原生 IP，[Ping0.cc](https://ping0.cc/) 风控分仅为 **10%**（极度纯净 ✨），归属地为宾夕法尼亚州。
+    订单处理完后，我成功拿到了一个 **Verizon Business** 的原生 IP，[https://scamalytics.com/](https://scamalytics.com/) 风控分仅为 **4**（极度纯净 ✨），归属地为哥伦比亚特区。
     * **ISP:** Verizon Business
     * **类型:** 家庭宽带 (Residential)
     * **原生:** True
 
-> **📸 ![Ping0.cc查出来的极低风控分截图，证明这颗 IP 的含金量](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1771778230589.jpg)**
+> **📸 ![scamalytics查出来的详细信息截图，证明这颗 IP 的含金量](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1784916814009.jpg，https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1784916821260.jpg)**
 
 ---
 
