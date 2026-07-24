@@ -59,7 +59,11 @@ tags:
     * **类型:** 家庭宽带 (Residential)
     * **原生:** True
 
-> **📸 ![scamalytics查出来的详细信息截图，证明这颗 IP 的含金量](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1784916814009.jpg，https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1784916821260.jpg)**
+> **📸 Scamalytics 查出来的详细信息截图，证明这颗 IP 的含金量：**
+> <div style="display: flex; gap: 10px;">
+>   <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1784916814009.jpg" width="49%" />
+>   <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1784916821260.jpg" width="49%" />
+> </div>
 
 ---
 
