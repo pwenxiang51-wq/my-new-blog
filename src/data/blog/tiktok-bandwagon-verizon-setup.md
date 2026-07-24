@@ -45,9 +45,13 @@ tags:
 2.  **定制要求（避坑重点 🕳️）：**
     在下单界面，我勾选了 **“Zero Risk”**（零风险）服务，虽然多付了钱 💸，但能保证 IP 的纯净度。
     **关键点：** 在备注栏（Extra Requirement）我特意备注了以下要求，要求客服人工筛选 🧑‍💻：
-    > **Strictly require a US Residential ISP IP with a Fraud Score of 5 (Five) on [Scamalytics](https://scamalytics.com/). Since I have paid for the "Zero Risk" service, I expect a flawless IP for TikTok business. Thank you!**
+    > **I need a dedicated Static Residential (ISP) IP from top-tier US carriers (e.g., Comcast, AT&T, Verizon, Charter). The ASN must be categorized as 'ISP' rather than 'Hosting/Datacenter'. Must pass Scamalytics (Risk Score < 5) and IP2Location (Fraud Score < 5) without any blacklists. Thank you!**
     
-    *(翻译：严格要求 Scamalytics 风控分为 5 的美国住宅 ISP IP。既然我已经购买了“零风险”服务，我希望得到一个用于 TikTok 业务的完美 IP。谢谢！)*
+    *(翻译：我需要一个由美国一线大厂运营商（如 Comcast、AT&T、Verizon、Spectrum 等）提供的【独享静态住宅（ISP）IP】。
+
+底层 ASN 属性必须严格分类为家庭宽带『ISP』，绝不能是机房/托管类型『Hosting/Datacenter』。
+
+同时，该 IP 在 Scamalytics 和 IP2Location 的欺诈风险得分必须【低于 5 分】，且没有任何黑名单记录。谢谢！)*
 
 3.  **获取极品 IP 💎：**
     订单处理完后，我成功拿到了一个 **Verizon Business** 的原生 IP，[Ping0.cc](https://ping0.cc/) 风控分仅为 **10%**（极度纯净 ✨），归属地为宾夕法尼亚州。
