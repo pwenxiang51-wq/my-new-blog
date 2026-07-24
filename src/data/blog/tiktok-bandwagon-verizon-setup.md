@@ -45,9 +45,9 @@ tags:
 2.  **定制要求（避坑重点 🕳️）：**
     在下单界面，我勾选了 **“Zero Risk”**（零风险）服务，虽然多付了钱 💸，但能保证 IP 的纯净度。
     **关键点：** 在备注栏（Extra Requirement）我特意备注了以下要求，要求客服人工筛选 🧑‍💻：
-    > **I need a dedicated Static Residential (ISP) IP from top-tier US carriers (e.g., Comcast, AT&T, Verizon, Charter). The ASN must be categorized as 'ISP' rather than 'Hosting/Datacenter'. Must pass Scamalytics (Risk Score < 5) and IP2Location (Fraud Score < 5) without any blacklists. Thank you!**
+    > **Require clean US ISP (Comcast/AT&T/Verizon). ASN must be ISP, non-hosting/DCH. Scamalytics score <5, IP2Location fraud score <5, no blacklists.**
     
-    *(翻译：我需要一个由美国一线大厂运营商（如 Comcast、AT&T、Verizon、Spectrum 等）提供的【独享静态住宅（ISP）IP】。
+    *(翻译：需要干净的美国原生宽带（Comcast/AT&T/Verizon）。底层 ASN 必须为纯 ISP，绝不能是托管/机房。Scamalytics 风险分 <5，IP2Location 欺诈分 <5，且无黑名单。
 
 底层 ASN 属性必须严格分类为家庭宽带『ISP』，绝不能是机房/托管类型『Hosting/Datacenter』。
 
