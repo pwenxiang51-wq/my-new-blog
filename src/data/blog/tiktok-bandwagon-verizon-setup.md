@@ -49,10 +49,6 @@ tags:
     
     *(翻译：需要干净的美国原生宽带（Comcast/AT&T/Verizon）。底层 ASN 必须为纯 ISP，绝不能是托管/机房。Scamalytics 风险分 <5，IP2Location 欺诈分 <5，且无黑名单。
 
-底层 ASN 属性必须严格分类为家庭宽带『ISP』，绝不能是机房/托管类型『Hosting/Datacenter』。
-
-同时，该 IP 在 Scamalytics 和 IP2Location 的欺诈风险得分必须【低于 5 分】，且没有任何黑名单记录。谢谢！)*
-
 3.  **获取极品 IP 💎：**
     订单处理完后，我成功拿到了一个 **Verizon Business** 的原生 IP，[https://scamalytics.com/](https://scamalytics.com/) 风控分仅为 **4**（极度纯净 ✨），归属地为哥伦比亚特区。
     * **ISP:** Verizon Business
