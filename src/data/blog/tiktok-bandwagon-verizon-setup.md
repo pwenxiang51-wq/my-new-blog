@@ -96,11 +96,10 @@ tags:
    * 填入 ISP 的 IP、端口、账号、密码。
 3. **配置“前置代理” ⚙️：**
    * 在电脑上开启 [v2rayN](https://github.com/2dust/v2rayN)（或 Mac 端客户端）运行搬瓦工节点。
-   * **验证本地监听端口：**
-     * **Windows (CMD / PowerShell):** 运行 `netstat -ano | findstr 10808`
-     * **macOS (Terminal):** 运行 `lsof -iTCP:10808 -sTCP:LISTEN`
-     * 若回显中包含 `127.0.0.1:10808` 且状态为 `LISTEN` / `LISTENING`，即确认本地服务正常。
-   * 在 AdsPower 的“前置代理”中填入：Host `127.0.0.1`，Port `10808`（客户端默认本地端口）。
+   * **Windows 验证端口：** CMD / PowerShell 运行 `netstat -ano | findstr 10808`
+   * **macOS 验证端口：** Terminal 运行 `lsof -iTCP:10808 -sTCP:LISTEN`
+   * **结果确认：** 回显包含 `127.0.0.1:10808` 且状态为 `LISTEN` / `LISTENING` 即正常。
+   * **填入前置代理：** Host 填 `127.0.0.1`，Port 填 `10808`（客户端默认本地端口）。
 4. **检查：** 点击“检查代理”，显示连接成功即可 ✅。
 
 
