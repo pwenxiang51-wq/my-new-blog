@@ -2,7 +2,7 @@
 
 export const SITE = {
   website: "https://222382.xyz/",
-  author: "Velo.x",
+  author: "Velox",
   profile: "https://github.com/pwenxiang51-wq",
   desc: "Velox 的个人博客",
   title: "Velox",
