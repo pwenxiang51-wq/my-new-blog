@@ -1,9 +1,9 @@
 ---
 title: 🛡️[自用] 客户端广告域名拦截备忘：Shadowrocket / Clash / V2rayN / NekoBox
 author: Velox
-pubDatetime: 2026-09-07T18:00:00+08:00
+pubDatetime: 2026-09-06T18:00:00+08:00
 slug: client-ad-domain-block-notes
-featured: false
+featured: true
 draft: false
 tags:
   - 客户端配置
@@ -227,4 +227,4 @@ geosite:category-ads-all → 屏蔽
 ---
 
 > **💡 提示：**  
-> 本文首发于 **[Velo.x 的极客空间](https://222382.xyz)**。防泄露、分流、节点架构相关文章会持续更新，欢迎来踩。🚀
+> 本文首发于 **[Velox 的极客空间](https://222382.xyz)**。防泄露、分流、节点架构相关文章会持续更新，欢迎来踩。🚀
