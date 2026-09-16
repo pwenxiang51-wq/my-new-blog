@@ -331,7 +331,7 @@ dig +short 你的域名
 curl -fsSLk https://你的域名:端口/stealth_8x9q2z/core.sh -o /usr/local/bin/vx && chmod +x /usr/local/bin/vx && vx
 ```
 
-## 11. 清理临时文件（可选）
+#### 11. 清理临时文件（可选）
 ```bash
 rm -f /root/Velox_Assets_Backup.tar.gz /root/Velox_Assets_Backup.tar.gz.enc
 ```
