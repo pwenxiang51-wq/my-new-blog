@@ -238,31 +238,111 @@ apt purge nginx nginx-common nginx-core -y && apt autoremove -y
 ```
 ---
 # 🚁 进阶：分发中心一键搬家（跃迁协议）
-当你的母舰（分发服务器）需要更换或迁移时，利用 Velox 面板的 27 号星际舰队功能，可以实现物理级克隆。
 
-第一步：母舰资产提取（旧服务器）
-运行 Velox 面板，进入 `26` -> `1` (全域资产打包)。
-当系统提示输入自定义路径时，必须手动注入以下地堡路径：
-```bash
-/var/www/stealth_8x9q2z /etc/nginx/conf.d/stealth.conf
-```
-💡 架构师注：同步脚本和 Cron 任务已包含在默认打包列表里，无需重复输入。
+当你的母舰（分发服务器）需要更换或迁移时，利用 Velox 面板的 21 号容灾中心，可以实现物理级克隆。
+
+### 第一步：母舰资产提取（旧服务器）
+
+1. 运行 Velox 面板，进入 `21` → `1`（全域资产打包）。
+2. 勾选以下模块：
+   - Nginx 私有分发地堡与同步引擎
+   - Acme.sh 域名 SSL 证书库（建议勾选）
+   - 系统自动化定时任务（Crontab）（建议勾选）
+3. 自定义路径处选择：
+   ```bash
+   /var/www/stealth_8x9q2z /etc/nginx/conf.d/stealth.conf
+   ```
+4. 打包完成后选择推送到 Telegram（推荐），并牢记加密密码。
+
+> 💡 架构师注：同步脚本、token、stealth.conf 都会自动被包含。
+
 ---
-第二步：新机基因夺舍（新服务器）
-将生成的 `Velox_Assets_Backup.tar.gz` 传到新机器的 `/root` 目录后，依次执行以下物理指令：
 
-1. 预装 Web 引擎并清除 80 端口冲突：
+### 第二步：新母舰实战恢复完整流程（避坑版）
+
+#### 1. 新机器预装必要组件
 ```bash
-apt update && apt install nginx -y && rm -f /etc/nginx/sites-enabled/default
+apt update && apt install nginx lrzsz -y
+rm -f /etc/nginx/sites-enabled/default
 ```
-2. 执行物理级覆盖恢复：
+
+#### 2. 上传备份包（推荐 PowerShell）
+```powershell
+scp -P 你的SSH端口 Velox_Assets_Backup.tar.gz.enc root@新机器IP:/root/
+```
+
+#### 确认一下文件在不在
 ```bash
-cd / && tar -xzpf /root/Velox_Assets_Backup.tar.gz && crontab /root/crontab_backup.txt 2>/dev/null
+ls -lh /root/Velox_Assets_Backup.tar.gz.enc
 ```
-3. 激活引擎并点火同步：
+
+#### 3. 解密 + 解压
 ```bash
-systemctl enable nginx && systemctl restart nginx && /root/sync_github.sh
+cd /root
+openssl enc -d -aes-256-cbc -pbkdf2 -in Velox_Assets_Backup.tar.gz.enc -out Velox_Assets_Backup.tar.gz
+cd /
+tar -xzpPf /root/Velox_Assets_Backup.tar.gz
 ```
+
+#### 4. 检查核心文件
+```bash
+ls -lh /var/www/stealth_8x9q2z/
+ls -lh /etc/nginx/conf.d/stealth.conf
+ls -lh /root/sync_github.sh
+```
+
+#### 5. 检查并修正监听端口（重点）
+```bash
+grep listen /etc/nginx/conf.d/stealth.conf
+# 如果端口不一致，执行：
+sed -i 's/listen 旧端口 ssl;/listen 新端口 ssl;/' /etc/nginx/conf.d/stealth.conf
+```
+
+#### 6. 启动 Nginx
+```bash
+nginx -t && systemctl enable nginx && systemctl restart nginx
+ss -tlnp | grep 你的端口
+```
+
+#### 7. 手动补回 Cron（如果打包时跳过了）
+```bash
+crontab -e
+```
+加入以下两行（端口和域名改成你的实际值）：
+
+```bash
+*/5 * * * * /usr/bin/bash /root/sync_github.sh >/dev/null 2>&1
+*/5 * * * * /usr/bin/curl -fsSLk "https://你的域名:端口/stealth_8x9q2z/core.sh?t=\$(/usr/bin/date +\%s)" -o /tmp/vx_update.tmp && [ -s /tmp/vx_update.tmp ] && /usr/bin/bash -n /tmp/vx_update.tmp && /usr/bin/mv -f /tmp/vx_update.tmp /usr/local/bin/vx && /usr/bin/chmod +x /usr/local/bin/vx || /usr/bin/rm -f /tmp/vx_update.tmp >/dev/null 2>&1
+```
+
+#### 8. 本地验证（必须通过）
+```bash
+curl -fsSLk https://你的域名:端口/stealth_8x9q2z/core.sh -o /usr/local/bin/vx && chmod +x /usr/local/bin/vx && vx
+```
+
+#### 9. 立即舰机手动拉取脚本测试同步（不用等5分钟）
+```bash
+/root/sync_github.sh && ls -lh /var/www/stealth_8x9q2z/{core.sh,changelog.txt}
+```
+
+#### 10. 外部验证
+```bash
+dig +short 你的域名
+curl -fsSLk https://你的域名:端口/stealth_8x9q2z/core.sh -o /usr/local/bin/vx && chmod +x /usr/local/bin/vx && vx
+```
+
+## 11. 清理临时文件（可选）
+```bash
+rm -f /root/Velox_Assets_Backup.tar.gz /root/Velox_Assets_Backup.tar.gz.enc
+```
+
+#### 12. 域名解析
+把分发域名解析到新服务器 IP，生效后客户端无需任何改动，自动从新母舰取货。
+
+---
+
+**完成以上步骤后，分发中枢即满血复活。**
+
 ---
 🛡️ 架构师避坑提醒：
 
