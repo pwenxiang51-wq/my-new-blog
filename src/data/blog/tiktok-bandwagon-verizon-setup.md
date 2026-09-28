@@ -104,7 +104,7 @@ tags:
 
 ## 五、 环境验证 🩺
 
-配置完成后，打开 [whoer.net](https://whoer.net/) 进行最终体检：
+配置完成后，打开 [browserscan.net](https://www.browserscan.net/) 进行最终体检：
 
 1.  **IP 地址：** 显示 `198.3.xx.xx`（你买的静态 IP）🎯。
 2.  **ISP 供应商：** 必须显示 **Verizon Business** 或 **MCI**，绝对不能显示 IT7、DigitalOcean 等机房名字 🏢。
