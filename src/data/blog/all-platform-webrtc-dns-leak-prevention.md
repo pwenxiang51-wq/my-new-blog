@@ -228,7 +228,7 @@ DOMAIN-KEYWORD,turn,REJECT
 期望结果：
 
 - 解析结果应全部来自海外 DNS 服务商（**Google**、**Cloudflare** 等）
-- 不应出现国内运营商（**China Telecom**、**China Unicom** 等）相关记录
+- 不应出现国内运营商（**China Telecom**、**China Unicom**、**China Mobile** 等）相关记录
 
 只要这两项都干净，**WebRTC** 与 **DNS** 泄露基本可视为已封死。
 
