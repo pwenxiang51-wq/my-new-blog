@@ -244,4 +244,4 @@ DOMAIN-KEYWORD,turn,REJECT
 
 ---
 
-> 本文首发于 [Velox 的极客空间](https://222382.xyz)。更完整的跨境节点与静态住宅 IP 部署指南见：[跨境级网络重构：台湾中继 + 美国静态住宅 IP 终极部署全指南](https://222382.xyz/posts/cross-border-relay-static-isp-guide/)。
+> 本文首发于 [Velox 的极客空间](https://222382.xyz)。
