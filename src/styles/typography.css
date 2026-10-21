@@ -14,7 +14,7 @@
     }
 
     h3 {
-      @apply italic;
+      @apply not-italic;
     }
 
     p,
@@ -75,7 +75,7 @@
     }
 
     blockquote {
-      @apply border-s-accent/80 wrap-break-word opacity-80;
+      @apply border-s-accent/80 wrap-break-word opacity-80 not-italic;
     }
 
     details {
