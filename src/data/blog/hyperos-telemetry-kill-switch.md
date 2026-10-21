@@ -73,7 +73,7 @@ description: 针对 MTK 平台设备（如 Redmi K50）防刷机变砖的防弹�
 #### 3.3 路由规则（小米黑洞）
 在「路由」页面添加自定义规则，动作选择 **屏蔽**，并**拖到规则列表最顶部**：
 
-```
+```bash
 domain:sec.miui.com
 domain:flash.sec.miui.com
 domain:tracking.miui.com
