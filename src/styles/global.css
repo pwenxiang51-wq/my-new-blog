@@ -28,6 +28,11 @@ html[data-theme="dark"] {
   --color-border: var(--border);
 }
 
+:root {
+  --default-mono-font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", monospace;
+}
+
+
 @layer base {
   * {
     @apply border-border outline-accent/75;
