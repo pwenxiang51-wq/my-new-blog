@@ -186,13 +186,13 @@ DOMAIN-KEYWORD,turn,REJECT
 
 **屏蔽 QUIC：** 并启用
 
-新建规则：
+- 新建规则：
 
-1. domai 分别添加：**`dst port:443`**、**`network:udp`**
+1. domain 分别添加：**`dst port:443`**、**`network:udp`**
                   
 **屏蔽 WebRTC：** 并启用
 
-新建规则：
+- 新建规则：
 
 1. domain 分别添加：**`keyword:stun`**、**`keyword:turn`**、**`keyword:rtc`**
 2. outbound 设为 **屏蔽（Block）** 或 **拒绝（Reject）**
