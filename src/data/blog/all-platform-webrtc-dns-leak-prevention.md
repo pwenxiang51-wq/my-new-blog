@@ -186,8 +186,8 @@ DOMAIN-KEYWORD,turn,REJECT
 
 **屏蔽 QUIC：** 并启用
 新建规则：
-1. domai 分别添加：**`dst port:443`**
-                  **`network:udp`**
+1. domai 分别添加：**`dst port:443`**、**`network:udp`**
+                  
 **屏蔽 WebRTC：** 并启用
 新建规则：
 
