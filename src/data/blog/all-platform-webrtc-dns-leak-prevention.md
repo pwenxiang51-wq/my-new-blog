@@ -189,13 +189,14 @@ DOMAIN-KEYWORD,turn,REJECT
 - 新建规则：
 
 1. domain 分别添加：**`dst port:443`**、**`network:udp`**
-                  
+2. outbound 设为 **屏蔽（Block）** 
+                     
 **屏蔽 WebRTC：** 并启用
 
 - 新建规则：
 
 1. domain 分别添加：**`keyword:stun`**、**`keyword:turn`**、**`keyword:rtc`**
-2. outbound 设为 **屏蔽（Block）** 或 **拒绝（Reject）**
+2. outbound 设为 **屏蔽（Block）** 
 
 ### 4. 其他调优
 
