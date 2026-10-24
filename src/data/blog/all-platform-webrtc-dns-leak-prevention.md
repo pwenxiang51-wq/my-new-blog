@@ -176,7 +176,7 @@ DOMAIN-KEYWORD,turn,REJECT
 
 - **`geosite:cn`** → **绕过（中国 域名规则）** 并启用
 - **`geoip:cn`** → **绕过（中国 IP 规则）** 并启用
-- **`gooleapis.cn`**→ **代理（中国play商店规则）** 并启用
+- **`googleapis.cn`**→ **代理（中国play商店规则）** 并启用
 
 保证微信、支付宝、抖音等国内 App 直连，速度与稳定性更好。
 
