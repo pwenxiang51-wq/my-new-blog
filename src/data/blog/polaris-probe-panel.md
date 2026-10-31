@@ -16,7 +16,7 @@ description: 用 Go 标准库做的私有 VPS 监控台，单管理员、探针�
 
 > 一句话：用 Go 标准库做的私有 VPS 监控台，单管理员、探针上报，不对外开面板端口。
 
-- 仓库：[https://github.com/pwenxiang51-wq/Polaris]_(https://github.com/pwenxiang51-wq/Polaris)
+- 仓库：[https://github.com/pwenxiang51-wq/Polaris](https://github.com/pwenxiang51-wq/Polaris)
 - 协议：AGPL-3.0
 - 作者：Velox
 
@@ -72,7 +72,7 @@ description: 用 Go 标准库做的私有 VPS 监控台，单管理员、探针�
 <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793467497323.jpg" alt="手机节点详情" style="width:50%;">
 </div>
 
-> UI 展示页是节点总览，走势图是节点卡里的 24h 曲线：CPU、内存、下行、上行、三网 TCP 建连延迟，总览图里看不清，单独放一张。
+> UI 展示页是节点总览，走势图是节点卡里的 24h 曲线：CPU、内存、下行、上行、VPS详情、三网 TCP 建连延迟，总览图里看不清，单独放两张手机截图。
 
 ## 手机：加到主屏幕 📱
 
@@ -265,14 +265,6 @@ docker volume ls
 装好之后日常就很简单：打开面板，看一眼节点在不在线、CPU、内存、流量、到期、三网延迟，有离线、额度、到期提醒 `Telegram` 会直接发过来，不用经常 `SSH` 上去查。
 
 Polaris 从一开始就不是给多人、多租户做的，就是给自己几台小鸡用的：私有、轻量、自己编译、自己部署，代码可以公开，实例必须私有。够用，就不往上加东西了。
-
-如果你也只是想要这样一个自己看的面板，欢迎直接看仓库、提 `Issue`，或者 `fork` 之后改成自己的星图。
-
-**Copyright © 2026 Velox | All rights reserved.**
-
-- GitHub：https://github.com/pwenxiang51-wq
-- Telegram：https://t.me/Velox95
-- 项目：https://github.com/pwenxiang51-wq/Polaris
 
 ---
 
