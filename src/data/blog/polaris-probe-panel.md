@@ -72,7 +72,8 @@ description: 用 Go 标准库做的私有 VPS 监控台，单管理员、探针�
 <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793467497323.jpg" alt="手机节点详情" style="width:50%;">
 </div>
 
-> UI 展示页是节点总览，走势图是节点卡里的 24h 曲线：CPU、内存、下行、上行、VPS详情、三网 TCP 建连延迟，总览图里看不清，单独放两张手机截图。
+> UI 展示页是节点总览，上面一张是PC局部浏览图，下面两张是手机上的样子：左边是手机总览，右边是点进单个节点后的手机节点详情，CPU、内存、下行、上行、VPS 详情、三网 TCP 建连延迟都在里面.
+
 
 ## 手机：加到主屏幕 📱
 
@@ -158,13 +159,21 @@ docker compose up -d --build
 docker compose ps
 ```
 
-polaris-polaris-1 应为 Up (healthy)，polaris-cloudflared-1 为 Up。重编镜像必须带 `--build`，只用 `--force-recreate` 是只重建容器、不重编镜像。
+>polaris-polaris-1 应为 Up (healthy)，polaris-cloudflared-1 为 Up。重编镜像必须带 `--build`，只用 `--force-recreate` 是只重建容器、不重编镜像。
 
-### 3. 装探针
+### 3. 下载 Go，版本跟面板用的 1.27 对得上就行
 
-探针在主机上编，面板在 `Docker` 里编，探针运行只需要编出来的 `5.2M` 文件。
+```bash
+wget https://go.dev/dl/go1.27.3.linux-amd64.tar.gz -O /tmp/go.tgz
+```
 
-先把主机上旧 **Go**删干净再解压：
+ARM 机子把 `linux-amd64` 换成 `linux-arm64`。
+
+### 4. 装探针
+
+探针在主机上编，面板在 Docker 里编，探针运行只需要编出来的几 MB 文件。
+
+先把主机上旧 Go 删干净再解压：
 
 ```bash
 rm -rf /usr/local/go
@@ -183,7 +192,7 @@ CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o polaris-agent ./cmd/polaris
 ls -lh polaris-agent
 ```
 
-出 `5.2M` 才算编成，然后装探针：
+编出来看到几 MB 的文件才算编成，RN 那台是 5.2M，别的架构大小会不一样，不用死卡 5.2M。然后装探针：
 
 ```bash
 sudo bash ./scripts/install-agent.sh
@@ -221,6 +230,40 @@ docker compose ps
 拉取不会动已建好的密钥文件。编完新镜像、容器起来，改动就生效。
 
 语言切换那类前端改动：切完语言按钮，验证框不会立刻变，按 `F5` 刷新一次，重新生成的验证框才会跟新语言一致。
+
+---
+
+## 添加新 VPS
+
+面板已经装好了就不用重装面板，也不用再跑 `setup-secrets.sh`，新机子只装探针就行，每个节点用自己的 Token，别拿 RN 那个 Token 去复用。
+
+### 1. 面板上先建节点
+
+登录面板，新增节点，填显示名、节点 ID、到期日、价格、月流量额度、计入模式，创建后把面板给出的整段探针配置复制下来。
+
+### 2. 新机子上装探针
+
+新机子按上面“装探针”那节走一遍：下载 Go、删旧 Go、解压、克隆仓库、编译探针，编好后：
+
+```bash
+sudo bash ./scripts/install-agent.sh
+```
+
+第一次会停下，让你改环境文件：
+
+```bash
+sudoedit /etc/polaris-agent.env
+```
+
+把面板上复制的整段新节点配置原样粘贴进去，服务器地址、节点 ID、节点名、Token 全替换，不要只换 Token 一行。保存退出，再执行一次：
+
+```bash
+sudo bash ./scripts/install-agent.sh
+```
+
+第二次跑之前脚本会查占位词和 Token 长度，有占位词就直接停下，不启动；没占位词就启动，看到 `active (running)`，面板 50 秒内就能看到新节点在线。
+
+如果不想在新机子上装 Go，也可以把编好的探针文件直接拷过去，再跑 `install-agent.sh`，效果一样，新机子上就不用装 Go 了。
 
 ---
 
