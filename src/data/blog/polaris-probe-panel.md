@@ -150,7 +150,7 @@ bash ./scripts/setup-secrets.sh
 **按提示填：面板域名、管理员账号、管理员密码、Turnstile Site Key、Turnstile Secret key、Telegram Token（可选）、Telegram Chat ID、Cloudflare Tunnels Token**。
 
 - **密码至少 `14` 位，两次一样就过。** 只卡长度，不卡复杂度，`14` 个 **`1`** 能过，复杂到 **`UUID`** 那种也能过，想简单就简单设，想复杂就复杂设。
-- **Turnstile Secret、Tunnels Token 都填两遍，填完回显头 4 位、尾 4 位、总长度，全文不显示**。
+- **Turnstile Secret、隧道 Token 都填两遍，填完回显头 4 位、尾 4 位、总长度，全文不显示**。
 - **Telegram Token 填完回显长度，Chat ID 只能填数字**。
 - **密钥目录 700，文件 440，Telegram 文件属组脚本直接写成面板进程的 10001，不用手动改**。
 
@@ -216,7 +216,7 @@ CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o polaris-agent ./cmd/polaris
 ls -lh polaris-agent
 ```
 
-4. 编出来看到几 MB 的文件才算编成，RN 那台是 5.2M，别的架构大小会不一样，不用死卡 5.2M。然后装探针：
+4. 编出来看到几 MB 的文件才算编成，别的架构大小会不一样，不用死卡 5.2M。然后装探针：
 
 ```bash
 sudo bash ./scripts/install-agent.sh
@@ -261,8 +261,9 @@ docker compose ps
 
 ## 四、卸载 🧹
 
->面板机卸载：面板、探针、验收三块都做。
->新加的 VPS 卸载：只做探针那块，面板那块和 docker 验收不用做，新机子上没有面板容器，docker 那三句查了也是空的。
+> 面板机卸载：面板、探针、验收三块都做。
+>
+> 新加的 VPS 卸载：只做探针那块，面板那块和 docker 验收不用做，新机子上没有面板容器，docker 那三句查了也是空的。
 
 **面板**：
 
@@ -285,7 +286,17 @@ systemctl daemon-reload
 rm /usr/local/bin/polaris-agent
 rm /etc/polaris-agent.env
 userdel polaris-agent
+rm -rf /usr/local/go
+rm -rf /opt/Polaris
+rm -f /tmp/go.tgz
 ```
+
+**go清理缓存**：
+
+```bash
+go clean -cache -modcache
+```
+> Go 编译缓存 `/root/go` 第一次编完很小，多次重编才会攒起来，平时稳定运行不涨，盘紧或者攒到 1、2G 再用这条指令平时不用清。
 
 **验收**：
 
@@ -297,11 +308,13 @@ docker volume ls
 
 全是 `0` 才算干净。
 
+> 卸了探针，面板上那台 VPS 不会自动消失，只会变离线，要彻底删还得在面板上把那台 VPS 的条目也删了。
+
 ---
 
 ## 写在最后 🌟
 
-装好之后日常就很简单：打开面板，看一眼VPS在不在线、CPU、内存、流量、到期、三网延迟，有离线、额度、到期提醒 `Telegram` 会直接发过来，不用经常 `SSH` 上去查。
+装好之后日常就很简单：打开面板，看一眼节点在不在线、CPU、内存、流量、到期、三网延迟，有离线、额度、到期提醒 `Telegram` 会直接发过来，不用经常 `SSH` 上去查。
 
 Polaris 从一开始就不是给多人、多租户做的，就是给自己几台小鸡用的：私有、轻量、自己编译、自己部署，代码可以公开，实例必须私有。够用，就不往上加东西了。
 
