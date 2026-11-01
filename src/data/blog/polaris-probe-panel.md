@@ -172,8 +172,6 @@ cd /opt/Polaris
 bash ./scripts/setup-secrets.sh
 ```
 
-### Telegram Token（可选）
-
 **按提示填：面板域名、管理员账号、管理员密码、Turnstile Site Key、Turnstile Secret key、Telegram Token（可选）、Telegram Chat ID、Cloudflare Tunnels Token**。
 
 - **密码至少 `14` 位，两次一样就过。** 只卡长度，不卡复杂度，`14` 个 **`1`** 能过，复杂到 **`UUID`** 那种也能过，想简单就简单设，想复杂就复杂设。
@@ -203,7 +201,8 @@ chmod 440 secrets/telegram-bot-token secrets/telegram-chat-id
 docker compose up -d --force-recreate polaris
 ```
 
- >反馈只显示 `restart` 不够，必须 `force-recreate`。
+在 VPS 终端里跑，只 `restart` 不够，必须 `force-recreate`。
+- **密钥目录 700，文件 440，Telegram 文件属组脚本直接写成面板进程的 10001，不用手动改**。
 
 ### 2. 启动
 
