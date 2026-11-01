@@ -287,8 +287,10 @@ rm /usr/local/bin/polaris-agent
 rm /etc/polaris-agent.env
 userdel polaris-agent
 rm -rf /usr/local/go
-rm -rf /opt/Polaris
+rm -rf /root/go
+rm -rf /root/.cache/go-build
 rm -f /tmp/go.tgz
+
 ```
 
 **go清理缓存**：
