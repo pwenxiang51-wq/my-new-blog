@@ -161,7 +161,7 @@ docker --version
 docker compose version
 ```
 
-- **Ubuntu 24.04 源代号用 `noble`，22.04 换成 `jammy`。**
+- **Ubuntu 26.04 源代号用 `resolute`，24.04 用 `noble`，22.04 换成 `jammy`。**
 
 ### 1. 初始化密钥
 
