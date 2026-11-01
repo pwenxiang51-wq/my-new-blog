@@ -1,5 +1,5 @@
 ---
-title: ✨[实战] 打造Polaris 探针Web面板
+title: ✨[实战] 打造 Polaris 探针Web面板
 author: Velox
 pubDatetime: 2026-10-31T20:00:00+08:00
 slug: polaris-probe-panel
@@ -51,7 +51,7 @@ description: 用 Go 标准库做的私有 VPS 监控台，单管理员、探针�
 - 读 **`/proc`**、**`statfs`**、网卡计数，不依赖额外守护进程
 - 公网 **IP** 优先从本机接口地址识别，必要时再走受控回退，**IP** 变了才重新查地理，平时不反复去问第三方
 - **不调用** **`ipify`** / **`ipwho.is`**（地理信息统一由面板查，避免探针出网噪音）
-- 可选 **TCP** 探测目标（延迟 / 丢包可视化），这台 **RN** 机子探的是电信、联通、移动三条到国内的线路
+- 可选 **TCP** 探测目标（延迟 / 丢包可视化），这台 **VPS** 机子探的是电信、联通、移动三条到国内的线路
 
 ### 面板侧（`polaris`）
 
@@ -65,7 +65,7 @@ description: 用 Go 标准库做的私有 VPS 监控台，单管理员、探针�
 
 ---
 
-![UI 展示页](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793466826446.jpg)
+![UI 展示页](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793521231105.jpg)
 
 <div style="display:flex;gap:12px;">
 <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793467451843.jpg" alt="手机总览" style="width:50%;">
@@ -117,7 +117,7 @@ description: 用 Go 标准库做的私有 VPS 监控台，单管理员、探针�
 
 ---
 
-## 装前：先拿到两个东西
+## 一 、装前：先拿到两个东西
 
 后面 `setup-secrets.sh` 问的密钥、Token，全是从下面这两处来的，**先建好再装，不要边装边找**。
 
@@ -137,9 +137,9 @@ description: 用 Go 标准库做的私有 VPS 监控台，单管理员、探针�
 
 ---
 
-## 安装 🚀
+## 二 、安装 🚀 
 
-### 1. 初始化密钥
+### 1. 初始化密钥 
 
 ```bash
 cd /opt
@@ -179,7 +179,7 @@ ARM 机子把 `linux-amd64` 换成 `linux-arm64`。
 
 探针在主机上编，面板在 Docker 里编，探针运行只需要编出来的几 MB 文件。
 
-先把主机上旧 Go 删干净再解压：
+1. 先把主机上旧 Go 删干净再解压：
 
 ```bash
 rm -rf /usr/local/go
@@ -188,7 +188,7 @@ export PATH=$PATH:/usr/local/go/bin
 cd /opt/Polaris
 ```
 
-**编探针，一次粘贴整句，不要在 `-o` 后面断行**：
+2. **编探针，一次粘贴整句，不要在 `-o` 后面断行**：
 
 ```bash
 CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o polaris-agent ./cmd/polaris-agent
@@ -198,19 +198,19 @@ CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o polaris-agent ./cmd/polaris
 ls -lh polaris-agent
 ```
 
-编出来看到几 MB 的文件才算编成，RN 那台是 5.2M，别的架构大小会不一样，不用死卡 5.2M。然后装探针：
+3. 编出来看到几 MB 的文件才算编成，RN 那台是 5.2M，别的架构大小会不一样，不用死卡 5.2M。然后装探针：
 
 ```bash
 sudo bash ./scripts/install-agent.sh
 ```
 
-第一次会停下，让你改环境文件：
+4. 第一次会停下，让你改环境文件：
 
 ```bash
 sudoedit /etc/polaris-agent.env
 ```
 
-把面板上复制的整段探针配置原样粘贴进去，**`服务器地址`**、**`节点 ID`**、**`节点名`**、**`Token`** 全替换，不要只换 **`Token`** 一行。保存退出，再执行一次：
+5. 把面板上复制的整段探针配置原样粘贴进去，**`服务器地址`**、**`节点 ID`**、**`节点名`**、**`Token`** 全替换，不要只换 **`Token`** 一行。保存退出，再执行一次：
 
 ```bash
 sudo bash ./scripts/install-agent.sh
@@ -218,13 +218,13 @@ sudo bash ./scripts/install-agent.sh
 
 **第二次跑之前脚本会查占位词和 Token 长度（面板 Token 是 43 位，合理范围 40-256 位），有占位词就直接停下，不启动；没占位词就启动，看到 active (running)，面板 50 秒内在线**。
 
->登录面板，面板在线就说明装好了，剩下的在面板上自己看。
+>登录面板，面板在线就说明装好了,可以点看板的小铅笔填写 `VPS 详情与套餐信息`。
 
 ---
 
-## 脚本改动后的拉取
+## （附加） 仓库脚本改动后的拉取
 
-仓库脚本、前端改了，不用重装，先拉后编，拉取单独跑一遍：
+**仓库脚本、前端改了，不用重装，先拉后编，拉取单独跑一遍**：
 
 ```bash
 cd /opt/Polaris
@@ -235,15 +235,15 @@ docker compose ps
 
 拉取不会动已建好的密钥文件。编完新镜像、容器起来，改动就生效。
 
-语言切换那类前端改动：切完语言按钮，验证框不会立刻变，按 `F5` 刷新一次，重新生成的验证框才会跟新语言一致。
+>语言切换那类前端改动：切完语言按钮，验证框不会立刻变，按 `F5` 刷新一次，重新生成的验证框才会跟新语言一致。
 
 ---
 
-#### 2. 面板添加探针
+## polaris 面板添加探针
 
 面板不用重装，新机子只装探针，不用跑 `setup-secrets.sh`，不用 `docker compose`。先在新机子上下载 Go、克隆仓库、编译探针，编好后再装探针，安装命令必须在 `/opt/Polaris` 这个目录里跑，当前目录里必须同时有 `polaris-agent` 和 `scripts/install-agent.sh`，在 `/root` 里直接跑会报找不到文件。
 
-下载 Go：
+1. ### 下载 Go：
 
 ```bash
 wget https://go.dev/dl/go1.27.3.linux-amd64.tar.gz -O /tmp/go.tgz
@@ -251,7 +251,7 @@ wget https://go.dev/dl/go1.27.3.linux-amd64.tar.gz -O /tmp/go.tgz
 
 >ARM 机子把 `linux-amd64` 换成 `linux-arm64`。
 
-删旧 Go、解压、加路径、克隆仓库、进目录：
+2. ### 删旧 Go、解压、加路径、克隆仓库、进目录：
 
 ```bash
 rm -rf /usr/local/go
@@ -262,14 +262,14 @@ git clone https://github.com/pwenxiang51-wq/Polaris
 cd /opt/Polaris
 ```
 
-编译探针，一次粘贴整句，`-o` 后不要断行：
+3. ### 编译探针，一次粘贴整句，`-o` 后不要断行：
 
 ```bash
 CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o polaris-agent ./cmd/polaris-agent
 ls -lh polaris-agent
 ```
 
->编出来看到几 MB 的文件才算编成，RN 那台是 5.2M，别的架构大小会不一样，不用死卡 5.2M。然后装探针，第一次会停下，让你改环境文件：
+4. ### 编出来看到几 MB 的文件才算编成，RN 那台是 5.2M，别的架构大小会不一样，不用死卡 5.2M。然后装探针，第一次会停下，让你改环境文件：
 
 ```bash
 sudo bash ./scripts/install-agent.sh
@@ -279,7 +279,7 @@ sudo bash ./scripts/install-agent.sh
 sudoedit /etc/polaris-agent.env
 ```
 
-把面板上复制的整段新探针配置原样粘贴进去，服务器地址、节点 ID、节点名、Token 全替换，不要只换 Token 一行。保存退出，再执行一次：
+5. ### 把面板上复制的整段新探针配置原样粘贴进去，服务器地址、节点 ID、节点名、Token 全替换，不要只换 Token 一行。保存退出，再执行一次：
 
 ```bash
 sudo bash ./scripts/install-agent.sh
