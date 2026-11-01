@@ -132,11 +132,36 @@ description: 用 Go 标准库做的私有 VPS 监控台，单管理员、探针�
 1. 进 `Cloudflare` 控制台，**Application Security → Turnstile → Add widget**。
 2. 域名填面板域名，模式用默认的 `Managed` 就行。
 3. 创建后会给 `Site Key` 和 `Secret Key`，**两个都要保存好**。
-4. 后面 `setup` 问 **Turnstile Secret** 时填两遍，填完回显头 4 位、尾 4 位、总长度，全文不显示。
+4. 后面 `setup` 问 **Turnstile Secret** 时填两遍。
 
 ---
 
 ## 二、安装 🚀
+
+### 0. 先装 Docker 环境
+
+- **面板在 Docker 里跑，新机子先装 Docker，再往下走，不然第 2 步 `docker compose` 会报 `docker not found`。**
+- **Ubuntu 官方源装，不要 snap、不要 podman-docker、不要 `apt install docker.io`，那个是 Ubuntu 自带的旧包。**
+
+```bash
+sudo apt update
+sudo apt install -y ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+- **装完核实，两个都要能出版本：**
+
+```bash
+docker --version
+docker compose version
+```
+
+- **Ubuntu 24.04 源代号用 `noble`，22.04 换成 `jammy`。**
 
 ### 1. 初始化密钥
 
@@ -147,12 +172,38 @@ cd /opt/Polaris
 bash ./scripts/setup-secrets.sh
 ```
 
+### Telegram Token（可选）
+
 **按提示填：面板域名、管理员账号、管理员密码、Turnstile Site Key、Turnstile Secret key、Telegram Token（可选）、Telegram Chat ID、Cloudflare Tunnels Token**。
 
 - **密码至少 `14` 位，两次一样就过。** 只卡长度，不卡复杂度，`14` 个 **`1`** 能过，复杂到 **`UUID`** 那种也能过，想简单就简单设，想复杂就复杂设。
 - **Turnstile Secret、隧道 Token 都填两遍，填完回显头 4 位、尾 4 位、总长度，全文不显示**。
-- **Telegram Token 填完回显长度，Chat ID 只能填数字**。
-- **密钥目录 700，文件 440，Telegram 文件属组脚本直接写成面板进程的 10001，不用手动改**。
+- **Telegram Token 只填一遍，填完回显头 4 位、尾 4 位、总长度，全文不显示，Chat ID 只能填数字。**
+- **密钥格全是隐藏输入：** 管理员密码、Turnstile Secret、隧道 Token、Telegram Token，粘贴后直接回车，Turnstile Secret、隧道 Token、Telegram Token 出回显，密码没有回显。能直接看到的是面板域名、管理员账号、Turnstile Site Key、Chat ID。
+- **Telegram Token 可以跳过，** 直接回车，跳过后提示按文件写 Token 和 Chat ID、改属组、重建面板，面板上通知提醒显示 `Telegram: 未开启`，就是还没加 TG。
+- **后期加、换 TG Bot，不用重跑 setup，在 VPS 终端里，`/opt/Polaris` 里跑：**
+
+删旧 TG，删完面板显示 `Telegram: 未开启`：
+
+```bash
+cd /opt/Polaris
+: > secrets/telegram-bot-token
+: > secrets/telegram-chat-id
+docker compose up -d --force-recreate polaris
+```
+
+补新 TG，补完面板显示 `Telegram: 已开启`：
+
+```bash
+cd /opt/Polaris
+printf '%s\n' '你的 Telegram Token' > secrets/telegram-bot-token
+printf '%s\n' '你的 Chat ID' > secrets/telegram-chat-id
+chown root:10001 secrets/telegram-bot-token secrets/telegram-chat-id
+chmod 440 secrets/telegram-bot-token secrets/telegram-chat-id
+docker compose up -d --force-recreate polaris
+```
+
+ >反馈只显示 `restart` 不够，必须 `force-recreate`。
 
 ### 2. 启动
 
