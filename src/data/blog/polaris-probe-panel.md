@@ -1,5 +1,5 @@
 ---
-title: ✨[实战] Polaris 探针Web面板
+title: ✨[实战] 打造Polaris 探针Web面板
 author: Velox
 pubDatetime: 2026-10-31T20:00:00+08:00
 slug: polaris-probe-panel
@@ -239,29 +239,47 @@ docker compose ps
 
 ---
 
-## 添加新 VPS
+#### 2. 面板添加探针
 
-面板已经装好了就不用重装面板，也不用再跑 `setup-secrets.sh`，新机子只装探针就行，每个节点用自己的 Token，别拿 RN 那个 Token 去复用。
+面板不用重装，新机子只装探针，不用跑 `setup-secrets.sh`，不用 `docker compose`。先在新机子上下载 Go、克隆仓库、编译探针，编好后再装探针，安装命令必须在 `/opt/Polaris` 这个目录里跑，当前目录里必须同时有 `polaris-agent` 和 `scripts/install-agent.sh`，在 `/root` 里直接跑会报找不到文件。
 
-### 1. 面板上先建节点
+下载 Go：
 
-登录面板，新增节点，填显示名、节点 ID、到期日、价格、月流量额度、计入模式，创建后把面板给出的整段探针配置复制下来。
+```bash
+wget https://go.dev/dl/go1.27.3.linux-amd64.tar.gz -O /tmp/go.tgz
+```
 
-### 2. 新机子上装探针
+>ARM 机子把 `linux-amd64` 换成 `linux-arm64`。
 
-新机子按上面“装探针”那节走一遍：下载 Go、删旧 Go、解压、克隆仓库、编译探针，编好后：
+删旧 Go、解压、加路径、克隆仓库、进目录：
+
+```bash
+rm -rf /usr/local/go
+tar -C /usr/local -xzf /tmp/go.tgz
+export PATH=$PATH:/usr/local/go/bin
+cd /opt
+git clone https://github.com/pwenxiang51-wq/Polaris
+cd /opt/Polaris
+```
+
+编译探针，一次粘贴整句，`-o` 后不要断行：
+
+```bash
+CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o polaris-agent ./cmd/polaris-agent
+ls -lh polaris-agent
+```
+
+>编出来看到几 MB 的文件才算编成，RN 那台是 5.2M，别的架构大小会不一样，不用死卡 5.2M。然后装探针，第一次会停下，让你改环境文件：
 
 ```bash
 sudo bash ./scripts/install-agent.sh
 ```
 
-第一次会停下，让你改环境文件：
-
 ```bash
 sudoedit /etc/polaris-agent.env
 ```
 
-把面板上复制的整段新节点配置原样粘贴进去，服务器地址、节点 ID、节点名、Token 全替换，不要只换 Token 一行。保存退出，再执行一次：
+把面板上复制的整段新探针配置原样粘贴进去，服务器地址、节点 ID、节点名、Token 全替换，不要只换 Token 一行。保存退出，再执行一次：
 
 ```bash
 sudo bash ./scripts/install-agent.sh
@@ -269,7 +287,7 @@ sudo bash ./scripts/install-agent.sh
 
 第二次跑之前脚本会查占位词和 Token 长度，有占位词就直接停下，不启动；没占位词就启动，看到 `active (running)`，面板 50 秒内就能看到新节点在线。
 
-如果不想在新机子上装 Go，也可以把编好的探针文件直接拷过去，再跑 `install-agent.sh`，效果一样，新机子上就不用装 Go 了。
+>如果不想在新机子上装 Go，也可以把编好的探针文件直接拷过去，但光拷探针文件不够，还要把仓库克隆过来、把探针文件放到 `/opt/Polaris` 目录里，再进这个目录跑 `install-agent.sh`，效果一样，新机子上就不用装 Go 了。
 
 ---
 
