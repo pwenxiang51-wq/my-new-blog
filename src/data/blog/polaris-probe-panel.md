@@ -9,7 +9,7 @@ tags:
   - VPS
   - Polaris
   - Docker
-  - Cloudflare
+  - Cloudflare 
   - Telegram
 description: 用 Go 标准库做的私有 VPS 监控台，单管理员、探针上报、只走 Cloudflare Tunnel。本文先写装前必须拿到的两个东西，再写安装、脚本改动后的拉取、卸载。
 ---
