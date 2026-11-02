@@ -1,5 +1,5 @@
 ---
-title: 🚀[实战] HyperOS 2.0 终极脱敏：免 Root 物理封杀小米内置反诈与遥测
+title: 🚀[实战] HyperOS 2.0 / 3.0 终极脱敏：免 Root 物理封杀小米内置反诈与遥测
 author: Velox
 pubDatetime: 2026-10-20T18:00:00+08:00
 slug: hyperos-telemetry-kill-switch
@@ -10,7 +10,7 @@ tags:
   - 脱敏
   - HyperOS
   - ADB实战
-description: 针对 MTK 平台设备（如 Redmi K50）防刷机变砖的防弹装甲级优化。无需 Root，利用 ADB 绕过 HyperOS 底层白名单，物理卸载系统级安全守护与遥测组件。
+description: 针对 MTK 平台设备（如 Redmi K50）防刷机变砖的防弹装甲级优化。无需 Root，全面兼容 HyperOS 2.0 / 3.0，利用 ADB 绕过 HyperOS 底层白名单，物理卸载系统级安全守护与遥测组件。
 ---
 
 > ⚠️ **极客免责声明**：本方案仅为个人实战记录与网络架构防侧漏技术探讨。系统级“脱敏”存在一定未知风险（如导致依赖该组件的部分系统自带功能闪退）。操作不当导致的数据丢失、系统死机或变砖，本人概不负责。动手前请确保你清楚自己在敲什么代码！
@@ -25,7 +25,7 @@ description: 针对 MTK 平台设备（如 Redmi K50）防刷机变砖的防弹�
 
 在动手前，先确认以下几个核心边界条件：
 
-1. **适用机型**：理论兼容所有运行 MIUI 14 / HyperOS 的小米与 Redmi 全系机型。本文之所以特别强调 **MTK（联发科）平台（如 Redmi K50）**，是因为联发科机型刷机变砖后极难自救（通常需售后 9008 深度授权），所以这套“不刷机”的方案对其最具实战保命价值。高通骁龙机型同样完全适用。
+1. **适用机型**：理论兼容所有运行 MIUI 14 / HyperOS 2.0 及最新 HyperOS 3.0 的小米与 Redmi 全系机型。本文之所以特别强调 **MTK（联发科）平台（如 Redmi K50）**，是因为联发科机型刷机变砖后极难自救（通常需售后 9008 深度授权），所以这套“不刷机”的方案对其最具实战保命价值。高通骁龙机型同样完全适用。
 2. **OTA 系统更新的影响**：**系统 OTA 升级（特别是跨大版本更新）极大概率会把这些被卸载的系统组件“复活”**。每次系统更新完，请重新拿数据线或连上无线调试，把本文的 ADB 拔管指令再跑一次。
 3. **实际效果**：本方案能显著降低小米后台主动上报与特征扫描，但并非 100% 绝对隔离（系统可能缓存数据、存在极少数硬编码通道）。结合高质量代理节点使用时效果最佳。
 
@@ -72,7 +72,7 @@ description: 针对 MTK 平台设备（如 Redmi K50）防刷机变砖的防弹�
 
 > 说明：开启「DNS 路由」后，国内域名会使用直连 DNS，国外域名使用远程 DNS。国内 App **不会**因此走代理。
 
-#### 3.3 路由规则（小米黑洞）
+#### 3.3 路由规则（小米及反诈遥测黑洞）
 在「路由」页面添加自定义规则，动作选择 **屏蔽**，并**拖到规则列表最顶部**：
 
 ```text
@@ -89,9 +89,15 @@ domain:api.ad.xiaomi.com
 domain:sdkconfig.ad.xiaomi.com
 domain:tracking.intl.miui.com
 domain:data.mistat.intl.xiaomi.com
+domain:fraud-detection.engine.miui.com
+domain:detection-aigc.engine.miui.com
+domain:virus-engine.sec.miui.com
+domain:notify.sec.miui.com
+domain:dm.wo.com.cn
+domain_suffix:loc.map.baidu.com
 ```
 
-> 以上域名均为小米系统遥测、安全扫描、广告与统计分析相关接口。加入屏蔽后，即使系统组件尝试上报，数据包也会在 NekoBox 虚拟网卡层被直接丢弃。
+> 以上域名均为小米系统遥测、安全扫描、广告、统计分析以及近期逆向曝光的反诈与运营商（联通 DM）上报接口。加入屏蔽后，即使系统组件尝试上报，数据包也会在 NekoBox 虚拟网卡层被直接丢弃。 （注：`dm.wo.com.cn` 纯属设备管理与信息采集接口，将其列入黑洞绝不影响联通 SIM 卡或宽带的正常上网、短信及通话功能。）
 
 同时建议保留以下规则：
 - **屏蔽 WebRTC（stun / turn / rtc）**
@@ -126,31 +132,39 @@ HyperOS 2.0 底层对部分核心包做了保护，常规的 `pm disable-user` �
    ```
 
 ### 2. 降维打击指令集
-> ⚠️ **重要提示**：通道打通后，请**务必逐行复制指令、逐条回车执行**（切勿整段一起粘贴）！
+> ⚠️ **重要提示**：通道打通后，请**务必逐行复制指令、逐条回车执行**（切勿整段复制中文一起粘贴）！
 
 **冷冻垃圾清理（允许 disable）：**
 ```cmd
-:: 停用猎豹内核垃圾清理组件（带广告与云端扫描）
+:: 1.停用猎豹内核垃圾清理组件（带广告与云端扫描）
 adb shell pm disable-user --user 0 com.miui.cleanmaster
 ```
 
-**物理卸载三大核心组件：**
+**物理卸载核心监控与遥测组件：**
+
 ```cmd
-:: 1. 物理卸载：安装扫描与云端特征反诈引擎
+:: 2. 物理卸载：安装扫描与云端特征反诈引擎（防 3 秒录屏回传）
 adb shell pm uninstall -k --user 0 com.miui.guardprovider
 
-:: 2. 物理卸载：系统行为埋点与大数据统计分析
+:: 3. 物理卸载：系统行为埋点与大数据统计分析
 adb shell pm uninstall -k --user 0 com.miui.analytics
 
-:: 3. 物理卸载：底层常驻遥测守护引擎
+:: 4. 物理卸载：底层常驻遥测守护引擎
 adb shell pm uninstall -k --user 0 com.miui.daemon
+
+:: 5. 物理卸载：运营商/渠道设备管理与应用列表采集探针（内鬼组件）
+adb shell pm uninstall -k --user 0 com.mobiletools.systemhelper
+
+:: 6. 物理卸载：高通/底层系统辅助进程（天玑机型通常没有，若提示 Failure，直接跳过即可）
+adb shell pm uninstall -k --user 0 com.qualcomm.qti.services.systemhelper
 ```
 
-当控制台回显 **`Success`** 或 **`new state: disabled-user`** 时，代表操作成功。
+⚠️ **回显说明**：当控制台回显 **`new state: disabled-user`** 或 **`Success`** 时代表操作成功；若回显 **`Failure [not installed for 0]`**，说明该组件此前已被移除或当前机型原生未内置，同样代表无需处理，直接跳过即可。
 
 ![脱敏成功回显](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1792658622097.jpg)
 ![脱敏成功回显](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1792591718909.jpg)
-
+![脱敏成功回显](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793643550131.jpg)
+![脱敏成功回显](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793643656606.jpg)
 
 ---
 
@@ -169,12 +183,12 @@ adb reboot
 1. 进入 NekoBox **「设置」** -> **「日志级别」**，临时将其从 `none` 改为 `Info`。
 2. 返回 NekoBox **「日志」** 页面，正常打开你常用的海内外 App（如海外的 TikTok、Instagram、Facebook；国内的抖音、美团、小红书等），观察滚动的内核实时数据流：
    * **分流连通性精准验证**：日志清晰显示，TikTok、IG、FB 等海外请求精准命中带有 **`[proxy]`**（或使用的 `tuic` 等协议）标识的出站代理；而抖音、美团、小红书等国内 App 全部精准命中带有 **`[bypass]`** 或 **`[direct]`** 标识的直连通道。
-   * **源头物理拔除验证（最核心）**：确认日志中**完全没有任何**关于 `sec.miui.com`、`tracking.miui.com`、`data.mistat.xiaomi.com` 等遥测域名的请求记录。**你会发现连 `[reject]`（拦截）都不会出现！** 这证明 ADB 底层拔管极其彻底，发包源头已死，根本无包可发。
+   * **源头物理拔除验证（最核心）**：确认日志中**完全没有任何**关于 `sec.miui.com`、`tracking.miui.com`、`dm.wo.com.cn` 等遥测域名的请求记录。**你会发现连 `[reject]`（拦截）都不会出现！** 这证明 ADB 底层拔管极其彻底，发包源头已死，根本无包可发。
 3. **关键性能复原**：验证无误后，务必返回设置将 **「日志级别」改回 `none` 并清空日志**！避免内核持续进行高频闪存 I/O 读写，引起不必要的发热、耗电和网络损耗。
 
 ### 3. 彻底封堵调试通道
 前往手机 **「设置」->「更多设置」->「开发者选项」**：
-* 彻底关闭 **无线调试** 、与 **开发者选项** 总开关。
+- 彻底关闭 **无线调试** 、与 **开发者选项** 总开关。
 > **运维安全准则**：日常使用切勿常驻开放调试通道，关闭后不仅能封堵来自物理接口的意外渗透，还能规避各类银行、政企金融类 App 的运行环境安全报警。
 
 ---
@@ -192,8 +206,8 @@ adb reboot
 **解法**：全面换用 **Gboard（Google 键盘）**，或在防火墙层直接切断输入法的联网权限。
 
 ### 3. 警惕“蜜罐”节点：免费的最致命
-网络上充斥着大量所谓的“免费翻墙 VPN”、“一键加速器”（如老王 VPN、蚂蚁 VPN 等）。  
-这些工具大概率会记录访问日志，甚至主动上报。记住铁律：**网络代理领域，来路不明的“免费”往往标好了暗中的代价**。务必使用自己搭建的节点（VLESS-Reality / Hysteria2 / TUIC 等），或背景干净、口碑可靠的付费专线，绝对不要碰来路不明的一键客户端。
+网络上充斥着大量所谓的“免费翻墙 VPN”、“一键加速器”（如老王 VPN、蚂蚁 VPN、免费梯子、快喵加速器、佛跳墙 VPN 等）。  
+这些工具大概率会记录访问日志，甚至主动上报。记住铁律：**网络代理领域，来路不明的“免费”往往标好了暗中的代价**。务必使用自己搭建的节点（VLESS-Reality / Hysteria2 / TUIC 等现代代理协议），或背景干净、口碑可靠的付费专线，绝对不要碰来路不明的一键客户端。
 
 ### 4. 蜂窝链路脱敏：海外流量卡 / 漫游卡
 只要插上国内三大运营商的实体 SIM 卡，基站就会强制将你的 **IMEI（设备串号）与身份证实名绑定的 IMSI** 深度关联，甚至能通过基站漫游和短信下发定位你的物理轨迹。
@@ -218,9 +232,14 @@ adb shell cmd package install-existing com.miui.analytics
 
 # 4. 恢复系统底层常驻遥测引擎
 adb shell cmd package install-existing com.miui.daemon
+
+# 5. 恢复运营商/渠道残留监控探针
+adb shell cmd package install-existing com.mobiletools.systemhelper
+
+# 6. 恢复高通系统辅助进程
+adb shell cmd package install-existing com.qualcomm.qti.services.systemhelper
 ```
 
 ---
 
 > 本文首发于 [Velox 的极客空间](https://222382.xyz)。
-
