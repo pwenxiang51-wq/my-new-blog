@@ -219,10 +219,24 @@ adb reboot
    验证无误后，**务必返回设置将「日志级别」改回 `none`（或 `Warn`）并清空日志**！避免内核持续进行高频闪存 I/O 读写与 CPU 唤醒，引起不必要的发热、耗电和内存损耗[cite: 17]。
 
 <div style="display: flex; gap: 8px; justify-content: space-between; align-items: flex-start; margin: 16px 0;">
-  <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793697458652.jpg" alt="Termux 原生探测阻断" style="width: 32%; border-radius: 4px;" />
-  <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696495272.jpg" alt="联通探针丢弃与海外分流" style="width: 32%; border-radius: 4px;" />
-  <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696546178.jpg" alt="MIUI 反诈处决与常规直连" style="width: 32%; border-radius: 4px;" />
+  <figure style="width: 32%; margin: 0;">
+    <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793697458652.jpg" alt="Termux 原生探测阻断" style="width: 100%; border-radius: 4px;" />
+    <figcaption style="margin-top: 6px; text-align: center; font-size: 14px;">Termux 原生探测阻断</figcaption>
+    <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.6; color: #888; text-align: left;">在 Termux 里直接 curl 联通探针和小米追踪域名，两个都报无法解析，说明请求在 DNS 那一步就被掐断了，根本没出手机。</p>
+  </figure>
+  <figure style="width: 32%; margin: 0;">
+    <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696495272.jpg" alt="联通探针丢弃与海外分流" style="width: 100%; border-radius: 4px;" />
+    <figcaption style="margin-top: 6px; text-align: center; font-size: 14px;">联通探针丢弃与海外分流</figcaption>
+    <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.6; color: #888; text-align: left;">一张图见分晓，上方联通探针刚抬头就被 DNS 黑洞静默丢弃，下方 Google 核心流量依然走 TUIC 节点出海，拦截和代理互不冲突。</p>
+  </figure>
+  <figure style="width: 32%; margin: 0;">
+    <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696546178.jpg" alt="MIUI 反诈处决与常规直连" style="width: 100%; border-radius: 4px;" />
+    <figcaption style="margin-top: 6px; text-align: center; font-size: 14px;">MIUI 反诈处决与常规直连</figcaption>
+    <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.6; color: #888; text-align: left;">这张图证明的是后半句，屏幕时间这类常规进程命中国内规则走直连，正常服务没被黑洞误杀。</p>
+  </figure>
 </div>
+
+> **这三张图能证明什么，不能证明什么：** 分流是实的，195 秒日志里 proxy 37 条、bypass 24 条，Google Play、Telegram 走代理，国内 IP 走直连。17 条规则配置全对，但实弹命中的是 tracking 18 次、dm.wo 2 次、flash 1 次、api.ad 1 次、sdkconfig 1 次，外加 sec.miui.com 后缀下的几个子域名，其余那些在窗口里根本没来查询，是源头已死、规则待命，不是 17 条都当场拦住了。六条卸载也不能单凭日志逐条证明，日志里没有包名，整体效果对得上，逐条证据在第二阶段的 ADB 回显里。另外 flash 那两行不在上面三张截图里，在新日志 0066 行，图 3 只能证明直连那部分。
 
 ### 3. 彻底封堵调试通道
 前往手机 **「设置」->「更多设置」->「开发者选项」**：
