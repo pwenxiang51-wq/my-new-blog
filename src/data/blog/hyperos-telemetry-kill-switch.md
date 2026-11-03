@@ -94,6 +94,36 @@ notify.sec.miui.com
 dm.wo.com.cn
 loc.map.baidu.com
 ```
+
+这 17 条按作用分 5 组，免得以后翻回来懵。先说清一点：这 17 条在 NekoBox 里会出现两次，一次是 DNS 黑洞，一次是路由拦截，同一批，双保险，不是 34 条不同的规则。
+
+**1. 系统遥测和统计，6 条**
+- `tracking.miui.com`：小米追踪上报
+- `tracking.intl.miui.com`：国际版追踪上报
+- `data.mistat.xiaomi.com`：统计数据上报
+- `mistat.xiaomi.com`：统计总后缀，上面没列出的 mistat 子域名也归它管
+- `abtest.mistat.xiaomi.com`：A/B 测试统计
+- `data.mistat.intl.xiaomi.com`：国际版统计数据上报
+
+**2. 安全扫描和反诈，6 条**
+- `sec.miui.com`：安全中心总入口
+- `flash.sec.miui.com`：安全中心鉴权接口
+- `fraud-detection.engine.miui.com`：反诈检测引擎
+- `detection-aigc.engine.miui.com`：AIGC 内容检测引擎
+- `virus-engine.sec.miui.com`：病毒扫描引擎
+- `notify.sec.miui.com`：安全通知推送
+
+**3. 广告，2 条**
+- `api.ad.xiaomi.com`：广告接口
+- `sdkconfig.ad.xiaomi.com`：广告 SDK 配置下发
+
+**4. 云服务，1 条**
+- `cloudservice.miui.com`：小米云服务，详见下面注，拦了会断云同步。
+
+**5. 运营商和第三方定位，2 条，不是小米的**
+- `dm.wo.com.cn`：联通设备管理探针，详见下面注，拦了不影响联通卡上网、短信、通话。
+- `loc.map.baidu.com`：百度定位接口，拦了百度系应用的定位可能受影响，按需保留。
+
 > “以上域名均为小米系统遥测、安全扫描、广告、统计分析以及近期逆向曝光的反诈与运营商（联通 DM）上报接口。加入屏蔽后，即使系统组件尝试上报，数据包也会在 NekoBox 虚拟网卡层被直接丢弃。
 
 > （注：`cloudservice.miui.com` 会连带拦截小米云同步如相册/便签，需保留云服务者请剔除此行；`dm.wo.com.cn` 纯属设备管理与信息采集探针，将其列入黑洞绝不影响联通 SIM 卡或宽带的正常上网、短信及通话功能。）”
