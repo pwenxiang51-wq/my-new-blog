@@ -147,6 +147,8 @@ HyperOS 2.0 底层对部分核心包做了保护，常规的 `pm disable-user` �
 ### 1. 建立调试通信通道
 1. 电脑端下载并解压 Google 官方的 **SDK Platform-Tools**（[点击直达官方下载](https://dl.google.com/android/repository/platform-tools-latest-windows.zip)）。
 
+> 💡 **极客底牌：ADB 的血统**：ADB 是 Google 写进 Android 底层的官方调试桥，HyperOS 包装得再花哨，底层还是 Linux 内核 + AOSP。只要底子是 Android，这根桥就还在，这就是我们能用它对系统组件动手的原因——但它不是万能的，受保护的包还是得按博客里那套办法来。
+
 ![ADB工具目录](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1792591943884.jpg)
 
 2. 手机端开启「开发者选项」→「无线调试」，点击「使用配对码配对设备」。
