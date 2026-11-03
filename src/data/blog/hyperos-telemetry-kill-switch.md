@@ -76,25 +76,23 @@ description: 针对 MTK 平台设备（如 Redmi K50）防刷机变砖的防弹�
 在「路由」页面添加自定义规则，动作选择 **屏蔽**，并**拖到规则列表最顶部**：
 
 ```text
-domain:sec.miui.com
-domain:flash.sec.miui.com
-domain:tracking.miui.com
-domain:data.mistat.xiaomi.com
-domain:cloudservice.miui.com
-domain_suffix:mistat.xiaomi.com
-domain_suffix:tracking.miui.com
-domain_suffix:sec.miui.com
-domain:abtest.mistat.xiaomi.com
-domain:api.ad.xiaomi.com
-domain:sdkconfig.ad.xiaomi.com
-domain:tracking.intl.miui.com
-domain:data.mistat.intl.xiaomi.com
-domain:fraud-detection.engine.miui.com
-domain:detection-aigc.engine.miui.com
-domain:virus-engine.sec.miui.com
-domain:notify.sec.miui.com
-domain:dm.wo.com.cn
-domain_suffix:loc.map.baidu.com
+sec.miui.com
+flash.sec.miui.com
+tracking.miui.com
+data.mistat.xiaomi.com
+cloudservice.miui.com
+mistat.xiaomi.com
+abtest.mistat.xiaomi.com
+api.ad.xiaomi.com
+sdkconfig.ad.xiaomi.com
+tracking.intl.miui.com
+data.mistat.intl.xiaomi.com
+fraud-detection.engine.miui.com
+detection-aigc.engine.miui.com
+virus-engine.sec.miui.com
+notify.sec.miui.com
+dm.wo.com.cn
+loc.map.baidu.com
 ```
 > “以上域名均为小米系统遥测、安全扫描、广告、统计分析以及近期逆向曝光的反诈与运营商（联通 DM）上报接口。加入屏蔽后，即使系统组件尝试上报，数据包也会在 NekoBox 虚拟网卡层被直接丢弃。
 
@@ -179,12 +177,22 @@ adb reboot
 ```
 
 ### 2. 最终脱敏与底层断根验收（关键）
+
 手机重启进入系统并重新开启 NekoBox 代理后，执行终极效果验收：
-1. 进入 NekoBox **「设置」** -> **「日志级别」**，临时将其从 `none` 改为 `Info`。
-2. 返回 NekoBox **「日志」** 页面，正常打开你常用的海内外 App（如海外的 TikTok、Instagram、Facebook；国内的抖音、美团、小红书等），观察滚动的内核实时数据流：
-   * **分流连通性精准验证**：日志清晰显示，TikTok、IG、FB 等海外请求精准命中带有 **`[proxy]`**（或使用的 `tuic` 等协议）标识的出站代理；而抖音、美团、小红书等国内 App 全部精准命中带有 **`[bypass]`** 或 **`[direct]`** 标识的直连通道。
-   * **源头物理拔除验证（最核心）**：确认日志中**完全没有任何**关于 `sec.miui.com`、`tracking.miui.com`、`dm.wo.com.cn` 等遥测域名的请求记录。**你会发现连 `[reject]`（拦截）都不会出现！** 这证明 ADB 底层拔管极其彻底，发包源头已死，根本无包可发。
-3. **关键性能复原**：验证无误后，务必返回设置将 **「日志级别」改回 `none` 并清空日志**！避免内核持续进行高频闪存 I/O 读写，引起不必要的发热、耗电和网络损耗。
+
+1. **开启内核审计追踪**：
+   进入 NekoBox **「设置」** -> **「日志级别」**，临时将其从 `Info` 改为 `Debug`，并重启代理核心[cite: 12]。
+2. **前后端双向验证闭环**：
+   * **主动强攻校验**：在 Termux 终端中执行 `curl -Iv http://dm.wo.com.cn` 与 `curl -Iv http://tracking.miui.com`，系统底层因 DNS 被黑洞劫持直接抛出 `Could not resolve host`，请求在网卡阶段被斩断[cite: 16]。
+   * **分流与黑洞协同**：观察 NekoBox 实时内核日志，联通反诈探针与安全中心鉴权接口（`flash.sec.miui.com`）精准命中黑洞规则下发 `predefined(NOERROR)` 假空响应；在此期间，Google 核心服务走 TUIC 节点出海，MIUI 屏幕时间等系统正常服务命中 `geosite:cn` 走本地 Direct 直连，互不干扰[cite: 13, 14]。
+3. **关键性能复原**：
+   验证无误后，**务必返回设置将「日志级别」改回 `none`（或 `Warn`）并清空日志**！避免内核持续进行高频闪存 I/O 读写与 CPU 唤醒，引起不必要的发热、耗电和内存损耗[cite: 17]。
+
+<div style="display: flex; gap: 8px; justify-content: space-between; align-items: flex-start; margin: 16px 0;">
+  <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696378145.jpg" alt="Termux 原生探测阻断" style="width: 32%; border-radius: 4px;" />
+  <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696495272.jpg" alt="联通探针丢弃与海外分流" style="width: 32%; border-radius: 4px;" />
+  <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696546178.jpg" alt="MIUI 反诈处决与常规直连" style="width: 32%; border-radius: 4px;" />
+</div>
 
 ### 3. 彻底封堵调试通道
 前往手机 **「设置」->「更多设置」->「开发者选项」**：
