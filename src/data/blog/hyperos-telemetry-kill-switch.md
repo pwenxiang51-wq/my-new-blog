@@ -222,17 +222,17 @@ adb reboot
   <figure style="width: 32%; margin: 0;">
     <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793697458652.jpg" alt="Termux 原生探测阻断" style="width: 100%; border-radius: 4px;" />
     <figcaption style="margin-top: 6px; text-align: center; font-size: 14px;">Termux 原生探测阻断</figcaption>
-    <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.6; color: #888; text-align: left;">在 Termux 里直接 curl 联通探针和小米追踪域名，两个都报无法解析，说明请求在 DNS 那一步就被掐断了，根本没出手机。</p>
+    <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.6; color: #555; text-align: left;">在 Termux 里直接 curl 联通探针和小米追踪域名，两个都报无法解析，说明请求在 DNS 那一步就被掐断了，根本没出手机。</p>
   </figure>
   <figure style="width: 32%; margin: 0;">
     <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696495272.jpg" alt="联通探针丢弃与海外分流" style="width: 100%; border-radius: 4px;" />
     <figcaption style="margin-top: 6px; text-align: center; font-size: 14px;">联通探针丢弃与海外分流</figcaption>
-    <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.6; color: #888; text-align: left;">一张图见分晓，上方联通探针刚抬头就被 DNS 黑洞静默丢弃，下方 Google 核心流量依然走 TUIC 节点出海，拦截和代理互不冲突。</p>
+    <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.6; color: #555; text-align: left;">一张图见分晓，上方联通探针刚抬头就被 DNS 黑洞静默丢弃，下方 Google 核心流量依然走 TUIC 节点出海，拦截和代理互不冲突。</p>
   </figure>
   <figure style="width: 32%; margin: 0;">
     <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696546178.jpg" alt="MIUI 反诈处决与常规直连" style="width: 100%; border-radius: 4px;" />
     <figcaption style="margin-top: 6px; text-align: center; font-size: 14px;">MIUI 反诈处决与常规直连</figcaption>
-    <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.6; color: #888; text-align: left;">这张图证明的是后半句，屏幕时间这类常规进程命中国内规则走直连，正常服务没被黑洞误杀。</p>
+    <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.6; color: #555; text-align: left;">这张图证明的是后半句，屏幕时间这类常规进程命中国内规则走直连，正常服务没被黑洞误杀。</p>
   </figure>
 </div>
 
