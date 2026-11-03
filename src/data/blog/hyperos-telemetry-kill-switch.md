@@ -189,7 +189,7 @@ adb reboot
    验证无误后，**务必返回设置将「日志级别」改回 `none`（或 `Warn`）并清空日志**！避免内核持续进行高频闪存 I/O 读写与 CPU 唤醒，引起不必要的发热、耗电和内存损耗[cite: 17]。
 
 <div style="display: flex; gap: 8px; justify-content: space-between; align-items: flex-start; margin: 16px 0;">
-  <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696378145.jpg" alt="Termux 原生探测阻断" style="width: 32%; border-radius: 4px;" />
+  <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793697458652.jpg" alt="Termux 原生探测阻断" style="width: 32%; border-radius: 4px;" />
   <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696495272.jpg" alt="联通探针丢弃与海外分流" style="width: 32%; border-radius: 4px;" />
   <img src="https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1793696546178.jpg" alt="MIUI 反诈处决与常规直连" style="width: 32%; border-radius: 4px;" />
 </div>
