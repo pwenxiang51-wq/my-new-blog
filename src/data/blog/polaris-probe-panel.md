@@ -266,12 +266,7 @@ CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o polaris-agent ./cmd/polaris
 ls -lh polaris-agent
 ```
 
-4. 编出来看到几 MB 的文件才算编成，别的架构大小会不一样，不用死卡 5.2M。然后装探针，先进目录再看一眼，确认 `polaris-agent`、`scripts/install-agent.sh`、`deploy/systemd/polaris-agent.service` 都在，再跑安装命令，在 `/root` 里直接跑会报找不到文件：
-
-```bash
-cd /opt/Polaris
-ls
-```
+4. 编出来看到几 MB 的文件才算编成，别的架构大小会不一样，不用死卡 5.2M。然后装探针：
 
 ```bash
 sudo bash ./scripts/install-agent.sh
@@ -290,14 +285,6 @@ sudo bash ./scripts/install-agent.sh
 ```
 
 **第二次跑之前脚本会查占位词和 Token 长度（面板 Token 是 43 位，合理范围 40-256 位），有占位词就直接停下，不启动；没占位词就启动，看到 active (running)，面板 50 秒内在线**。
-
-**注意：如果探针服务已经在跑（比如面板里删了重建、换了新 Token），再跑一次安装脚本不会重启它，`enable --now` 只在没跑的时候启动。改完环境文件后必须手动重启一次，不然探针还用旧 Token 上报，面板会一直报 401、离线：**
-
-```bash
-systemctl restart polaris-agent.service
-```
-
-**重启后 15-30 秒，面板 50 秒内在线。第一次装就不用这句，服务本来就没跑，安装脚本会自己启动。**
 
 > 登录面板，面板在线就说明装好了,可以点看板的小铅笔填写 `VPS 详情与套餐信息`。
 
