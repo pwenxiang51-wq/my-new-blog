@@ -395,7 +395,7 @@ ls
 systemctl restart polaris-agent.service
 ```
 
-重启后 15-30 秒，面板 50 秒内在线。删了重建的那条，11 月流量从 0 开始重新算，历史曲线丢了，旧 Token 作废。
+重启后 15-30 秒，面板 50 秒内在线。
 
 ---
 
