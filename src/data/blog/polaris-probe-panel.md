@@ -290,6 +290,25 @@ sudo bash ./scripts/install-agent.sh
 
 > 如果不想在新加的 VPS 上装 Go，也可以把编好的探针文件直接拷过去，但光拷探针文件不够，还要把仓库克隆过来、把探针文件放到 `/opt/Polaris` 目录里，再进这个目录跑 `install-agent.sh`，效果一样，新加的 VPS 上就不用装 Go 了。
 
+---
+
+## 三、拉取
+
+**仓库脚本、前端改了，不用重装，先拉后编，拉取单独跑一遍**：
+
+```bash
+cd /opt/Polaris
+git pull origin main
+docker compose up -d --build
+docker compose ps
+```
+
+拉取不会动已建好的密钥文件。编完新镜像、容器起来，改动就生效。
+
+> 语言切换那类前端改动：切完语言按钮，验证框不会立刻变，按 `F5` 刷新一次，重新生成的验证框才会跟新语言一致。
+
+---
+
 ### 误删 VPS 看板后重新添加
 
 面板里把一台 VPS 的条目删了，探针还在机器上跑，但旧 Token 已经作废了，面板会一直离线、报 401。按下面这几步重新加回来，不用重装探针：
@@ -322,23 +341,6 @@ systemctl restart polaris-agent.service
 ```
 
 重启后 15-30 秒，面板 50 秒内在线。删了重建的那条，11 月流量从 0 开始重新算，历史曲线丢了，旧 Token 作废。
-
----
-
-## 三、拉取
-
-**仓库脚本、前端改了，不用重装，先拉后编，拉取单独跑一遍**：
-
-```bash
-cd /opt/Polaris
-git pull origin main
-docker compose up -d --build
-docker compose ps
-```
-
-拉取不会动已建好的密钥文件。编完新镜像、容器起来，改动就生效。
-
-> 语言切换那类前端改动：切完语言按钮，验证框不会立刻变，按 `F5` 刷新一次，重新生成的验证框才会跟新语言一致。
 
 ---
 
