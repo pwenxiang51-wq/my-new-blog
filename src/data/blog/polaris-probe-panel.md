@@ -290,6 +290,39 @@ sudo bash ./scripts/install-agent.sh
 
 > 如果不想在新加的 VPS 上装 Go，也可以把编好的探针文件直接拷过去，但光拷探针文件不够，还要把仓库克隆过来、把探针文件放到 `/opt/Polaris` 目录里，再进这个目录跑 `install-agent.sh`，效果一样，新加的 VPS 上就不用装 Go 了。
 
+### 误删 VPS 看板后重新添加
+
+面板里把一台 VPS 的条目删了，探针还在机器上跑，但旧 Token 已经作废了，面板会一直离线、报 401。按下面这几步重新加回来，不用重装探针：
+
+1. 面板里先删掉那条旧的，再新建一条，同名、同额度、同计入模式、同到期日，拿到新 Token，把整段探针配置复制下来。
+
+2. 到那台 VPS 的终端里，改环境文件，把整段配置原样粘贴进去，**服务器地址**、**节点 ID**、**节点名**、**Token** 全替换，不要只换 **Token** 一行：
+
+```bash
+sudoedit /etc/polaris-agent.env
+```
+
+3. 保存退出，再跑一次安装脚本：
+
+```bash
+sudo bash ./scripts/install-agent.sh
+```
+
+如果报找不到文件，是你站错目录了，安装脚本在 `/opt/Polaris` 里，不在 `/root` 里，先进目录再看一眼，确认 `polaris-agent`、`scripts/install-agent.sh`、`deploy/systemd/polaris-agent.service` 都在，再跑安装脚本：
+
+```bash
+cd /opt/Polaris
+ls
+```
+
+4. 安装脚本的 `enable --now` 只在服务没跑的时候启动，服务已经在跑了，它不会重启，探针还用旧 Token 上报，必须手动重启一次：
+
+```bash
+systemctl restart polaris-agent.service
+```
+
+重启后 15-30 秒，面板 50 秒内在线。删了重建的那条，11 月流量从 0 开始重新算，历史曲线丢了，旧 Token 作废。
+
 ---
 
 ## 三、拉取
