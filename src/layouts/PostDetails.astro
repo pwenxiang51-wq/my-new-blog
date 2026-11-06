@@ -127,20 +127,29 @@ const nextPost =
     <ShareLinks />
 
     <hr class="my-6 border-dashed" />
-<script src="https://giscus.app/client.js"
-        data-repo="pwenxiang51-wq/my-new-blog"
-        data-repo-id="R_kgDOQ7j0gA"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOQ7j0gM4C1E7e"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
+<div class="giscus"></div>
+<script is:inline data-astro-rerun>
+  (function () {
+    var container = document.querySelector(".giscus");
+    if (!container) return;
+    container.innerHTML = "";
+    var s = document.createElement("script");
+    s.src = "https://giscus.app/client.js";
+    s.setAttribute("data-repo", "pwenxiang51-wq/my-new-blog");
+    s.setAttribute("data-repo-id", "R_kgDOQ7j0gA");
+    s.setAttribute("data-category", "Announcements");
+    s.setAttribute("data-category-id", "DIC_kwDOQ7j0gM4C1E7e");
+    s.setAttribute("data-mapping", "pathname");
+    s.setAttribute("data-strict", "0");
+    s.setAttribute("data-reactions-enabled", "1");
+    s.setAttribute("data-emit-metadata", "0");
+    s.setAttribute("data-input-position", "bottom");
+    s.setAttribute("data-theme", "preferred_color_scheme");
+    s.setAttribute("data-lang", "zh-CN");
+    s.setAttribute("crossorigin", "anonymous");
+    s.async = true;
+    container.appendChild(s);
+  })();
 </script>
 
     <!-- Previous/Next Post Buttons -->
