@@ -199,6 +199,34 @@ adb shell pm uninstall -k --user 0 com.sohu.inputmethod.sogou.xiaomi
 
 ---
 
+## 六、想彻底不升级：卸载系统更新器（可选）
+
+**这条不算在前面 6 条里，是单独的可选项，只给真不想升级的人。**
+
+**这是干什么的：`com.android.updater` 是系统更新器，OTA 全量包下载、静默安装都走它。**
+
+**为什么卸载它：你 314 里它还在，卸了它，半夜 Wi-Fi 下全量包那条路就断了，从根上断 OTA。**
+
+```cmd
+adb shell pm uninstall -k --user 0 com.android.updater
+```
+
+**回显 `Success`，就是卸掉了。**
+
+![卸载 - 装回 - 再卸载](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1794208484346.jpg)
+
+> 卸载 - 装回 - 再卸载：三次回显，证明是可逆的卸载，不是冷冻，也不是彻底删除。
+
+**卸掉会坏什么：设置里“我的设备 - 系统版本”会点不进去或闪退，这是预期的，不是手机坏了。以后想升级，先装回来再升：**
+
+```cmd
+adb shell cmd package install-existing com.android.updater
+```
+
+**装回回显：`Package com.android.updater installed for user: 0`，就是装回去了。**
+
+---
+
 ## 附录：本文新卸 6 条的回滚
 
 **上述操作属于用户层面的深度卸载，未破坏系统底层只读分区（ROM）。未来如果手机需要出二手、转给家人使用或恢复原厂完整逻辑，只需连上电脑开启调试，电脑上在 ADB 里逐行复制指令并回车执行（切勿整段一起粘贴）！以下指令即可恢复本文新卸的 6 条：**
