@@ -128,7 +128,6 @@ udp-policy-not-supported-behaviour = REJECT
 ipv6 = false
 mode = rule
 is-skip-local-ip-queries-enabled = false
-hijack-dns = 8.8.8.8:53, 8.8.4.4:53, 1.1.1.1:53, 9.9.9.9:53
 ```
 
 说明简要：
