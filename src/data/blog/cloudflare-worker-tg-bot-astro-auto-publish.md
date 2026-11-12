@@ -55,7 +55,7 @@ Worker 需要这把钥匙，才能把生成的文章直接塞进你的源码库�
 
 ### 4. `GH_REPO` (目标仓库路径)
 这个最简单，就是你的 GitHub 账号名加上你的博客仓库名。
-* 例如：`pwenxiang51-wq/my-new-blog`。
+* 例如：`VeloxSpace/my-new-blog`。
 
 ---
 

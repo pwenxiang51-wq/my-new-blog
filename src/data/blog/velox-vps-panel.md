@@ -22,7 +22,7 @@ description: 玩 VPS 的尽头是对 Linux 底层的掌控。Velox 将 SSH 审�
 
 项目已在 GitHub 开源，欢迎 Star：
 
-**[Velox-VPS-Panel](https://github.com/pwenxiang51-wq/Velox-VPS-Panel)**
+**[Velox-VPS-Panel](https://github.com/VeloxSpace/Velox-VPS-Panel)**
 
 ![Velox 面板功能预览](https://pub-65eb3861e8d64d24a3280e55bd221735.r2.dev/blog-img-1774342949638.jpg)
 
@@ -67,7 +67,7 @@ description: 玩 VPS 的尽头是对 Linux 底层的掌控。Velox 将 SSH 审�
 建议在 VPS 上使用 root 执行：
 
 ```bash
-bash <(curl -sL https://raw.githubusercontent.com/pwenxiang51-wq/Velox-VPS-Panel/main/install.sh)
+bash <(curl -sL https://raw.githubusercontent.com/VeloxSpace/Velox-VPS-Panel/main/install.sh)
 ```
 
 安装成功后，任意时候输入：
@@ -86,4 +86,4 @@ Velox 一直在按实机使用迭代：异步菜单、双栈 WARP 探测、核�
 
 若帮你省过搬家或排障时间，去仓库点个 **Star** 就是最大支持。有想法或 Bug 欢迎开 Issue。
 
-**[项目主页：Velox-VPS-Panel](https://github.com/pwenxiang51-wq/Velox-VPS-Panel)**
+**[项目主页：Velox-VPS-Panel](https://github.com/VeloxSpace/Velox-VPS-Panel)**

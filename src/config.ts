@@ -3,7 +3,7 @@
 export const SITE = {
   website: "https://222382.xyz/",
   author: "Velox",
-  profile: "https://github.com/pwenxiang51-wq",
+  profile: "https://github.com/VeloxSpace",
   desc: "Velox 的个人博客",
   title: "Velox",
   ogImage: "astropaper-og.jpg",
@@ -23,7 +23,7 @@ export const SITE = {
   editPost: {
     enabled: true,
     text: "Edit page",
-    url: "https://github.com/pwenxiang51-wq/my-new-blog/edit/main/src/content/blog",
+    url: "https://github.com/VeloxSpace/my-new-blog/edit/main/src/content/blog",
   }
 };
 
@@ -42,7 +42,7 @@ export const LOGO_IMAGE = {
 export const SOCIALS = [
   {
     name: "Github",
-    href: "https://github.com/pwenxiang51-wq",
+    href: "https://github.com/VeloxSpace",
     linkTitle: ` ${SITE.title} on Github`,
     active: true,
   },

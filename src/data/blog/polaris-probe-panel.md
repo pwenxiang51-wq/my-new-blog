@@ -16,7 +16,7 @@ description: 用 Go 标准库做的私有 VPS 监控台，单管理员、探针�
 
 > 一句话：用 Go 标准库做的私有 VPS 监控台，单管理员、探针上报，不对外开面板端口。
 
-- 仓库：[https://github.com/pwenxiang51-wq/Polaris](https://github.com/pwenxiang51-wq/Polaris)
+- 仓库：[https://github.com/VeloxSpace/Polaris](https://github.com/VeloxSpace/Polaris)
 - 协议：AGPL-3.0
 - 作者：Velox
 
@@ -167,7 +167,7 @@ docker compose version
 
 ```bash
 cd /opt
-git clone https://github.com/pwenxiang51-wq/Polaris
+git clone https://github.com/VeloxSpace/Polaris
 cd /opt/Polaris
 bash ./scripts/setup-secrets.sh
 ```
@@ -250,7 +250,7 @@ cd /opt/Polaris
 
 ```bash
 cd /opt
-git clone https://github.com/pwenxiang51-wq/Polaris
+git clone https://github.com/VeloxSpace/Polaris
 cd /opt/Polaris
 ```
 

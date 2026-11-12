@@ -7,7 +7,7 @@
 
 ---
 
-Copyright (c) 2026 Velox (GitHub: pwenxiang51-wq). All rights reserved.
+Copyright (c) 2026 Velox (GitHub: VeloxSpace). All rights reserved.
 
 未经作者书面许可，禁止全文转载、镜像，或将文章批量复制到其他网站、公开仓库发布。
 引用、摘录请注明出处并附原文链接：https://222382.xyz

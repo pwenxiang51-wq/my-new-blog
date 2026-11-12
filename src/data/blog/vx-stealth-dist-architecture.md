@@ -113,7 +113,7 @@ if [ ! -f "/root/.github_token" ]; then
 fi
 GITHUB_TOKEN=$(cat /root/.github_token)
 # ==================================
-REPO_URL="https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/vx.sh"
+REPO_URL="https://raw.githubusercontent.com/VeloxSpace/VX-Node-Engine/main/vx.sh"
 TARGET_FILE="/var/www/stealth_8x9q2z/core.sh"
 
 # 携带兵符强行拉取
@@ -127,7 +127,7 @@ else
     rm -f "${TARGET_FILE}.tmp"
     echo "$(date): 同步失败，保持防御态势！" >> /var/log/vx_sync.log
 fi
-LOG_URL="https://raw.githubusercontent.com/pwenxiang51-wq/VX-Node-Engine/main/changelog.txt"
+LOG_URL="https://raw.githubusercontent.com/VeloxSpace/VX-Node-Engine/main/changelog.txt"
 LOG_TARGET="/var/www/stealth_8x9q2z/changelog.txt"
 
 # 携带同一块兵符，强行拉取日志
